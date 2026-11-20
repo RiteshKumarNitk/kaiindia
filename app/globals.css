@@ -1,0 +1,96 @@
+:root {
+  color-scheme: light;
+  --ink: #1c1c1a;
+  --vermilion: #d53a15;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+.poster {
+  width: min(90%, 94rem);
+  min-height: 100svh;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.masthead, .identity, .stripes {
+  display: flex;
+  align-items: center;
+}
+.masthead {
+  justify-content: space-between;
+  padding-block: clamp(1rem, 2.6vh, 2rem);
+  border-bottom: 1px solid #c9c9c3;
+}
+.identity { gap: 0.9rem; }
+.identity img { width: clamp(3rem, 5vw, 4.25rem); height: auto; }
+.identity p {
+  font: 700 clamp(1.07rem, 1.6vw, 1.45rem)/1 "Barlow Condensed", sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.025em;
+}
+.stripes { gap: 0.22rem; padding-right: 0.15rem; }
+.stripes i {
+  width: 0.55rem;
+  height: 1.35rem;
+  transform: skewX(-19deg);
+  background: #ef8134;
+}
+.stripes i:nth-child(2) { background: #eeeae3; }
+.stripes i:last-child { background: #227e4f; }
+
+.hero {
+  display: grid;
+  grid-template-columns: 0.92fr 1fr;
+  align-items: center;
+  padding-block: clamp(2rem, 5vh, 5rem);
+}
+.announcement { padding-left: 2vw; }
+h1 {
+  margin: 0;
+  font: 800 clamp(5.4rem, 11vw, 11rem)/0.85 "Barlow Condensed", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+}
+h1 > span { display: block; }
+.period { color: var(--vermilion); }
+.brush {
+  margin-top: clamp(1.4rem, 2.8vw, 2.8rem);
+  width: clamp(4rem, 7vw, 7rem);
+  height: 0.5rem;
+  background: var(--vermilion);
+  clip-path: polygon(0 24%, 95% 0, 84% 30%, 100% 27%, 92% 43%, 43% 77%, 8% 100%, 0 83%);
+}
+.athlete {
+  display: block;
+  width: min(100%, 72svh);
+  height: auto;
+  justify-self: center;
+}
+footer {
+  border-top: 1px solid #c9c9c3;
+  padding-block: 1.15rem;
+  color: #565652;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 42rem) {
+  .hero {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 1.25rem;
+  }
+  .announcement { padding: 0; }
+  h1 { font-size: clamp(4.3rem, 13.5vw, 6rem); }
+  h1 > span { display: inline; }
+  .brush { margin-top: 0.8rem; }
+  .athlete { width: min(100%, 52svh, 27rem); }
+}
