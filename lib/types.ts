@@ -183,10 +183,19 @@ export type OfficialDocument = {
   file?: string;
 };
 
+export type SliderImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+};
+
 export type LeadershipMessage = {
   status: ContentStatus;
   name?: string;
   designation?: string;
   portrait?: string;
+  images?: SliderImage[];
   paragraphs: string[];
 };

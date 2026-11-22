@@ -1,6 +1,8 @@
 /** Small inline icon set (stroke icons, 24×24). Decorative unless a label is supplied. */
 const paths = {
   arrow: "M5 12h14M13 6l6 6-6 6",
+  chevronLeft: "M15 19l-7-7 7-7",
+  chevronRight: "M9 5l7 7-7 7",
   clock: "M12 7v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
   news: "M4 5h13v14H6a2 2 0 0 1-2-2V5Zm13 4h3v8a2 2 0 0 1-2 2h-1M8 9h5M8 13h5M8 16h3",
   photo: "M4 7h3l2-2h6l2 2h3v12H4V7Zm8 9a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z",

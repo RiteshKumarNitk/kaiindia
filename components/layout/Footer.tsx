@@ -32,7 +32,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="site-footer__note">
-            Official website under development. Sections are updated as verified information is approved.
+            Official national federation for karate in India, incorporated in 2013.
           </p>
         </div>
 

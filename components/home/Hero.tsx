@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getPage } from "@/lib/page-content";
 import { siteConfig } from "@/lib/site-config";
 
-/** The original Coming Soon poster with a single welcome line and two calls to action. */
+/** Homepage Hero section with national federation identity and calls to action. */
 export function Hero() {
   const page = getPage("/");
   return (
@@ -12,7 +12,7 @@ export function Hero() {
         <div className="announcement">
           <p className="eyebrow">{siteConfig.name}</p>
           <h1 id="home-title" className="poster-title">
-            Coming <span>soon<span className="period">.</span></span>
+            Karate <span>India<span className="period">.</span></span>
           </h1>
           <div className="brush" aria-hidden="true" />
           <p className="home-hero__lead">{page.intro}</p>
@@ -20,8 +20,8 @@ export function Hero() {
             <Link href="/about" className="button button--primary">
               About KAI
             </Link>
-            <Link href="/about/karate" className="button button--ghost">
-              Discover karate
+            <Link href="/organisation/chairman-message" className="button button--ghost">
+              Chairman's Message
             </Link>
           </div>
         </div>

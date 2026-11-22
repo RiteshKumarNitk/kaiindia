@@ -7,6 +7,7 @@ import type {
   NewsArticle,
   OfficialDocument,
   LeadershipMessage,
+  SliderImage,
   StateAssociation,
   VideoItem,
 } from "./types";
@@ -32,14 +33,38 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
 };
 
 /**
- * Chairman's message — supplied by the client (verbatim source in lib/client-supplied.ts).
- * Published as supplied; only Indian English spelling has been applied.
- * No photograph has been supplied, so the page is purely typographic.
+ * Chairman photographs and message — supplied by the client.
  */
+export const chairmanImages: SliderImage[] = [
+  {
+    src: "/chairman/chairman1.jpeg",
+    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
+    caption: "Mr. Likha Tara Ji — Chairman, Karate Association of India",
+    width: 960,
+    height: 639,
+  },
+  {
+    src: "/chairman/chairman2.jpeg",
+    alt: "Mr. Likha Tara Ji presiding at an official KAI event",
+    caption: "Mr. Likha Tara Ji presiding at an official KAI event",
+    width: 656,
+    height: 768,
+  },
+  {
+    src: "/chairman/chairman3.jpeg",
+    alt: "Mr. Likha Tara Ji, Chairman of Karate Association of India",
+    caption: "Mr. Likha Tara Ji — Championing karate across India",
+    width: 1080,
+    height: 1079,
+  },
+];
+
 export const chairmanMessage: LeadershipMessage = {
   status: "published",
   name: "Mr. Likha Tara Ji",
   designation: "Chairman, Karate Association of India",
+  portrait: "/chairman/chairman1.jpeg",
+  images: chairmanImages,
   paragraphs: [
     "It gives me immense pleasure to welcome all athletes, coaches, referees, officials and martial arts enthusiasts to the Karate Association of India.",
     "Karate is much more than a combat sport; it is a way of life built on the core pillars of discipline, respect, perseverance and self-control. Through rigorous training and healthy competition, our young karatekas not only sharpen their physical agility and mental focus but also learn the values of humility and sportsmanship that stay with them far beyond the dojo.",

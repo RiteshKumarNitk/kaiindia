@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComingSoon } from "@/components/shared/ComingSoon";
 import { Icon } from "@/components/shared/Icon";
+import { ImageSlider } from "@/components/shared/ImageSlider";
 import { chairmanMessage, isPublished } from "@/lib/content-data";
 import { pageLabel, pageSummary } from "@/lib/page-content";
 import { siteConfig } from "@/lib/site-config";
@@ -98,9 +99,20 @@ export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
     return <ComingSoon {...comingSoon} variant="section" />;
   }
   const [first, ...rest] = msg.paragraphs;
+  const hasSlider = msg.images && msg.images.length > 0;
+
   return (
     <article className="leader-message" aria-labelledby="message-signature">
-      {msg.portrait && msg.name && (
+      {hasSlider ? (
+        <div className="leader-message__slider-col">
+          <ImageSlider
+            images={msg.images!}
+            title={`Photographs of ${msg.name || "Chairman"}`}
+            showThumbnails
+            className="slider--chairman-page"
+          />
+        </div>
+      ) : msg.portrait && msg.name ? (
         <Image
           src={msg.portrait}
           alt={`Portrait of ${msg.name}`}
@@ -108,7 +120,7 @@ export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
           height={440}
           className="leader-message__portrait"
         />
-      )}
+      ) : null}
       <div className="leader-message__body">
         <span className="leader-message__mark" aria-hidden="true">
           “

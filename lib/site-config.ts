@@ -25,9 +25,9 @@ const site = resolveSiteUrl();
 export const siteConfig = {
   name: "Karate Association of India",
   shortName: "KAI",
-  tagline: "Official website — under development",
+  tagline: "National Federation for Karate in India",
   description:
-    "The Karate Association of India website is under development. Sections for the association, organisation, media, membership and governance are being prepared.",
+    "Official website of the Karate Association of India (KAI) — national federation for the promotion and development of karate sport in India since 2013.",
   /** Absolute base URL used for the sitemap and robots.txt. */
   url: site.url,
   /** Canonical URLs are emitted only when the domain is confirmed via NEXT_PUBLIC_SITE_URL. */

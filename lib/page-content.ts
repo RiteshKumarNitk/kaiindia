@@ -13,17 +13,17 @@ const pending = "Details for this section will be published once the association
 
 export const pages: Record<RoutePath, PageEntry> = {
   "/": {
-    title: "Coming soon.",
+    title: "Karate Association of India",
     shortTitle: "Home",
     eyebrow: "Karate Association of India",
     intro:
-      "The new official website of the Karate Association of India is being prepared for athletes, coaches, officials, clubs and supporters across the country.",
+      "The official national federation for the promotion and development of karate as a sport in India since 2013. Nurturing grassroots talent and empowering athletes for the national and international stage.",
     metaDescription:
-      "The Karate Association of India website is under development. Explore the sections being prepared for athletes, coaches, officials, clubs and supporters.",
+      "Official website of the Karate Association of India (KAI) — national federation promoting karate sport across India for athletes, coaches, officials and clubs.",
     comingSoon: {
-      title: "Our new website is on its way",
+      title: "Karate Association of India",
       description:
-        "Every section is open for you to explore. Verified information will be added as the association approves it.",
+        "Official national federation for karate sport in India, incorporated in 2013.",
     },
     body: { kind: "home" },
   },
