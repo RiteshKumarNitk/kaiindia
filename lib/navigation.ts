@@ -22,7 +22,7 @@ export const mainNav: NavItem[] = [
     href: "/organisation",
     children: [
       { label: "Organisation Overview", href: "/organisation" },
-      { label: "President Message", href: "/organisation/president-message" },
+      { label: "Chairman's Message", href: "/organisation/chairman-message" },
       { label: "Executive Committee", href: "/organisation/executive-committee" },
       { label: "Anti-Doping Committee", href: "/organisation/anti-doping-committee" },
       { label: "Referee Committee", href: "/organisation/referee-committee" },
@@ -84,7 +84,7 @@ export const footerNav: FooterColumn[] = [
     heading: "Organisation",
     links: [
       { label: "Organisation Overview", href: "/organisation" },
-      { label: "President Message", href: "/organisation/president-message" },
+      { label: "Chairman's Message", href: "/organisation/chairman-message" },
       { label: "Executive Committee", href: "/organisation/executive-committee" },
       { label: "Associate States", href: "/organisation/associate-states" },
       { label: "Judges Profile", href: "/about/judges-profile" },

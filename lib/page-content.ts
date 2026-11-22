@@ -17,7 +17,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     shortTitle: "Home",
     eyebrow: "Karate Association of India",
     intro:
-      "Our new website is being prepared for athletes, coaches, officials, clubs and supporters of karate across India. Every section is open to explore, and official information will be published as soon as it is approved.",
+      "The new official website of the Karate Association of India is being prepared for athletes, coaches, officials, clubs and supporters across the country.",
     metaDescription:
       "The Karate Association of India website is under development. Explore the sections being prepared for athletes, coaches, officials, clubs and supporters.",
     comingSoon: {
@@ -33,21 +33,66 @@ export const pages: Record<RoutePath, PageEntry> = {
     title: "About KAI",
     eyebrow: "About the association",
     intro:
-      "This section will introduce the Karate Association of India — its purpose, its work for the sport, and the people and programmes behind it. It also gives access to athlete and coach services, the judges directory and an introduction to karate.",
+      "The Karate Association of India was established in 2013 for the overall promotion and development of karate as a sport in India.",
     metaDescription:
-      "Learn about the Karate Association of India and access the athlete portal, coach portal, judges profile directory and an introduction to karate.",
+      "About the Karate Association of India: background, objectives and mission, promotion of karate in India, and athlete and coach development.",
     comingSoon: {
       title: "Association profile",
-      description:
-        "The association's official profile, objectives and history are being prepared for approval and will be published here.",
+      description: "Further details about the association will be published here once approved.",
     },
+    // Client-supplied statements (verbatim source: lib/client-supplied.ts), edited for grammar only.
     body: {
-      kind: "hub",
-      layout: "editorial",
-      groups: [
-        { title: "Services", links: ["/about/athlete-login", "/about/coach-login"] },
-        { title: "Officials and the sport", links: ["/about/judges-profile", "/about/karate"] },
+      kind: "info",
+      sections: [
+        {
+          id: "introduction",
+          title: "Introduction to Karate Association of India",
+          status: "published",
+          body: [
+            "The Karate Association of India (KAI) was established for the overall promotion and development of karate as a sport in India.",
+            "KAI is the only national federation of karate in India.",
+          ],
+        },
+        {
+          id: "background",
+          title: "Association Background",
+          status: "published",
+          body: [
+            "KAI was incorporated in 2013 as a not-for-profit company under Section 8, registered with the Registrar of Companies.",
+            "It is a nationwide association with the strength of 33 affiliated state associations and karate clubs and academies.",
+          ],
+        },
+        {
+          id: "objectives",
+          title: "Objectives and Mission",
+          status: "published",
+          body: [
+            "The overall aim of KAI is to popularise karate, a tremendous martial art of self-defence, among the youth and growing children of India.",
+            "The association's aim is to produce Asian Games medallists and Asian and world champions.",
+          ],
+        },
+        {
+          id: "promotion",
+          title: "Promotion of Karate in India",
+          status: "published",
+          body: [
+            "To popularise karate, KAI conducts training seminars, self-defence camps and tournaments at district, state, national, school and university level.",
+            "India is one of the major karate countries in the world, with millions of people learning and practising the art of karate.",
+          ],
+        },
+        {
+          id: "development",
+          title: "Athlete and Coach Development",
+          status: "published",
+          body: [
+            "Most of India's national champions and internationally renowned players, as well as WKF- and AKF-qualified judges and referees, coaches and masters, are associated with KAI.",
+          ],
+        },
       ],
+      related: {
+        title: "In this section",
+        links: ["/about/athlete-login", "/about/coach-login", "/about/judges-profile", "/about/karate"],
+      },
     },
   },
   "/about/athlete-login": {
@@ -186,15 +231,15 @@ export const pages: Record<RoutePath, PageEntry> = {
     metaDescription:
       "Organisational structure of the Karate Association of India, including leadership, committees and associate states.",
     comingSoon: {
-      title: "Organisational details in preparation",
+      title: "Committee details in preparation",
       description:
-        "We are preparing this section to share the Karate Association of India's official organisational information. Verified details will be published here once available.",
+        "Committee memberships and the state association directory will be published here once verified. The Chairman's message is available now.",
     },
     body: {
       kind: "hub",
       layout: "directory",
       groups: [
-        { title: "Leadership", links: ["/organisation/president-message", "/organisation/executive-committee"] },
+        { title: "Leadership", links: ["/organisation/chairman-message", "/organisation/executive-committee"] },
         {
           title: "Committees",
           links: [
@@ -210,17 +255,16 @@ export const pages: Record<RoutePath, PageEntry> = {
       ],
     },
   },
-  "/organisation/president-message": {
-    title: "President's Message",
-    shortTitle: "President Message",
+  "/organisation/chairman-message": {
+    title: "Chairman's Message",
     eyebrow: "Organisation · Leadership",
-    intro:
-      "A message from the President of the Karate Association of India to athletes, coaches, officials and the wider karate community will be published here.",
-    metaDescription: "The President's message to the karate community, to be published by the Karate Association of India.",
+    intro: "Message from the Chairman",
+    metaDescription:
+      "A message from Mr. Likha Tara Ji, Chairman of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
+    // Fallback only; the message is published in lib/content-data.ts.
     comingSoon: {
       title: "Message to be published",
-      description:
-        "The official message will appear here, together with the President's name and portrait, once it has been approved for publication.",
+      description: "The Chairman's message will appear here once approved for publication.",
     },
     body: { kind: "message" },
   },
@@ -587,13 +631,13 @@ export function pageLabel(path: RoutePath): string {
 
 /** One-line descriptions used in directory listings and landing pages. */
 const summaries: Partial<Record<RoutePath, string>> = {
-  "/about": "The association, its services and an introduction to karate.",
+  "/about": "Background, objectives and mission of the association.",
   "/about/athlete-login": "Planned online portal for registered athletes.",
   "/about/coach-login": "Planned online portal for coaches.",
   "/about/judges-profile": "Directory of verified judges and technical officials.",
   "/about/karate": "Karate as a martial art and sport: kata, kumite and training.",
   "/organisation": "Leadership, committees and state associations.",
-  "/organisation/president-message": "A message from the President to the karate community.",
+  "/organisation/chairman-message": "A message from Mr. Likha Tara Ji, Chairman of KAI.",
   "/organisation/executive-committee": "Officeholders responsible for direction and administration.",
   "/organisation/anti-doping-committee": "Clean-sport education and awareness.",
   "/organisation/referee-committee": "Officiating standards and referee development.",

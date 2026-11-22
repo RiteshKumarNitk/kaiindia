@@ -2,13 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComingSoon } from "@/components/shared/ComingSoon";
 import { Icon } from "@/components/shared/Icon";
-import { isPublished, presidentMessage } from "@/lib/content-data";
+import { chairmanMessage, isPublished } from "@/lib/content-data";
+import { pageLabel, pageSummary } from "@/lib/page-content";
 import { siteConfig } from "@/lib/site-config";
-import type { ComingSoonCopy, InfoSection } from "@/lib/types";
+import type { ComingSoonCopy, InfoSection, RoutePath } from "@/lib/types";
 
 /* ------------------------------------------- Long-form article (About Karate) */
 
-export function InfoSections({ sections, pending }: { sections: InfoSection[]; pending: ComingSoonCopy }) {
+export function InfoSections({
+  sections,
+  pending,
+  related,
+}: {
+  sections: InfoSection[];
+  pending?: ComingSoonCopy;
+  related?: { title: string; links: RoutePath[] };
+}) {
   const live = sections.filter(isPublished);
   return (
     <div className="article-layout">
@@ -31,7 +40,27 @@ export function InfoSections({ sections, pending }: { sections: InfoSection[]; p
             ))}
           </section>
         ))}
-        <ComingSoon {...pending} variant="section" icon="shield" />
+        {related && (
+          <nav aria-labelledby="related-heading" className="related">
+            <h2 id="related-heading" className="related__title">
+              {related.title}
+            </h2>
+            <ul className="link-list">
+              {related.links.map((href) => (
+                <li key={href}>
+                  <Link href={href} className="link-row">
+                    <span className="link-row__text">
+                      <span className="link-row__title">{pageLabel(href)}</span>
+                      <span className="link-row__desc">{pageSummary(href)}</span>
+                    </span>
+                    <Icon name="arrow" className="link-row__arrow" size={18} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+        {pending && <ComingSoon {...pending} variant="section" icon="shield" />}
       </div>
     </div>
   );
@@ -61,37 +90,42 @@ export function ProcessSteps({ sections, heading }: { sections: InfoSection[]; h
   );
 }
 
-/* ---------------------------------------------------- President's message */
+/* ------------------------------------------------------ Chairman's message */
 
 export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
-  const msg = presidentMessage;
-  if (isPublished(msg) && msg.paragraphs.length > 0) {
-    return (
-      <article className="message">
-        {msg.portrait && msg.name && (
-          <Image src={msg.portrait} alt={`Portrait of ${msg.name}`} width={360} height={440} className="message__portrait" />
-        )}
-        <div className="message__text">
-          {msg.paragraphs.map((p) => (
-            <p key={p.slice(0, 24)}>{p}</p>
-          ))}
-          {msg.name && (
-            <p className="message__sign">
-              <strong>{msg.name}</strong>
-              {msg.designation && <span>{msg.designation}</span>}
-            </p>
-          )}
-        </div>
-      </article>
-    );
+  const msg = chairmanMessage;
+  if (!isPublished(msg) || msg.paragraphs.length === 0) {
+    return <ComingSoon {...comingSoon} variant="section" />;
   }
+  const [first, ...rest] = msg.paragraphs;
   return (
-    <div className="message-frame">
-      <span className="message-frame__quote" aria-hidden="true">
-        “
-      </span>
-      <ComingSoon {...comingSoon} variant="compact" />
-    </div>
+    <article className="leader-message" aria-labelledby="message-signature">
+      {msg.portrait && msg.name && (
+        <Image
+          src={msg.portrait}
+          alt={`Portrait of ${msg.name}`}
+          width={360}
+          height={440}
+          className="leader-message__portrait"
+        />
+      )}
+      <div className="leader-message__body">
+        <span className="leader-message__mark" aria-hidden="true">
+          “
+        </span>
+        <p className="leader-message__lead">{first}</p>
+        {rest.map((p) => (
+          <p key={p.slice(0, 24)}>{p}</p>
+        ))}
+        {msg.name && (
+          <footer className="leader-message__sign" id="message-signature">
+            <span className="leader-message__rule" aria-hidden="true" />
+            <strong>{msg.name}</strong>
+            {msg.designation && <span>{msg.designation}</span>}
+          </footer>
+        )}
+      </div>
+    </article>
   );
 }
 

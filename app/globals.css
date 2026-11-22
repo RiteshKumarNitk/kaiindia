@@ -1,26 +1,43 @@
 /* =====================================================================
    Karate Association of India — global styles
-   Editorial sports-federation system: navy, white and cool grey surfaces,
-   saffron accent used sparingly, Barlow Condensed for display headings and
+   Indian tricolour identity: Chakra Navy navigation and headings, saffron
+   for primary actions and highlights, India green for secondary accents,
+   on white and very light surfaces. Barlow Condensed for display headings,
    Inter for everything else. All colours and spacing come from tokens.
    ===================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* Colour */
-  --navy: #111827;
-  --navy-2: #1f2937;
-  --surface: #ffffff;
-  --surface-2: #f5f6f8;
-  --text: #172033;
-  --text-2: #5b6472;
-  --border: #e2e5ea;
-  --border-strong: #cfd4db;
-  --accent: #d44828; /* indicators, rules, focus */
-  --accent-ink: #b23a1f; /* accent text and filled buttons (AA on white) */
-  --accent-tint: #fbefeb;
-  --green: #18744d;
+  /* Official palette */
+  --india-saffron: #ff9933;
+  --india-white: #ffffff;
+  --india-green: #138808;
+  --chakra-navy: #000080;
+
+  --text-primary: #172033;
+  --text-secondary: #576170;
+  --background-primary: #ffffff;
+  --background-secondary: #f8fafc;
+  --border-color: #e5e7eb;
+
+  /* Roles (mapped from the palette) */
+  --navy: var(--chakra-navy); /* navigation, headings, dark surfaces */
+  --navy-deep: #00004d; /* footer */
+  --heading: var(--chakra-navy);
+  --surface: var(--background-primary);
+  --surface-2: var(--background-secondary);
+  --text: var(--text-primary);
+  --text-2: var(--text-secondary);
+  --border: var(--border-color);
+  --border-strong: #d1d5db;
+  --accent: var(--india-saffron); /* primary buttons, indicators, highlights */
+  --accent-hover: #f0851a;
+  --accent-ink: #b35a00; /* saffron text on white (AA 4.8:1) */
+  --accent-tint: #fff3e6;
+  --green: var(--india-green); /* secondary highlights, labels (AA 4.6:1) */
+  --green-tint: #eaf6e8;
+  --link: var(--chakra-navy);
   --on-navy: #e8eaee;
   --on-navy-2: #a9b0bc;
 
@@ -38,7 +55,7 @@
   --space-7: 3rem;
   --space-8: 4.5rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
-  --max: 76rem;
+  --max: 78rem;
   --section: clamp(2.5rem, 6vw, 4.5rem);
 
   /* Shape */
@@ -98,13 +115,17 @@ h2,
 h3 {
   text-wrap: balance;
 }
+h1,
+h2 {
+  color: var(--heading);
+}
 h3 {
   font: 600 1.0625rem/1.35 var(--sans);
   letter-spacing: -0.005em;
 }
 
 a {
-  color: var(--accent-ink);
+  color: var(--link);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
@@ -158,7 +179,7 @@ a:hover {
   font: 600 0.75rem/1.3 var(--sans);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--green);
 }
 
 .section-title {
@@ -244,12 +265,12 @@ a:hover {
     border-color 0.18s var(--ease);
 }
 .button--primary {
-  background: var(--accent-ink);
-  color: #fff;
+  background: var(--accent);
+  color: var(--navy);
 }
 .button--primary:hover {
-  background: #96301a;
-  color: #fff;
+  background: var(--accent-hover);
+  color: var(--navy);
 }
 .button--ghost {
   border-color: var(--border-strong);
@@ -257,8 +278,8 @@ a:hover {
   background: var(--surface);
 }
 .button--ghost:hover {
-  border-color: var(--text);
-  color: var(--text);
+  border-color: var(--green);
+  color: var(--navy);
 }
 .button--small {
   min-height: 2.25rem;
@@ -490,7 +511,7 @@ a:hover {
   color: var(--text);
 }
 .dropdown__link.is-current {
-  color: var(--accent-ink);
+  color: var(--link);
   font-weight: 600;
 }
 .dropdown__link.is-current::before {
@@ -585,7 +606,7 @@ a:hover {
   color: var(--text);
 }
 .mobile-nav__link.is-active {
-  color: var(--accent-ink);
+  color: var(--link);
   font-weight: 600;
 }
 .mobile-nav__link .chevron {
@@ -613,7 +634,7 @@ a:hover {
   text-decoration: none;
 }
 .mobile-nav__sub a.is-current {
-  color: var(--accent-ink);
+  color: var(--link);
   font-weight: 600;
 }
 .mobile-nav__sub a.is-current::before {
@@ -879,7 +900,7 @@ a:hover {
 }
 .link-row:hover .link-row__arrow {
   transform: translateX(3px);
-  color: var(--accent-ink);
+  color: var(--link);
 }
 @media (min-width: 52rem) {
   .link-list--grid {
@@ -982,7 +1003,7 @@ a:hover {
   margin-top: var(--space-3);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--accent-ink);
+  color: var(--link);
 }
 
 /* Resources (Rules) */
@@ -1016,7 +1037,7 @@ a:hover {
   height: 2.75rem;
   border-radius: var(--radius);
   background: var(--accent-tint);
-  color: var(--accent-ink);
+  color: var(--link);
 }
 .resource__text {
   display: grid;
@@ -1035,7 +1056,7 @@ a:hover {
   gap: 0.35rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--accent-ink);
+  color: var(--link);
 }
 @media (max-width: 36rem) {
   .resource {
@@ -1125,7 +1146,7 @@ a:hover {
   margin-top: var(--space-3);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--accent-ink);
+  color: var(--link);
 }
 
 /* ---------------------------------------------------- Article (Karate) */
@@ -1163,7 +1184,7 @@ a:hover {
   text-decoration: none;
 }
 .toc a:hover {
-  color: var(--accent-ink);
+  color: var(--link);
 }
 .article {
   display: grid;
@@ -1285,7 +1306,7 @@ a:hover {
 }
 .member-card__role {
   font-size: 0.9375rem;
-  color: var(--accent-ink);
+  color: var(--green);
   font-weight: 500;
 }
 .member-card__meta,
@@ -1347,7 +1368,7 @@ a:hover {
 }
 .doc-name svg {
   flex: none;
-  color: var(--accent-ink);
+  color: var(--link);
 }
 @media (max-width: 40rem) {
   .data-table thead {
@@ -1440,48 +1461,76 @@ a:hover {
   color: var(--text-2);
 }
 
-/* ------------------------------------------------------ President message */
+/* ------------------------------------------------------ Chairman's message */
 
-.message-frame {
-  position: relative;
-  max-width: 48rem;
-  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-}
-.message-frame__quote {
-  display: block;
-  height: 2.5rem;
-  font: 700 5rem/1 Georgia, serif;
-  color: var(--accent);
-}
-.message-frame .empty-state--compact {
-  border-left: 0;
-  padding: 0;
-  background: none;
-}
-.message {
+.leader-message {
   display: grid;
   gap: var(--space-6);
   align-items: start;
 }
 @media (min-width: 52rem) {
-  .message {
+  .leader-message:has(.leader-message__portrait) {
     grid-template-columns: minmax(13rem, 18rem) 1fr;
   }
 }
-.message__portrait {
+.leader-message__portrait {
   width: 100%;
   border-radius: var(--radius-lg);
 }
-.message__text {
+.leader-message__body {
+  position: relative;
   display: grid;
-  gap: var(--space-4);
-  max-width: 44rem;
-  font-size: 1.0625rem;
+  gap: var(--space-5);
+  max-width: 46rem;
+  padding-left: clamp(1.25rem, 4vw, 2.5rem);
+  border-left: 3px solid var(--accent);
+  font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
+  line-height: 1.75;
 }
-.message__sign {
+.leader-message__mark {
+  display: block;
+  height: 2.75rem;
+  margin-bottom: calc(-1 * var(--space-3));
+  font: 700 5.5rem/1 Georgia, "Times New Roman", serif;
+  color: var(--accent);
+}
+.leader-message__lead {
+  font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--heading);
+  font-weight: 500;
+}
+.leader-message__sign {
   display: grid;
+  gap: 0.15rem;
+  margin-top: var(--space-3);
+}
+.leader-message__rule {
+  width: 3rem;
+  height: 3px;
+  margin-bottom: var(--space-3);
+  background: var(--green);
+}
+.leader-message__sign strong {
+  font: 700 1.5rem/1.1 var(--display);
+  color: var(--heading);
+}
+.leader-message__sign span:last-child {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+/* Related links under an article */
+.related {
+  padding-top: var(--space-2);
+}
+.article .related__title,
+.related__title {
+  margin-bottom: var(--space-3);
+  font: 600 0.75rem/1.3 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
 }
 
 /* ------------------------------------------------------------- Governance */
@@ -1534,6 +1583,7 @@ a:hover {
 }
 .contact-card__brand h2 {
   font: 700 1.5rem/1.1 var(--display);
+  color: #fff;
 }
 .contact-card__brand p {
   font-size: 0.875rem;
@@ -1607,7 +1657,8 @@ a:hover {
 
 .home-directory {
   padding-block: var(--section);
-  background: var(--surface-2);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
 }
 .site-directory {
   display: grid;
@@ -1639,11 +1690,11 @@ a:hover {
   transition: transform 0.18s var(--ease);
 }
 .site-directory__head:hover {
-  color: var(--accent-ink);
+  color: var(--link);
 }
 .site-directory__head:hover svg {
   transform: translateX(3px);
-  color: var(--accent-ink);
+  color: var(--link);
 }
 .site-directory ul {
   list-style: none;
@@ -1662,7 +1713,7 @@ a:hover {
   text-decoration-color: var(--border-strong);
 }
 .site-directory ul a:hover {
-  color: var(--accent-ink);
+  color: var(--link);
   text-decoration-color: currentColor;
 }
 
@@ -1682,10 +1733,156 @@ a:hover {
   }
 }
 
+/* -------------------------------------------------------- Tricolour accent */
+
+.tricolour {
+  display: grid;
+}
+.tricolour i {
+  display: block;
+  height: 3px;
+}
+.tricolour i:nth-child(1) {
+  background: var(--india-saffron);
+}
+.tricolour i:nth-child(2) {
+  background: var(--india-white);
+}
+.tricolour i:nth-child(3) {
+  background: var(--india-green);
+}
+.tricolour--thin i {
+  height: 2px;
+}
+.tricolour-rule {
+  display: block;
+  width: 4.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--india-saffron) 0 33.3%, #e5e7eb 33.3% 66.6%, var(--india-green) 66.6%);
+}
+
+/* -------------------------------------------------- Home: introduction */
+
+.intro {
+  padding-block: var(--section);
+}
+.intro__grid {
+  display: grid;
+  gap: var(--space-6);
+}
+@media (min-width: 56rem) {
+  .intro__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+.intro__heading {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+.intro__crest {
+  width: 4.5rem;
+  height: auto;
+  margin-bottom: var(--space-2);
+}
+.intro__title {
+  font: 700 clamp(2rem, 4vw, 3rem)/1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.intro__subtitle {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--green);
+  max-width: 26rem;
+}
+.intro__text {
+  display: grid;
+  gap: var(--space-4);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.intro__text .text-link {
+  margin-top: var(--space-2);
+}
+
+/* ------------------------------------------------------- Home: mission */
+
+.mission {
+  padding-block: var(--section);
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+}
+.mission__head {
+  max-width: 44rem;
+  margin-bottom: var(--space-6);
+}
+.mission__title {
+  font: 700 clamp(1.75rem, 3vw, 2.4rem)/1.05 var(--display);
+}
+.mission__lead {
+  margin-top: var(--space-3);
+  font-size: 1.0625rem;
+  color: var(--text-2);
+}
+.mission__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+.mission__item {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.mission__item h3 {
+  color: var(--heading);
+}
+.mission__item p {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+.mission__icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: var(--space-2);
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--accent-ink);
+}
+@media (max-width: 40rem) {
+  .mission__item {
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    padding: var(--space-4);
+  }
+  .mission__icon {
+    grid-row: span 2;
+    margin: 0;
+  }
+}
+.mission__item:nth-child(even) .mission__icon {
+  background: var(--green-tint);
+  color: var(--green);
+}
+
 /* ----------------------------------------------------------------- Footer */
 
 .site-footer {
-  background: var(--navy);
+  background: var(--navy-deep);
   color: var(--on-navy-2);
   font-size: 0.875rem;
 }

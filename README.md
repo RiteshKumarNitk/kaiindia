@@ -18,12 +18,13 @@ No official facts are invented. Officeholders, committee members, state associat
 | --- | --- |
 | Home | `/` |
 | About KAI | `/about`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
-| Organisation | `/organisation`, `/organisation/president-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states` |
+| Organisation | `/organisation`, `/organisation/chairman-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states` |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
 | Other pages | `/donations`, `/rti-governance`, `/contact`, `/privacy-policy`, `/refund-policy` (the two policy pages are linked from the footer) |
 | SEO | `/sitemap.xml`, `/robots.txt` |
+| Redirect | `/organisation/president-message` → `/organisation/chairman-message` (permanent, in `next.config.ts`) |
 
 ## Project structure
 
@@ -71,6 +72,37 @@ pnpm start        # serve the production build
 3. Deploy. Do not use `www.kai.org` until the client confirms it is their domain.
 
 See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github).
+
+## Client-supplied content
+
+The homepage introduction, mission section, About KAI page and Chairman's Message use text supplied by the client.
+
+- `lib/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
+- The published versions are edited for grammar and punctuation only, with no new facts:
+  - `associationIntro` and `chairmanMessage` in `lib/content-data.ts`;
+  - the `/about` sections in `lib/page-content.ts`.
+- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, and the Chairman's name and title. The site presents them as the association's own statements and never labels them as verified or endorsed.
+- Numerical highlights (counters or statistics) must use only verified, approved figures.
+
+## Colour system
+
+The tokens are defined at the top of `app/globals.css`.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--chakra-navy` | `#000080` | Navigation bar, headings, links, dark surfaces |
+| `--india-saffron` | `#FF9933` | Primary buttons (with navy text), active-nav indicator, highlights |
+| `--india-green` | `#138808` | Eyebrow labels, subtitles, secondary accents |
+| `--india-white` | `#FFFFFF` | Main background, middle band of the tricolour accent |
+| `--text-primary` / `--text-secondary` | `#172033` / `#576170` | Body text and secondary text |
+| `--background-secondary` | `#F8FAFC` | Page heroes and alternate sections |
+| `--border-color` | `#E5E7EB` | Borders |
+
+Contrast rules:
+
+- Saffron is too light for white text (about 2.1:1). Saffron buttons therefore use navy text (7.5:1).
+- Saffron-coloured text on white uses `--accent-ink` (`#B35A00`, 4.8:1).
+- The tricolour accent appears only under the header and at the top of the footer, plus one small rule in the homepage introduction.
 
 ## Editing guide
 
@@ -154,7 +186,7 @@ export const committees = {
 };
 ```
 
-For the President's message, fill in `presidentMessage` (`name`, `designation`, `portrait` and `paragraphs`) and set its `status` to `"published"`.
+The Chairman's message is published from `chairmanMessage` in `lib/content-data.ts` (`name`, `designation`, `paragraphs`). To add an approved photograph, put it in `public/people/` and set `portrait`. Never use a stock or generated portrait.
 
 For associate states, add entries to `stateAssociations`. Set `recognitionStatus` **only** if the recognition has been verified.
 

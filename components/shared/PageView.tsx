@@ -32,7 +32,7 @@ function Body({ page }: { page: PageEntry }) {
     case "message":
       return <MessagePanel comingSoon={comingSoon} />;
     case "info":
-      return <InfoSections sections={body.sections} pending={body.pending} />;
+      return <InfoSections sections={body.sections} pending={body.pending} related={body.related} />;
     case "news":
       return <NewsList comingSoon={comingSoon} />;
     case "photos":

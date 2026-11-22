@@ -19,7 +19,7 @@ export const routePaths = [
   "/about/judges-profile",
   "/about/karate",
   "/organisation",
-  "/organisation/president-message",
+  "/organisation/chairman-message",
   "/organisation/executive-committee",
   "/organisation/anti-doping-committee",
   "/organisation/referee-committee",
@@ -89,7 +89,7 @@ export type PageBody =
   | { kind: "directory"; committee: CommitteeKey; focus: string[] }
   | { kind: "states" }
   | { kind: "message" }
-  | { kind: "info"; sections: InfoSection[]; pending: ComingSoonCopy }
+  | { kind: "info"; sections: InfoSection[]; pending?: ComingSoonCopy; related?: { title: string; links: RoutePath[] } }
   | { kind: "news" }
   | { kind: "photos" }
   | { kind: "videos" }
@@ -183,7 +183,7 @@ export type OfficialDocument = {
   file?: string;
 };
 
-export type PresidentMessage = {
+export type LeadershipMessage = {
   status: ContentStatus;
   name?: string;
   designation?: string;

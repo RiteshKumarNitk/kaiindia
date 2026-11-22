@@ -9,6 +9,11 @@ export function Footer() {
 
   return (
     <footer className="site-footer">
+      <div className="tricolour tricolour--thin" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
       <div className="container site-footer__grid">
         <div className="site-footer__brand">
           <Link href="/" className="brand brand--footer">

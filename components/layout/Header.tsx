@@ -28,6 +28,11 @@ export function Header() {
         <p className="site-header__tagline">{siteConfig.tagline}</p>
         <MobileMenu items={mainNav} />
       </div>
+      <div className="tricolour" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
       <div className="site-header__nav">
         <div className="container">
           <Navbar items={mainNav} />
