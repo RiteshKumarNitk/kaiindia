@@ -14,6 +14,9 @@ importers:
       '@fontsource/barlow-condensed':
         specifier: 5.3.0
         version: 5.3.0
+      '@svg-maps/india':
+        specifier: 2.0.0
+        version: 2.0.0
       next:
         specifier: 16.4.6
         version: 16.4.6(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -264,6 +267,9 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@svg-maps/india@2.0.0':
+    resolution: {integrity: sha512-2v47x6L9bAzIJlcUtk4AxKyr94gjFiK/vcF4JMdO+1T8BHvt6pcJbr5sSzoEOzMRN7wxYxOZYNmw3rH5bwGd5w==}
 
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
@@ -527,6 +533,8 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@16.4.6':
     optional: true
+
+  '@svg-maps/india@2.0.0': {}
 
   '@swc/helpers@0.5.23':
     dependencies:

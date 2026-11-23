@@ -18,13 +18,13 @@ No official facts are invented. Officeholders, committee members, state associat
 | --- | --- |
 | Home | `/` |
 | About KAI | `/about`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
-| Organisation | `/organisation`, `/organisation/chairman-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states` |
+| Organisation | `/organisation`, `/organisation/director-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states` |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
 | Other pages | `/donations`, `/rti-governance`, `/contact`, `/privacy-policy`, `/refund-policy` (the two policy pages are linked from the footer) |
 | SEO | `/sitemap.xml`, `/robots.txt` |
-| Redirect | `/organisation/president-message` → `/organisation/chairman-message` (permanent, in `next.config.ts`) |
+| Redirects | `/organisation/president-message` and `/organisation/chairman-message` → `/organisation/director-message` (permanent, in `next.config.ts`) |
 
 ## Project structure
 
@@ -34,7 +34,7 @@ app/                     Route folders. Each page.tsx is a few lines long.
   sitemap.ts, robots.ts  Generated from the route list
 components/
   layout/                Header, Navbar (desktop dropdowns), MobileMenu, Breadcrumbs, Footer
-  home/                  Hero (original poster), QuickLinks (section directory)
+  home/                  Hero, DirectorSection, OfficeBearers, Introduction, Mission
   shared/                ComingSoon, PageHero, PageView, SectionHeading, PageContainer, Icon
   sections/              Page templates: hubs (landing-page layouts), directories, media, documents, portal, info pages, contact
 lib/
@@ -75,13 +75,13 @@ See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github)
 
 ## Client-supplied content
 
-The homepage introduction, mission section, About KAI page and Chairman's Message use text supplied by the client.
+The homepage introduction, office bearers, mission section, About KAI page, Executive Committee and Director's Message use content supplied by the client.
 
 - `lib/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
 - The published versions are edited for grammar and punctuation only, with no new facts:
-  - `associationIntro` and `chairmanMessage` in `lib/content-data.ts`;
+  - `associationIntro`, `directorMessage` and the office bearers (`committees.executive`) in `lib/content-data.ts`;
   - the `/about` sections in `lib/page-content.ts`.
-- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, and the Chairman's name and title. The site presents them as the association's own statements and never labels them as verified or endorsed.
+- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, the Director's name and title, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
 - Numerical highlights (counters or statistics) must use only verified, approved figures.
 
 ## Colour system
@@ -186,7 +186,24 @@ export const committees = {
 };
 ```
 
-The Chairman's message is published from `chairmanMessage` in `lib/content-data.ts` (`name`, `designation`, `paragraphs`). To add an approved photograph, put it in `public/people/` and set `portrait`. Never use a stock or generated portrait.
+The Director's message is published from `directorMessage` in `lib/content-data.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `directorImages`, with the photographs stored in `public/director/`. Never use a stock or generated portrait.
+
+### Office bearers
+
+The office bearers are listed in `officeBearerList` in `lib/content-data.ts`, in order of precedence. They appear on the homepage ("Office Bearers") and on the Executive Committee page.
+
+- Photographs live in `public/assets/`.
+- Each entry takes `name`, `designation`, an optional `affiliation` (for example "MLA, Vejalpur, Gujarat") and `photo`.
+- To add, remove or reorder someone, edit that list.
+
+### Associate States map
+
+`/organisation/associate-states` shows a map of India with all 28 states and 8 union territories, each linked to its place in the list.
+
+- The list is defined in `lib/india-states.ts`.
+- The map is drawn from the `@svg-maps/india` package (CC BY 4.0, credited under the map).
+- That map data predates 2019, so Ladakh appears within the Jammu and Kashmir outline. The list notes this.
+- Verified state associations go in `stateAssociations` in `lib/content-data.ts` and appear in the table below the map.
 
 For associate states, add entries to `stateAssociations`. Set `recognitionStatus` **only** if the recognition has been verified.
 

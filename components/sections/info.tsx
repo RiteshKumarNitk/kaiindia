@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ComingSoon } from "@/components/shared/ComingSoon";
 import { Icon } from "@/components/shared/Icon";
 import { ImageSlider } from "@/components/shared/ImageSlider";
-import { chairmanMessage, isPublished } from "@/lib/content-data";
+import { directorMessage, isPublished } from "@/lib/content-data";
 import { pageLabel, pageSummary } from "@/lib/page-content";
 import { siteConfig } from "@/lib/site-config";
 import type { ComingSoonCopy, InfoSection, RoutePath } from "@/lib/types";
@@ -91,10 +91,10 @@ export function ProcessSteps({ sections, heading }: { sections: InfoSection[]; h
   );
 }
 
-/* ------------------------------------------------------ Chairman's message */
+/* ------------------------------------------------------ Director's message */
 
 export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
-  const msg = chairmanMessage;
+  const msg = directorMessage;
   if (!isPublished(msg) || msg.paragraphs.length === 0) {
     return <ComingSoon {...comingSoon} variant="section" />;
   }
@@ -107,9 +107,9 @@ export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         <div className="leader-message__slider-col">
           <ImageSlider
             images={msg.images!}
-            title={`Photographs of ${msg.name || "Chairman"}`}
+            title={`Photographs of ${msg.name || "the Director"}`}
             showThumbnails
-            className="slider--chairman-page"
+            className="slider--director-page"
           />
         </div>
       ) : msg.portrait && msg.name ? (

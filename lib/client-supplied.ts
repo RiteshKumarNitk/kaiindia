@@ -18,6 +18,11 @@ export const kaiIntroductionOriginal = [
   "Karate Association of India aim is to produce Asian Games Medalists and Asian, World champions players.",
 ] as const;
 
+/**
+ * The message was first supplied as the "Chairman's Message". On 23 November 2026 the client
+ * instructed that Mr. Likha Tara Ji's title is Director; the site now shows it as the
+ * Director's Message. The message text itself is unchanged.
+ */
 export const chairmanMessageOriginal = {
   title: "CHAIRMAN'S MESSAGE",
   subtitle: "Message from the Chairman",
@@ -31,6 +36,42 @@ export const chairmanMessageOriginal = {
   designation: "Chairman, Karate Association of India",
 } as const;
 
+/** Office bearers as supplied by the client on 23 November 2026, verbatim, in the given order. */
+export const officeBearersOriginal = {
+  order: [
+    "Director",
+    "President",
+    "Acting President",
+    "Vice President",
+    "General secretary",
+    "Co-Acting secretary",
+    "Joint Secretary",
+  ],
+  entries: [
+    "Likha Tara Ji / Director Karate Association of India",
+    "Amit Thaker ji ( MLA - Vejalpur Gujarat) / President / Karate Association of India",
+    "Baikunth singh / Acting President / Karate Association of India",
+    "Pawan Kharkhoda / MLA Kharkhoda Haryana / Vice President / Karate Association of India",
+    "Dr. Neelkanth Kunjilal Kawade / General Secretary, / Karate Association of India",
+    "Yogesh kalara / Co - Acting Secretary / Karate Association of India",
+    "Mahesh Kumawat / Joint Secretary / Karate association of India",
+    "Jwala Turkar / Joint Secretary / Karate Association of India",
+  ],
+  photos: "public/assets/<FirstName>.jpeg, supplied by the client",
+} as const;
+
+/** Media committee as supplied by the client on 23 November 2026, verbatim. */
+export const mediaCommitteeOriginal = {
+  entries: ["Aashish Poonia / Media Director"],
+  photos: "public/assets/Ashish.jpeg, supplied by the client",
+} as const;
+
+/** Referee committee as supplied by the client on 23 November 2026, verbatim. */
+export const refereeCommitteeOriginal = {
+  entries: ["Susil Sharma / Referee commission / Secretary / Karate association of India"],
+  photos: "public/assets/Susil.jpeg, supplied by the client",
+} as const;
+
 /**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
@@ -42,5 +83,9 @@ export const claimsRequiringVerification = [
   "KAI is the only national federation of karate in India (recognition documents).",
   "Association of national champions, internationally renowned players and WKF/AKF-qualified judges, referees, coaches and masters with KAI.",
   "Millions of people in India learning and practising karate (source of figure).",
-  "Mr. Likha Tara Ji as Chairman of the Karate Association of India.",
+  "Mr. Likha Tara Ji as Director of the Karate Association of India.",
+  "Office bearer names, designations and photographs, and the MLA affiliations of Amit Thaker Ji and Pawan Kharkhoda.",
+  "Written consent of each office bearer and committee member to publish their name and photograph.",
+  "Aashish Poonia as Media Director (name spelling, title and photograph).",
+  "Susil Sharma as Secretary of the Referee Commission (name spelling, title and photograph).",
 ] as const;

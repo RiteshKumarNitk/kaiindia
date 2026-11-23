@@ -1279,7 +1279,13 @@ a:hover {
 .member-grid {
   display: grid;
   gap: var(--space-5);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  /* Fixed-width columns so a single member is not stretched across the page. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 15rem));
+}
+@media (max-width: 40rem) {
+  .member-grid {
+    gap: var(--space-4) var(--space-3);
+  }
 }
 .member-card {
   border: 1px solid var(--border);
@@ -1461,7 +1467,7 @@ a:hover {
   color: var(--text-2);
 }
 
-/* ------------------------------------------------------ Chairman's message */
+/* ------------------------------------------------------ Director's message */
 
 .leader-message {
   display: grid;
@@ -1661,68 +1667,6 @@ a:hover {
   width: min(100%, 30rem, 62svh);
   height: auto;
   justify-self: center;
-}
-
-.home-directory {
-  padding-block: var(--section);
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-}
-.site-directory {
-  display: grid;
-  gap: var(--space-5) var(--space-6);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-}
-.site-directory__block {
-  display: grid;
-  gap: var(--space-2);
-  align-content: start;
-  padding-top: var(--space-4);
-  border-top: 2px solid var(--navy);
-}
-.site-directory__block p {
-  font-size: 0.9375rem;
-  color: var(--text-2);
-}
-.site-directory__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-2);
-  font: 700 1.5rem/1.1 var(--display);
-  color: var(--text);
-  text-decoration: none;
-}
-.site-directory__head svg {
-  color: var(--text-2);
-  transition: transform 0.18s var(--ease);
-}
-.site-directory__head:hover {
-  color: var(--link);
-}
-.site-directory__head:hover svg {
-  transform: translateX(3px);
-  color: var(--link);
-}
-.site-directory ul {
-  list-style: none;
-  margin: var(--space-1) 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
-  font-size: 0.875rem;
-}
-.site-directory ul a {
-  display: inline-block;
-  padding-block: 0.2rem;
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--border-strong);
-}
-.site-directory ul a:hover {
-  color: var(--link);
-  text-decoration-color: currentColor;
 }
 
 @media (max-width: 48rem) {
@@ -1931,57 +1875,57 @@ a:hover {
   object-fit: cover;
 }
 
-/* ------------------------------------------------ Home: Chairman's message */
+/* ------------------------------------------------ Home: Director's message */
 
-.home-chairman {
+.home-director {
   padding-block: var(--section);
   background: var(--surface-2);
   border-bottom: 1px solid var(--border);
 }
-.home-chairman__head {
+.home-director__head {
   margin-bottom: var(--space-6);
 }
-.home-chairman__title {
+.home-director__title {
   font: 700 clamp(1.85rem, 3.2vw, 2.6rem)/1.1 var(--display);
   margin-top: var(--space-1);
   margin-bottom: var(--space-3);
 }
-.home-chairman__grid {
+.home-director__grid {
   display: grid;
   gap: var(--space-6);
   align-items: start;
 }
 @media (min-width: 56rem) {
-  .home-chairman__grid {
+  .home-director__grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     gap: var(--space-8);
     align-items: center;
   }
 }
-.home-chairman__media {
+.home-director__media {
   max-width: 32rem;
   width: 100%;
   margin-inline: auto;
 }
-.home-chairman__content {
+.home-director__content {
   position: relative;
   display: grid;
   gap: var(--space-4);
   padding-left: clamp(1.25rem, 4vw, 2.25rem);
   border-left: 3px solid var(--accent);
 }
-.home-chairman__lead {
+.home-director__lead {
   font-size: clamp(1.125rem, 1.6vw, 1.25rem);
   font-weight: 500;
   line-height: 1.6;
   color: var(--heading);
 }
-.home-chairman__text {
+.home-director__text {
   font-size: 1.0625rem;
   line-height: 1.75;
   color: var(--text-2);
 }
-.home-chairman__actions {
+.home-director__actions {
   margin-top: var(--space-2);
 }
 
@@ -2203,4 +2147,256 @@ a:hover {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* -------------------------------------------------- Home: office bearers */
+
+.bearers {
+  padding-block: var(--section);
+  border-top: 1px solid var(--border);
+}
+.bearers__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  margin-bottom: var(--space-6);
+}
+.bearers__title {
+  font: 700 clamp(1.75rem, 3vw, 2.4rem)/1.05 var(--display);
+}
+.bearers__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 64rem) {
+  .bearers__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 40rem) {
+  .bearers__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-3);
+  }
+}
+.bearer {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.bearer--lead {
+  border-top: 3px solid var(--accent);
+}
+.bearer__photo {
+  aspect-ratio: 4 / 5;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.bearer__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+.bearer__body {
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--space-4);
+}
+.bearer__role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.bearer__name {
+  font: 700 1.3rem/1.1 var(--display);
+  color: var(--heading);
+}
+.bearer__meta {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+@media (max-width: 40rem) {
+  .bearer__body {
+    padding: var(--space-3);
+  }
+  .bearer__name {
+    font-size: 1.125rem;
+  }
+  .bearer__role {
+    font-size: 0.6875rem;
+  }
+}
+
+/* Member cards on the Executive Committee page: same portrait framing. */
+.member-card__photo {
+  object-position: 50% 18%;
+}
+
+/* ------------------------------------------- Associate states: India map */
+
+.regions__head {
+  max-width: 46rem;
+  margin-bottom: var(--space-5);
+}
+.regions__head .section-title {
+  margin-bottom: var(--space-2);
+}
+.regions__grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .regions__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+}
+.india-map {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+@media (min-width: 60rem) {
+  .india-map {
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+.india-map__svg {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  margin-inline: auto;
+}
+.india-map__region path {
+  stroke: #ffffff;
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  transition: fill 0.15s var(--ease);
+}
+.india-map__region.is-state path {
+  fill: #ffd9b0;
+}
+.india-map__region.is-ut path {
+  fill: #bfe3bb;
+}
+.india-map__region:hover path {
+  fill: var(--navy);
+}
+.india-map__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.india-map__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.india-map__key i {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+}
+.india-map__key i.is-state {
+  background: #ffd9b0;
+}
+.india-map__key i.is-ut {
+  background: #bfe3bb;
+}
+.india-map__credit {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+}
+
+.regions__lists {
+  display: grid;
+  gap: var(--space-6);
+}
+.region-group__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font: 700 1.4rem/1.1 var(--display);
+  color: var(--heading);
+}
+.region-group__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.9rem;
+  height: 1.6rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font: 600 0.8125rem/1 var(--sans);
+  color: var(--text-2);
+}
+.region-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 21rem) {
+  .region-list {
+    grid-template-columns: 1fr;
+  }
+}
+.region {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9375rem;
+  scroll-margin-top: 6rem;
+}
+.region::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.region.is-ut::before {
+  background: var(--green);
+}
+.region__note {
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.region:target {
+  background: var(--accent-tint);
+  box-shadow: inset 3px 0 0 var(--accent);
+  font-weight: 600;
 }

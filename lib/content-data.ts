@@ -21,50 +21,125 @@ import type {
  * See README.md → "Publishing approved content" for worked examples.
  */
 
+/**
+ * Office bearers — names, designations, affiliations and photographs supplied by the client
+ * (November 2026). Listed in the client's order of precedence. Shown on the homepage and on
+ * the Executive Committee page.
+ */
+const officeBearerList: CommitteeMember[] = [
+  {
+    status: "published",
+    name: "Mr. Likha Tara Ji",
+    designation: "Director",
+    photo: "/assets/Likha.jpeg",
+  },
+  {
+    status: "published",
+    name: "Amit Thaker Ji",
+    designation: "President",
+    affiliation: "MLA, Vejalpur, Gujarat",
+    photo: "/assets/Amit.jpeg",
+  },
+  {
+    status: "published",
+    name: "Baikunth Singh",
+    designation: "Acting President",
+    photo: "/assets/Baikunth.jpeg",
+  },
+  {
+    status: "published",
+    name: "Pawan Kharkhoda",
+    designation: "Vice President",
+    affiliation: "MLA, Kharkhoda, Haryana",
+    photo: "/assets/Pawan.jpeg",
+  },
+  {
+    status: "published",
+    name: "Dr. Neelkanth Kunjilal Kawade",
+    designation: "General Secretary",
+    photo: "/assets/Neelkanth.jpeg",
+    photoFocus: "50% 78%",
+  },
+  {
+    status: "published",
+    name: "Yogesh Kalara",
+    designation: "Co-Acting Secretary",
+    photo: "/assets/Yogesh.jpeg",
+  },
+  {
+    status: "published",
+    name: "Mahesh Kumawat",
+    designation: "Joint Secretary",
+    photo: "/assets/Mahesh.jpeg",
+  },
+  {
+    status: "published",
+    name: "Jwala Turkar",
+    designation: "Joint Secretary",
+    photo: "/assets/Jwala.jpeg",
+  },
+];
+
 export const committees: Record<CommitteeKey, CommitteeMember[]> = {
-  executive: [],
+  executive: officeBearerList,
   "anti-doping": [],
-  referee: [],
+  // Supplied by the client, 23 November 2026.
+  referee: [
+    {
+      status: "published",
+      name: "Susil Sharma",
+      designation: "Secretary, Referee Commission",
+      photo: "/assets/Susil.jpeg",
+    },
+  ],
   womens: [],
   kata: [],
   kumite: [],
-  media: [],
+  // Supplied by the client, 23 November 2026.
+  media: [
+    {
+      status: "published",
+      name: "Aashish Poonia",
+      designation: "Media Director",
+      photo: "/assets/Ashish.jpeg",
+    },
+  ],
   judges: [],
 };
 
 /**
- * Chairman photographs and message — supplied by the client.
+ * Director photographs and message — supplied by the client.
  */
-export const chairmanImages: SliderImage[] = [
+export const directorImages: SliderImage[] = [
   {
-    src: "/chairman/chairman1.jpeg",
-    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
-    caption: "Mr. Likha Tara Ji — Chairman, Karate Association of India",
+    src: "/director/director1.jpeg",
+    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
+    caption: "Mr. Likha Tara Ji — Director, Karate Association of India",
     width: 960,
     height: 639,
   },
   {
-    src: "/chairman/chairman2.jpeg",
+    src: "/director/director2.jpeg",
     alt: "Mr. Likha Tara Ji presiding at an official KAI event",
     caption: "Mr. Likha Tara Ji presiding at an official KAI event",
     width: 656,
     height: 768,
   },
   {
-    src: "/chairman/chairman3.jpeg",
-    alt: "Mr. Likha Tara Ji, Chairman of Karate Association of India",
+    src: "/director/director3.jpeg",
+    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
     caption: "Mr. Likha Tara Ji — Championing karate across India",
     width: 1080,
     height: 1079,
   },
 ];
 
-export const chairmanMessage: LeadershipMessage = {
+export const directorMessage: LeadershipMessage = {
   status: "published",
   name: "Mr. Likha Tara Ji",
-  designation: "Chairman, Karate Association of India",
-  portrait: "/chairman/chairman1.jpeg",
-  images: chairmanImages,
+  designation: "Director, Karate Association of India",
+  portrait: "/director/director1.jpeg",
+  images: directorImages,
   paragraphs: [
     "It gives me immense pleasure to welcome all athletes, coaches, referees, officials and martial arts enthusiasts to the Karate Association of India.",
     "Karate is much more than a combat sport; it is a way of life built on the core pillars of discipline, respect, perseverance and self-control. Through rigorous training and healthy competition, our young karatekas not only sharpen their physical agility and mental focus but also learn the values of humility and sportsmanship that stay with them far beyond the dojo.",

@@ -80,7 +80,7 @@ export function ImageSlider({
           <Image
             key={activeImage.src}
             src={activeImage.src}
-            alt={activeImage.alt || title || "Chairman photograph"}
+            alt={activeImage.alt || title || "Photograph"}
             fill
             sizes="(max-width: 48rem) 95vw, (max-width: 64rem) 45vw, 36rem"
             className="slider__image"

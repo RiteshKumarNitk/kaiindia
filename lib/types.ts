@@ -19,7 +19,7 @@ export const routePaths = [
   "/about/judges-profile",
   "/about/karate",
   "/organisation",
-  "/organisation/chairman-message",
+  "/organisation/director-message",
   "/organisation/executive-committee",
   "/organisation/anti-doping-committee",
   "/organisation/referee-committee",
@@ -123,9 +123,13 @@ export type CommitteeMember = {
   name: string;
   designation: string;
   state?: string;
+  /** Other public office, e.g. "MLA, Vejalpur, Gujarat" — only as supplied by the client. */
+  affiliation?: string;
   biography?: string;
-  /** Path under /public, e.g. "/people/executive/jane-doe.jpg". */
+  /** Path under /public, e.g. "/assets/name.jpeg". */
   photo?: string;
+  /** CSS object-position for cropping the photo, e.g. "50% 80%" (default "50% 18%"). */
+  photoFocus?: string;
 };
 
 export type StateAssociation = {

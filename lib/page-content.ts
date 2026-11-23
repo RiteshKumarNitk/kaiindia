@@ -233,13 +233,13 @@ export const pages: Record<RoutePath, PageEntry> = {
     comingSoon: {
       title: "Committee details in preparation",
       description:
-        "Committee memberships and the state association directory will be published here once verified. The Chairman's message is available now.",
+        "Committee memberships and the state association directory will be published here once verified. The Director's message is available now.",
     },
     body: {
       kind: "hub",
       layout: "directory",
       groups: [
-        { title: "Leadership", links: ["/organisation/chairman-message", "/organisation/executive-committee"] },
+        { title: "Leadership", links: ["/organisation/director-message", "/organisation/executive-committee"] },
         {
           title: "Committees",
           links: [
@@ -255,16 +255,16 @@ export const pages: Record<RoutePath, PageEntry> = {
       ],
     },
   },
-  "/organisation/chairman-message": {
-    title: "Chairman's Message",
+  "/organisation/director-message": {
+    title: "Director's Message",
     eyebrow: "Organisation · Leadership",
-    intro: "Message from the Chairman",
+    intro: "Message from the Director",
     metaDescription:
-      "A message from Mr. Likha Tara Ji, Chairman of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
+      "A message from Mr. Likha Tara Ji, Director of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
     // Fallback only; the message is published in lib/content-data.ts.
     comingSoon: {
       title: "Message to be published",
-      description: "The Chairman's message will appear here once approved for publication.",
+      description: "The Director's message will appear here once approved for publication.",
     },
     body: { kind: "message" },
   },
@@ -272,8 +272,8 @@ export const pages: Record<RoutePath, PageEntry> = {
     title: "Executive Committee",
     eyebrow: "Organisation · Committees",
     intro:
-      "The Executive Committee is responsible for the overall direction and administration of an association. Its officeholders will be listed here once the official records are confirmed.",
-    metaDescription: "Members of the Karate Association of India Executive Committee, to be published once confirmed.",
+      "The office bearers of the Karate Association of India, listed in order of office.",
+    metaDescription: "Office bearers of the Karate Association of India: Director, President, Vice President, General Secretary and other officeholders.",
     comingSoon: {
       title: "Members to be announced",
       description: "Officeholders and members will be listed here after the association confirms the official records.",
@@ -305,7 +305,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     title: "Referee Committee",
     eyebrow: "Organisation · Committees",
     intro:
-      "Consistent, impartial officiating underpins every competition. This page will present the committee that oversees refereeing standards, official training and seminars.",
+      "Consistent, impartial officiating underpins every competition. The Referee Commission oversees refereeing standards, official training and seminars.",
     metaDescription: "Referee committee of the Karate Association of India — officiating standards and referee development.",
     comingSoon: {
       title: "Members to be announced",
@@ -369,7 +369,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     title: "Media Committee",
     eyebrow: "Organisation · Committees",
     intro:
-      "This page will introduce the committee responsible for the association's communications, publicity and official media coverage of events.",
+      "The committee responsible for the association's communications, publicity and official media coverage of events.",
     metaDescription: "Media committee of the Karate Association of India — communications and event coverage.",
     comingSoon: {
       title: "Members to be announced",
@@ -637,8 +637,8 @@ const summaries: Partial<Record<RoutePath, string>> = {
   "/about/judges-profile": "Directory of verified judges and technical officials.",
   "/about/karate": "Karate as a martial art and sport: kata, kumite and training.",
   "/organisation": "Leadership, committees and state associations.",
-  "/organisation/chairman-message": "A message from Mr. Likha Tara Ji, Chairman of KAI.",
-  "/organisation/executive-committee": "Officeholders responsible for direction and administration.",
+  "/organisation/director-message": "A message from Mr. Likha Tara Ji, Director of KAI.",
+  "/organisation/executive-committee": "Office bearers of the association.",
   "/organisation/anti-doping-committee": "Clean-sport education and awareness.",
   "/organisation/referee-committee": "Officiating standards and referee development.",
   "/organisation/womens-committee": "Participation and leadership of women in karate.",
