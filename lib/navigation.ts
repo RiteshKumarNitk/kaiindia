@@ -31,6 +31,9 @@ export const mainNav: NavItem[] = [
       { label: "Kumite Committee", href: "/organisation/kumite-committee" },
       { label: "Media Committee", href: "/organisation/media-committee" },
       { label: "Associate States", href: "/organisation/associate-states" },
+      { label: "Medical & Physio. Committee", href: "/organisation/medical-physio-committee" },
+      { label: "Objection Committee", href: "/organisation/objection-committee" },
+      { label: "Management Committee", href: "/organisation/management-committee" },
     ],
   },
   {

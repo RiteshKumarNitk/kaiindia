@@ -28,6 +28,9 @@ export const routePaths = [
   "/organisation/kumite-committee",
   "/organisation/media-committee",
   "/organisation/associate-states",
+  "/organisation/medical-physio-committee",
+  "/organisation/objection-committee",
+  "/organisation/management-committee",
   "/media",
   "/media/news",
   "/media/photo-gallery",
@@ -71,6 +74,9 @@ export type CommitteeKey =
   | "kata"
   | "kumite"
   | "media"
+  | "medical"
+  | "objection"
+  | "management"
   | "judges";
 
 export type DocumentCollection = "association-rules" | "karate-rules" | "governance";

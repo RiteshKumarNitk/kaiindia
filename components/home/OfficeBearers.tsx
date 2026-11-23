@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/shared/Icon";
-import { committees, published } from "@/lib/content-data";
+import { officeBearers, published } from "@/lib/content-data";
 
 /** Homepage list of office bearers, in the client's order of precedence, with photographs. */
 export function OfficeBearers() {
-  const members = published(committees.executive);
+  const members = published(officeBearers);
   if (members.length === 0) return null;
 
   return (

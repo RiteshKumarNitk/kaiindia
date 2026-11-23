@@ -149,9 +149,9 @@ const stateColumns = ["State", "Association", "Representative", "Contact", "Stat
 
 /**
  * Associate states: map and list of all states and union territories, then the directory of
- * state associations, with an in-table empty state until records are verified.
+ * verified state associations (hidden until at least one is published).
  */
-export function StateDirectory({ comingSoon }: { comingSoon: ComingSoonCopy }) {
+export function StateDirectory() {
   const entries = published(stateAssociations).sort((a, b) => a.state.localeCompare(b.state));
   return (
     <>
@@ -173,35 +173,32 @@ export function StateDirectory({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         </div>
       </div>
     </section>
-    <section aria-labelledby="states-heading">
-      <h2 id="states-heading" className="section-title">
-        State associations
-      </h2>
-      <div className="table-wrap">
-        <table className="data-table">
-          <thead>
-            <tr>
-              {stateColumns.map((c) => (
-                <th key={c} scope="col">
-                  {c}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {entries.length > 0 ? (
-              entries.map((e) => <StateRow key={e.state} entry={e} />)
-            ) : (
-              <tr className="data-table__empty">
-                <td colSpan={stateColumns.length}>
-                  <ComingSoon {...comingSoon} variant="compact" headingLevel={3} />
-                </td>
+    {/* Shown only once verified state associations are published; no placeholder otherwise. */}
+    {entries.length > 0 && (
+      <section aria-labelledby="states-heading">
+        <h2 id="states-heading" className="section-title">
+          State associations
+        </h2>
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
+              <tr>
+                {stateColumns.map((c) => (
+                  <th key={c} scope="col">
+                    {c}
+                  </th>
+                ))}
               </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </section>
+            </thead>
+            <tbody>
+              {entries.map((e) => (
+                <StateRow key={e.state} entry={e} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )}
     </>
   );
 }

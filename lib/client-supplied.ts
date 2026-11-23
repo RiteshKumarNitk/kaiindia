@@ -72,6 +72,15 @@ export const refereeCommitteeOriginal = {
   photos: "public/assets/Susil.jpeg, supplied by the client",
 } as const;
 
+/** Further members supplied by the client on 23 November 2026, verbatim. */
+export const additionalMembersOriginal = {
+  entries: [
+    "Anjali / Executive member / Karate association of India (photo: public/assets/anjali.jpeg)",
+    "Vijeta mundlia / Woman commission / Karate association of India / Women commitee (photo: public/assets/Vijeta.jpeg)",
+  ],
+  newCommittees: ["Medical & Physio. Committee", "Objection Committee", "Management committee"],
+} as const;
+
 /**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
@@ -88,4 +97,6 @@ export const claimsRequiringVerification = [
   "Written consent of each office bearer and committee member to publish their name and photograph.",
   "Aashish Poonia as Media Director (name spelling, title and photograph).",
   "Susil Sharma as Secretary of the Referee Commission (name spelling, title and photograph).",
+  "Anjali as Executive Member (full name, title and photograph).",
+  "Vijeta Mundlia of the Women's Commission (exact title and photograph).",
 ] as const;

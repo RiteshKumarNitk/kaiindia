@@ -18,7 +18,7 @@ No official facts are invented. Officeholders, committee members, state associat
 | --- | --- |
 | Home | `/` |
 | About KAI | `/about`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
-| Organisation | `/organisation`, `/organisation/director-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states` |
+| Organisation | `/organisation`, `/organisation/director-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states`, `/organisation/medical-physio-committee`, `/organisation/objection-committee`, `/organisation/management-committee` |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
@@ -195,6 +195,9 @@ The office bearers are listed in `officeBearerList` in `lib/content-data.ts`, in
 - Photographs live in `public/assets/`.
 - Each entry takes `name`, `designation`, an optional `affiliation` (for example "MLA, Vejalpur, Gujarat") and `photo`.
 - To add, remove or reorder someone, edit that list.
+- Executive members who are not office bearers (for example Anjali) go in `executiveMembers`. They appear on the Executive Committee page but not on the homepage.
+- Other committees' members go in `committees.<key>`, for example `media`, `referee`, `womens`, `medical`, `objection` or `management`.
+- **Replacing a photo:** save the new photo under a **new file name** (for example `Name-2.jpeg`) and update `photo`. Next.js caches optimised images by URL, so a file replaced under the same name keeps showing the old picture until the cache in `.next/cache/images` is cleared. If a face is cropped badly, set `photoFocus` (for example `"46% 22%"`).
 
 ### Associate States map
 
@@ -203,7 +206,7 @@ The office bearers are listed in `officeBearerList` in `lib/content-data.ts`, in
 - The list is defined in `lib/india-states.ts`.
 - The map is drawn from the `@svg-maps/india` package (CC BY 4.0, credited under the map).
 - That map data predates 2019, so Ladakh appears within the Jammu and Kashmir outline. The list notes this.
-- Verified state associations go in `stateAssociations` in `lib/content-data.ts` and appear in the table below the map.
+- Verified state associations go in `stateAssociations` in `lib/content-data.ts`. A table of them appears below the map only once at least one is published; until then the page shows just the map and list.
 
 For associate states, add entries to `stateAssociations`. Set `recognitionStatus` **only** if the recognition has been verified.
 

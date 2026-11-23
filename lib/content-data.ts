@@ -57,8 +57,9 @@ const officeBearerList: CommitteeMember[] = [
     status: "published",
     name: "Dr. Neelkanth Kunjilal Kawade",
     designation: "General Secretary",
-    photo: "/assets/Neelkanth.jpeg",
-    photoFocus: "50% 78%",
+    // Replaced photo uses a new file name so cached copies of the old one are not served.
+    photo: "/assets/Neelkanth-2.jpeg",
+    photoFocus: "46% 22%",
   },
   {
     status: "published",
@@ -76,12 +77,26 @@ const officeBearerList: CommitteeMember[] = [
     status: "published",
     name: "Jwala Turkar",
     designation: "Joint Secretary",
-    photo: "/assets/Jwala.jpeg",
+    // Replaced photo uses a new file name so cached copies of the old one are not served.
+    photo: "/assets/Jwala-2.jpeg",
   },
 ];
 
+/** Executive members (not office bearers) — supplied by the client, 23 November 2026. */
+const executiveMembers: CommitteeMember[] = [
+  {
+    status: "published",
+    name: "Anjali",
+    designation: "Executive Member",
+    photo: "/assets/anjali.jpeg",
+  },
+];
+
+/** Office bearers only, in order of precedence (used on the homepage). */
+export const officeBearers = officeBearerList;
+
 export const committees: Record<CommitteeKey, CommitteeMember[]> = {
-  executive: officeBearerList,
+  executive: [...officeBearerList, ...executiveMembers],
   "anti-doping": [],
   // Supplied by the client, 23 November 2026.
   referee: [
@@ -92,7 +107,15 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       photo: "/assets/Susil.jpeg",
     },
   ],
-  womens: [],
+  // Supplied by the client, 23 November 2026.
+  womens: [
+    {
+      status: "published",
+      name: "Vijeta Mundlia",
+      designation: "Women's Commission",
+      photo: "/assets/Vijeta.jpeg",
+    },
+  ],
   kata: [],
   kumite: [],
   // Supplied by the client, 23 November 2026.
@@ -104,6 +127,9 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       photo: "/assets/Ashish.jpeg",
     },
   ],
+  medical: [],
+  objection: [],
+  management: [],
   judges: [],
 };
 

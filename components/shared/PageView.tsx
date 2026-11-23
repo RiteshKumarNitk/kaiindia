@@ -28,7 +28,7 @@ function Body({ page }: { page: PageEntry }) {
     case "directory":
       return <MemberDirectory committee={body.committee} focus={body.focus} comingSoon={comingSoon} />;
     case "states":
-      return <StateDirectory comingSoon={comingSoon} />;
+      return <StateDirectory />;
     case "message":
       return <MessagePanel comingSoon={comingSoon} />;
     case "info":
