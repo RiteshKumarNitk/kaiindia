@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icon } from "@/components/shared/Icon";
-import { officeBearers, published } from "@/lib/content-data";
+import { Icon } from "@/components/ui/Icon";
+import { officeBearers } from "@/content/people";
+import { published } from "@/lib/content-status";
 
 /** Homepage list of office bearers, in the client's order of precedence, with photographs. */
 export function OfficeBearers() {

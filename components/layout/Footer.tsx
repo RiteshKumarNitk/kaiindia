@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { footerNav } from "@/lib/navigation";
-import { siteConfig } from "@/lib/site-config";
+import { footerNav } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
 
 export function Footer() {
   const { email, phone } = siteConfig.contact;
@@ -16,14 +16,14 @@ export function Footer() {
       </div>
       <div className="container site-footer__grid">
         <div className="site-footer__brand">
-          <Link href="/" className="brand brand--footer">
+          <Link href="/" className="brand brand--footer" prefetch={false}>
             <Image
               src={siteConfig.crest.src}
               width={siteConfig.crest.width}
               height={siteConfig.crest.height}
               alt={`${siteConfig.name} crest`}
               className="brand__crest"
-              unoptimized
+              sizes="48px"
             />
             <span className="brand__name">
               Karate Association
@@ -42,7 +42,10 @@ export function Footer() {
             <ul>
               {column.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  {/* No viewport prefetch for ~20 footer links: saves bandwidth on every page. */}
+                  <Link href={link.href} prefetch={false}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -67,7 +70,7 @@ export function Footer() {
           ) : (
             <p className="site-footer__muted">Official contact information will be available soon.</p>
           )}
-          <Link href="/contact" className="text-link">
+          <Link href="/contact" className="text-link" prefetch={false}>
             Contact page <span aria-hidden="true">→</span>
           </Link>
         </div>

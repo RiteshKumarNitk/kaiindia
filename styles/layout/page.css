@@ -1,0 +1,75 @@
+/* ----------------------------------------------------------- Breadcrumbs */
+
+.breadcrumbs ol {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+}
+.breadcrumbs li + li::before {
+  content: "/";
+  margin: 0 0.5rem;
+  color: var(--border-strong);
+}
+.breadcrumbs a {
+  color: var(--text-2);
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+.breadcrumbs [aria-current="page"] {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------- Page hero */
+
+.page-hero {
+  padding-block: clamp(1.75rem, 4vw, 3rem) clamp(2rem, 4.5vw, 3.25rem);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero__title {
+  font: 700 clamp(2.4rem, 5.6vw, 4rem)/1 var(--display);
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+}
+.page-hero__intro {
+  margin-top: var(--space-4);
+  max-width: 60ch;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  color: var(--text-2);
+}
+.page-hero--center {
+  text-align: center;
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+.page-hero--center .page-hero__title,
+.page-hero--center .page-hero__intro,
+.page-hero--center .brush {
+  margin-inline: auto;
+}
+.page-hero--center .button-row {
+  justify-content: center;
+  margin-top: var(--space-6);
+}
+
+.page-body {
+  padding-block: var(--section);
+}
+.stack {
+  display: grid;
+  gap: clamp(2rem, 4.5vw, 3.25rem);
+}
+.stack > * {
+  min-width: 0;
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { getPage } from "./page-content";
-import { siteConfig } from "./site-config";
-import type { RoutePath } from "./types";
+import { getPage } from "@/content/pages";
+import { siteConfig } from "@/config/site";
+import type { RoutePath } from "@/lib/types";
 
 /** Builds unique per-page metadata from the page-content registry. */
 export function pageMetadata(path: RoutePath): Metadata {

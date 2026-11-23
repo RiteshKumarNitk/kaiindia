@@ -1,5 +1,6 @@
-import { Icon, type IconName } from "@/components/shared/Icon";
-import { associationIntro, isPublished } from "@/lib/content-data";
+import { Icon, type IconName } from "@/components/ui/Icon";
+import { associationIntro } from "@/content/association";
+import { isPublished } from "@/lib/content-status";
 
 const icons: IconName[] = ["map", "users", "shield", "trophy"];
 

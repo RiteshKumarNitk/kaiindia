@@ -1,0 +1,28 @@
+/* -------------------------------------------------------- Tricolour accent */
+
+.tricolour {
+  display: grid;
+}
+.tricolour i {
+  display: block;
+  height: 3px;
+}
+.tricolour i:nth-child(1) {
+  background: var(--india-saffron);
+}
+.tricolour i:nth-child(2) {
+  background: var(--india-white);
+}
+.tricolour i:nth-child(3) {
+  background: var(--india-green);
+}
+.tricolour--thin i {
+  height: 2px;
+}
+.tricolour-rule {
+  display: block;
+  width: 4.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--india-saffron) 0 33.3%, #e5e7eb 33.3% 66.6%, var(--india-green) 66.6%);
+}

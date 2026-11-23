@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { mainNav } from "@/lib/navigation";
-import { siteConfig } from "@/lib/site-config";
-import { MobileMenu } from "./MobileMenu";
-import { Navbar } from "./Navbar";
+import { mainNav } from "@/config/navigation";
+import { siteConfig } from "@/config/site";
+import { MobileMenu } from "@/components/layout/MobileMenu";
+import { Navbar } from "@/components/layout/Navbar";
 
 export function Header() {
   return (
@@ -16,8 +16,8 @@ export function Header() {
             height={siteConfig.crest.height}
             alt={`${siteConfig.name} crest`}
             className="brand__crest"
-            unoptimized
-            preload
+            sizes="56px"
+            loading="eager"
           />
           <span className="brand__name">
             Karate Association

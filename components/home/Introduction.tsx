@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icon } from "@/components/shared/Icon";
-import { associationIntro, isPublished } from "@/lib/content-data";
-import { siteConfig } from "@/lib/site-config";
+import { Icon } from "@/components/ui/Icon";
+import { associationIntro } from "@/content/association";
+import { isPublished } from "@/lib/content-status";
+import { siteConfig } from "@/config/site";
 
 /** Official association introduction (client-supplied) shown below the homepage hero. */
 export function Introduction() {
@@ -18,7 +19,7 @@ export function Introduction() {
             height={siteConfig.crest.height}
             alt=""
             className="intro__crest"
-            unoptimized
+            sizes="72px"
           />
           <h2 id="intro-title" className="intro__title">
             {title}

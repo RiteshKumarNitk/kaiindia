@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { pageLabel, pages } from "@/lib/page-content";
+import { pageLabel, pages } from "@/content/pages";
 import { routePaths, type RoutePath } from "@/lib/types";
 
 function isRoute(path: string): path is RoutePath {

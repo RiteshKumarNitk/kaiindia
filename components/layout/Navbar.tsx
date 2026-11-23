@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
-import { isActivePath } from "@/lib/navigation";
+import { isActivePath } from "@/config/navigation";
 import type { NavItem } from "@/lib/types";
 
 type OpenState = { label: string; pathname: string } | null;

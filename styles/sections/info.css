@@ -1,0 +1,82 @@
+/* ------------------------------------------------------------- Governance */
+
+.topic-list {
+  margin: 0;
+  display: grid;
+  border-top: 1px solid var(--border);
+}
+.topic {
+  display: grid;
+  gap: var(--space-1) var(--space-6);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+.topic dt {
+  font-weight: 600;
+}
+.topic dd {
+  margin: 0;
+  color: var(--text-2);
+}
+@media (min-width: 48rem) {
+  .topic {
+    grid-template-columns: 16rem 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------- Contact */
+
+.contact-card {
+  max-width: 40rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.contact-card__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--navy);
+  color: #fff;
+}
+.contact-card__brand img {
+  width: 3.25rem;
+  height: auto;
+  border-radius: 50%;
+  background: #fff;
+}
+.contact-card__brand h2 {
+  font: 700 1.5rem/1.1 var(--display);
+  color: #fff;
+}
+.contact-card__brand p {
+  font-size: 0.875rem;
+  color: var(--on-navy-2);
+}
+.contact-card__pending,
+.contact-card__list {
+  margin: 0;
+  padding: var(--space-5);
+}
+.contact-card__pending {
+  display: grid;
+  gap: var(--space-2);
+}
+.contact-card__list > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.contact-card__list dt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-2);
+}
+.contact-card__list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}

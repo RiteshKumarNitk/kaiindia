@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Icon } from "@/components/shared/Icon";
-import { ImageSlider } from "@/components/shared/ImageSlider";
-import { directorImages, directorMessage, isPublished } from "@/lib/content-data";
+import { Icon } from "@/components/ui/Icon";
+import { ImageSlider } from "@/components/ui/ImageSlider";
+import { directorImages, directorMessage } from "@/content/leadership";
+import { isPublished } from "@/lib/content-status";
 
 /** Director's feature section on the homepage with an interactive photo slider and message excerpt. */
 export function DirectorSection() {

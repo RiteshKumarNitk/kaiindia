@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { isActivePath } from "@/lib/navigation";
+import { isActivePath } from "@/config/navigation";
 import type { NavItem } from "@/lib/types";
 
 /** Hamburger menu with accordion sections, shown below the desktop breakpoint. */

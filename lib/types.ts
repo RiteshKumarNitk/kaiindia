@@ -10,7 +10,7 @@
  */
 export type ContentStatus = "coming-soon" | "draft" | "published";
 
-/** Every route on the site. Adding a route here forces a matching entry in `lib/page-content.ts`. */
+/** Every route on the site. Adding a route here forces a matching entry in `content/pages.ts`. */
 export const routePaths = [
   "/",
   "/about",

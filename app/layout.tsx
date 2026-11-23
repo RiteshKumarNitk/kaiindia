@@ -1,12 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import "@fontsource-variable/inter/index.css";
-import "@fontsource/barlow-condensed/latin-700.css";
-import "@fontsource/barlow-condensed/latin-800.css";
 import "./globals.css";
+import { fontDisplay, fontSans } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -22,7 +20,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" className={`${fontSans.variable} ${fontDisplay.variable}`}>
       {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to <body>
           before React hydrates; this suppresses that attribute-only mismatch on <body> itself. */}
       <body suppressHydrationWarning>

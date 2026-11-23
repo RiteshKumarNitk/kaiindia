@@ -8,8 +8,8 @@ No official facts are invented. Officeholders, committee members, state associat
 
 - Next.js 16 (App Router, Turbopack), all pages statically prerendered
 - React 19, TypeScript (strict)
-- Plain CSS in `app/globals.css`, with no UI framework or animation library. Colours, type and spacing are CSS tokens at the top of the file (`--navy`, `--accent`, `--space-*` …).
-- Self-hosted fonts: `@fontsource/barlow-condensed` for display headings and `@fontsource-variable/inter` for body text, navigation and buttons
+- Plain CSS split by area in `styles/` (entry point `app/globals.css`), with no UI framework or animation library. Colours, type and spacing are tokens in `styles/tokens.css` (`--navy`, `--accent`, `--space-*` …).
+- Self-hosted fonts via `next/font/local` (files in `assets/fonts/`): Barlow Condensed for display headings and Inter for body text, navigation and buttons
 - pnpm 10.34.9, Node.js 24.x
 
 ## Routes
@@ -28,28 +28,74 @@ No official facts are invented. Officeholders, committee members, state associat
 
 ## Project structure
 
+The project keeps **content** (what the association edits), **configuration** and **code** apart.
+
 ```text
-app/                     Route folders. Each page.tsx is a few lines long.
-  layout.tsx             Header, footer, skip link and default metadata
-  sitemap.ts, robots.ts  Generated from the route list
+app/                       Routes only. Each page.tsx is a few lines: metadata + <PageView path="…" />.
+  layout.tsx               Root layout: fonts, header, footer, skip link, default metadata
+  globals.css              Imports the stylesheets in /styles (order matters)
+  sitemap.ts, robots.ts    Generated from the route list
+content/                   Everything the client supplies or approves (edit here first)
+  pages.ts                 Title, introduction, metadata, Coming Soon copy and layout for every route
+  people.ts                Office bearers, executive members and committee members (+ photo paths)
+  leadership.ts            Director's message and photo slider
+  association.ts           Homepage introduction and mission
+  states.ts                States/UTs list for the map, and verified state associations
+  media.ts                 News, photo gallery and videos
+  documents.ts             Rules and governance documents (PDFs)
+  source/client-supplied.ts  The client's original wording, verbatim, and claims to verify
+config/
+  site.ts                  Name, crest, illustration, contact details, site URL
+  navigation.ts            Header and footer menus
+lib/                       Code helpers (no content)
+  types.ts                 Route list (routePaths), ContentStatus and record types
+  content-status.ts        published() / isPublished() — only "published" content is shown
+  metadata.ts              Per-page <title> and description
+  fonts.ts                 Self-hosted fonts via next/font
+  format.ts, svg-path.ts   Date formatting; map path simplification
 components/
-  layout/                Header, Navbar (desktop dropdowns), MobileMenu, Breadcrumbs, Footer
-  home/                  Hero, DirectorSection, OfficeBearers, Introduction, Mission
-  shared/                ComingSoon, PageHero, PageView, SectionHeading, PageContainer, Icon
-  sections/              Page templates: hubs (landing-page layouts), directories, media, documents, portal, info pages, contact
-lib/
-  types.ts               Route list (routePaths), ContentStatus and record types
-  navigation.ts          Header and footer menus
-  page-content.ts        Title, introduction, metadata and Coming Soon copy for every route
-  content-data.ts        Approved records: committee members, news, photos, videos, documents, states
-  site-config.ts         Name, crest, illustration, contact details and site URL
-  metadata.ts            Per-page <title> and description
-public/
-  kai-crest.jpg          Original client-supplied crest. Do not replace it.
-  karate.webp            Karate illustration (see "Assets" below)
+  layout/                  Header, Navbar (desktop dropdowns), MobileMenu, Breadcrumbs, Footer
+  home/                    Hero, DirectorSection, OfficeBearers, Introduction, Mission
+  templates/PageView.tsx   Picks the page body for each route from content/pages.ts
+  sections/<area>/         Page bodies grouped by site section:
+                           about, organisation, media, documents, membership, hub,
+                           policies, donations, governance, contact
+  ui/                      Reusable building blocks: ComingSoon, Icon, ImageSlider,
+                           PageHero, PageContainer, SectionHeading
+styles/                    tokens.css (colours, type, spacing), base, primitives,
+                           layout/, components/, sections/, home.css, motion.css
+assets/fonts/              Inter and Barlow Condensed (Latin subset) + OFL licences
+public/                    Crest, illustration, people photos (assets/), director photos
 ```
 
-Only `Navbar` and `MobileMenu` are client components. All other components render on the server.
+Only `Navbar`, `MobileMenu` and `ImageSlider` are client components. Everything else renders on the server and ships no JavaScript.
+
+### Why no Tailwind or UI library
+
+The site already uses a small token-based CSS system: all colours, fonts and spacing are variables in `styles/tokens.css`. The whole stylesheet is about 9 KB compressed.
+
+Moving to Tailwind would mean rewriting every component, with no speed benefit and a real risk of visual regressions. A component library would add JavaScript the site does not need. If the team later prefers Tailwind, it can be adopted gradually by mapping its theme to the same tokens.
+
+## Performance
+
+These optimisations are in place:
+
+- **Images.** All images go through `next/image` with accurate `sizes`. Browsers get AVIF or WebP at the size actually displayed. For example, the header crest is now a ~3 KB 128 px image instead of the 29 KB original. Off-screen photos load lazily, and the hero illustration is preloaded.
+- **Fonts.** Fonts are self-hosted with `next/font` (Latin subset only). They are preloaded, and metric-matched fallbacks prevent layout shift. The heavy weight used only by the homepage title loads on the homepage only.
+- **Map.** The India map's coordinates are simplified when the site is built, at a precision finer than a screen pixel. This cut the Associate States HTML from 142 KB to 58 KB. Because other pages prefetch that page, this also saves bandwidth site-wide.
+- **Prefetching.** Footer links don't prefetch (`prefetch={false}`), so scrolling to the footer no longer downloads about 20 other pages.
+- **Rendering.** Every page is static HTML generated at build time.
+
+Measured on a throttled mobile connection (slow 4G, 4× CPU slowdown, empty cache), compared with the previous version:
+
+| Page | Data before → after | Largest Contentful Paint |
+| --- | --- | --- |
+| Home | 876 KB → 459 KB | 3.5 s → 1.4 s |
+| Director's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
+| Executive Committee | 544 KB → 341 KB | ~0.6–0.8 s (unchanged) |
+| Associate States | 514 KB → 329 KB | ~0.7–0.8 s (unchanged) |
+
+**When adding photos,** keep originals at around 1,600 px or less on the long side; `next/image` resizes them. To replace a photo, use a new file name (see "Office bearers").
 
 ## Local setup
 
@@ -77,10 +123,10 @@ See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github)
 
 The homepage introduction, office bearers, mission section, About KAI page, Executive Committee and Director's Message use content supplied by the client.
 
-- `lib/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
+- `content/source/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
 - The published versions are edited for grammar and punctuation only, with no new facts:
-  - `associationIntro`, `directorMessage` and the office bearers (`committees.executive`) in `lib/content-data.ts`;
-  - the `/about` sections in `lib/page-content.ts`.
+  - `associationIntro` in `content/association.ts`, `directorMessage` in `content/leadership.ts`, and the office bearers in `content/people.ts`;
+  - the `/about` sections in `content/pages.ts`.
 - Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, the Director's name and title, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
 - Numerical highlights (counters or statistics) must use only verified, approved figures.
 
@@ -108,7 +154,7 @@ Contrast rules:
 
 ### Navigation
 
-Edit `lib/navigation.ts`.
+Edit `config/navigation.ts`.
 
 - `mainNav` controls the header, including dropdowns and the mobile accordion.
 - `footerNav` controls the footer columns.
@@ -118,7 +164,7 @@ Every `href` is checked against `routePaths` in `lib/types.ts`, so a mistyped li
 **To add a new page:**
 
 1. Add the path to `routePaths` in `lib/types.ts`.
-2. Add an entry to `pages` in `lib/page-content.ts`. TypeScript reports an error until you do.
+2. Add an entry to `pages` in `content/pages.ts`. TypeScript reports an error until you do.
 3. Create `app/<path>/page.tsx`, copying any existing three-line page.
 4. Add the page to `mainNav` or `footerNav` if it should appear in a menu.
 
@@ -126,7 +172,7 @@ The sitemap updates automatically.
 
 ### Headings, introductions and Coming Soon messages
 
-All page copy is in `lib/page-content.ts`:
+All page copy is in `content/pages.ts`:
 
 - `title`: the H1. It is also used for the browser tab title.
 - `eyebrow`: the small label above the H1.
@@ -138,7 +184,7 @@ All page copy is in `lib/page-content.ts`:
 
 Keep the copy factual. Do not name officeholders, affiliations, recognitions or legal obligations until the association confirms them in writing.
 
-The panel itself is `components/shared/ComingSoon.tsx`:
+The panel itself is `components/ui/ComingSoon.tsx`:
 
 ```tsx
 <ComingSoon title="…" description="…" variant="hero | section | compact" icon="news" label="Coming soon" />
@@ -168,7 +214,7 @@ When at least one item in a list is published, the page swaps its Coming Soon pa
 ### Add committee members or judges
 
 1. Put photographs in `public/people/<committee>/`.
-2. Add members to `lib/content-data.ts`:
+2. Add members to `content/people.ts`:
 
 ```ts
 export const committees = {
@@ -186,11 +232,11 @@ export const committees = {
 };
 ```
 
-The Director's message is published from `directorMessage` in `lib/content-data.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `directorImages`, with the photographs stored in `public/director/`. Never use a stock or generated portrait.
+The Director's message is published from `directorMessage` in `content/leadership.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `directorImages`, with the photographs stored in `public/director/`. Never use a stock or generated portrait.
 
 ### Office bearers
 
-The office bearers are listed in `officeBearerList` in `lib/content-data.ts`, in order of precedence. They appear on the homepage ("Office Bearers") and on the Executive Committee page.
+The office bearers are listed in `officeBearerList` in `content/people.ts`, in order of precedence. They appear on the homepage ("Office Bearers") and on the Executive Committee page.
 
 - Photographs live in `public/assets/`.
 - Each entry takes `name`, `designation`, an optional `affiliation` (for example "MLA, Vejalpur, Gujarat") and `photo`.
@@ -203,16 +249,16 @@ The office bearers are listed in `officeBearerList` in `lib/content-data.ts`, in
 
 `/organisation/associate-states` shows a map of India with all 28 states and 8 union territories, each linked to its place in the list.
 
-- The list is defined in `lib/india-states.ts`.
+- The list is defined in `content/states.ts`.
 - The map is drawn from the `@svg-maps/india` package (CC BY 4.0, credited under the map).
 - That map data predates 2019, so Ladakh appears within the Jammu and Kashmir outline. The list notes this.
-- Verified state associations go in `stateAssociations` in `lib/content-data.ts`. A table of them appears below the map only once at least one is published; until then the page shows just the map and list.
+- Verified state associations go in `stateAssociations` in `content/states.ts`. A table of them appears below the map only once at least one is published; until then the page shows just the map and list.
 
 For associate states, add entries to `stateAssociations`. Set `recognitionStatus` **only** if the recognition has been verified.
 
 ### Publish news, photographs and videos
 
-All three lists are in `lib/content-data.ts`. Store images under `public/media/…`.
+All three lists are in `content/media.ts`. Store images under `public/media/…`.
 
 ```ts
 export const newsArticles = [
@@ -252,11 +298,11 @@ Use only official, approved photographs and videos. Never use stock imagery to r
 
 ### Publish rules and governance documents
 
-Place PDFs in `public/documents/`. Then add entries to `documents["association-rules"]`, `documents["karate-rules"]` or `documents.governance` in `lib/content-data.ts`. Each entry takes `title`, `description`, `category`, `version`, `publishedOn` and `file`.
+Place PDFs in `public/documents/`. Then add entries to `documents["association-rules"]`, `documents["karate-rules"]` or `documents.governance` in `content/documents.ts`. Each entry takes `title`, `description`, `category`, `version`, `publishedOn` and `file`.
 
 ### Membership, governance and policy text
 
-The membership and RTI & Governance sections are defined in `lib/page-content.ts`. To publish a section:
+The membership and RTI & Governance sections are defined in `content/pages.ts`. To publish a section:
 
 1. Set its `status` to `"published"`.
 2. Add a `body` array of approved paragraphs.
@@ -265,7 +311,7 @@ The privacy and refund policies remain "Document pending" until the official tex
 
 ### Contact details
 
-Fill in `siteConfig.contact` (`email`, `phone`, `address`) in `lib/site-config.ts` with verified details only. The Contact page and footer then show them automatically.
+Fill in `siteConfig.contact` (`email`, `phone`, `address`) in `config/site.ts` with verified details only. The Contact page and footer then show them automatically.
 
 ### Enabling logins, membership applications or donations later
 

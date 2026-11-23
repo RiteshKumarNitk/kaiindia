@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPage } from "@/lib/page-content";
-import { siteConfig } from "@/lib/site-config";
+import { getPage } from "@/content/pages";
+import { siteConfig } from "@/config/site";
 
 /** Homepage Hero section with national federation identity and calls to action. */
 export function Hero() {
@@ -31,9 +31,8 @@ export function Hero() {
           width={siteConfig.illustration.width}
           height={siteConfig.illustration.height}
           alt="Ink illustration of a karate athlete performing a high side kick in front of a vermilion sun"
-          sizes="(max-width: 48rem) 80vw, 40vw"
+          sizes="(max-width: 48rem) 78vw, 40vw"
           preload
-          unoptimized
         />
       </div>
     </section>
