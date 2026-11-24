@@ -99,3 +99,8 @@
   color: var(--navy);
   text-decoration: none;
 }
+
+/* Long values such as the email address wrap inside narrow footer columns. */
+.site-footer__col a {
+  overflow-wrap: anywhere;
+}

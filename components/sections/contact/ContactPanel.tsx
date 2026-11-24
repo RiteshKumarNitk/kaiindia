@@ -61,7 +61,7 @@ export function ContactPanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         {anyMissing && <p className="contact-info__note">{comingSoon.description}</p>}
       </aside>
 
-      <ContactForm endpoint={siteConfig.contactForm.endpoint} />
+      <ContactForm endpoint={siteConfig.contactForm.endpoint} fallbackEmail={email} />
     </div>
   );
 }

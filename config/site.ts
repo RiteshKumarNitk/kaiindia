@@ -50,7 +50,7 @@ export const siteConfig = {
   illustration: { src: "/karate.webp", width: 1254, height: 1254 },
   // Fill in ONLY with details the association has confirmed in writing.
   contact: {
-    email: null,
+    email: "kaikarateassociation@gmail.com", // supplied by the client, 24 November 2026
     phone: null,
     address: null,
     officeHours: null,

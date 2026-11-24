@@ -318,7 +318,7 @@ The privacy and refund policies remain "Document pending" until the official tex
 
 ### Contact details
 
-Fill in `siteConfig.contact` in `config/site.ts` with verified details only:
+Fill in `siteConfig.contact` in `config/site.ts` with verified details only. The official email `kaikarateassociation@gmail.com` is set; it appears on the Contact page, in the footer, beside the contact form, and on the Policy and Donations pages.
 
 - `address`, `email`, `phone` and `officeHours`. Until a field is set, the Contact page shows it as "Awaiting confirmation".
 - `mapUrl`. The "View on map" link appears only when both `address` and `mapUrl` are set.

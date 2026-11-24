@@ -81,7 +81,7 @@ type Status = { kind: "idle" } | { kind: "sending" } | { kind: "sent" } | { kind
  *   Without it, the submit button is disabled and a notice explains that submission is not yet available.
  * - Shows a success message only after the endpoint returns a successful response.
  */
-export function ContactForm({ endpoint }: { endpoint: string | null }) {
+export function ContactForm({ endpoint, fallbackEmail }: { endpoint: string | null; fallbackEmail?: string | null }) {
   const uid = useId();
   const [values, setValues] = useState<Values>(initial);
   const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
@@ -244,6 +244,12 @@ export function ContactForm({ endpoint }: { endpoint: string | null }) {
             <p className="contact-form__notice">
               <strong>Enquiry submission will be available soon.</strong> Online submission is not active yet, so
               nothing you enter here is sent.
+              {fallbackEmail && (
+                <>
+                  {" "}
+                  Meanwhile, please email us at <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a>.
+                </>
+              )}
             </p>
           )}
           {status.kind === "sent" && <p className="contact-form__success">Thank you — your enquiry has been sent.</p>}

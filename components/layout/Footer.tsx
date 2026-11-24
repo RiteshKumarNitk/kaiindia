@@ -58,7 +58,11 @@ export function Footer() {
             <ul>
               {email && (
                 <li>
-                  <a href={`mailto:${email}`}>{email}</a>
+                  {/* <wbr> lets the address wrap neatly before "@" in narrow columns. */}
+                  <a href={`mailto:${email}`}>
+                    {email.split("@")[0]}
+                    <wbr />@{email.split("@")[1]}
+                  </a>
                 </li>
               )}
               {phone && (

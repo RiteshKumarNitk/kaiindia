@@ -81,6 +81,9 @@ export const additionalMembersOriginal = {
   newCommittees: ["Medical & Physio. Committee", "Objection Committee", "Management committee"],
 } as const;
 
+/** Official email supplied by the client on 24 November 2026 ("use this mail where ever required"). */
+export const officialEmailOriginal = "kaikarateassociation@gmail.com";
+
 /**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
