@@ -43,7 +43,7 @@ export function DirectorSection() {
             </footer>
 
             <div className="home-director__actions">
-              <Link href="/organisation/director-message" className="button button--primary">
+              <Link href="/about/director-message" className="button button--primary">
                 Read full message <Icon name="arrow" size={16} />
               </Link>
             </div>

@@ -8,6 +8,20 @@ export type ContactDetails = {
   email: string | null;
   phone: string | null;
   address: string | null;
+  /** e.g. "Monday to Saturday, 10:00 am – 5:00 pm IST" — only once confirmed. */
+  officeHours: string | null;
+  /** Link to the verified office location (e.g. a Google Maps URL). Only set with a verified address. */
+  mapUrl: string | null;
+};
+
+export type ContactFormConfig = {
+  /**
+   * URL that receives enquiries as JSON (POST). Leave null until a secure backend exists —
+   * e.g. a Next.js Route Handler at app/api/contact/route.ts that sends email using
+   * credentials stored in server-side environment variables. Never put API keys here.
+   * While null, the form validates input but submission is disabled.
+   */
+  endpoint: string | null;
 };
 
 function resolveSiteUrl(): { url: string; confirmed: boolean } {
@@ -34,9 +48,15 @@ export const siteConfig = {
   urlConfirmed: site.confirmed,
   crest: { src: "/kai-crest.jpg", width: 447, height: 447 },
   illustration: { src: "/karate.webp", width: 1254, height: 1254 },
+  // Fill in ONLY with details the association has confirmed in writing.
   contact: {
     email: null,
     phone: null,
     address: null,
+    officeHours: null,
+    mapUrl: null,
   } satisfies ContactDetails as ContactDetails,
+  contactForm: {
+    endpoint: null,
+  } satisfies ContactFormConfig as ContactFormConfig,
 };

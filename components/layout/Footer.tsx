@@ -68,10 +68,12 @@ export function Footer() {
               )}
             </ul>
           ) : (
-            <p className="site-footer__muted">Official contact information will be available soon.</p>
+            <p className="site-footer__muted">
+              Questions about membership, events or the association? Send us an enquiry.
+            </p>
           )}
-          <Link href="/contact" className="text-link" prefetch={false}>
-            Contact page <span aria-hidden="true">→</span>
+          <Link href="/contact" className="button button--primary site-footer__cta" prefetch={false}>
+            Contact Us
           </Link>
         </div>
       </div>

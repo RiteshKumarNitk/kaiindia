@@ -145,6 +145,17 @@
 .dropdown[hidden] {
   display: none;
 }
+/* Two-column variant for long menus (filled column by column). */
+.dropdown--columns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(2, minmax(13.5rem, 1fr));
+  column-gap: var(--space-2);
+  min-width: 29rem;
+}
+.dropdown--columns[hidden] {
+  display: none;
+}
 @keyframes drop-in {
   from {
     opacity: 0;

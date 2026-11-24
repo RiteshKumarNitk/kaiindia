@@ -47,7 +47,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
     <nav ref={navRef} className="desktop-nav" aria-label="Main">
       <ul className="desktop-nav__list">
         {items.map((item) => {
-          const active = isActivePath(pathname, item.href);
+          const active = isActivePath(pathname, item.section ?? item.href);
           if (!item.children) {
             return (
               <li key={item.label}>
@@ -63,7 +63,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
           }
 
           const isOpen = openLabel === item.label;
-          const menuId = `menu-${item.href.slice(1) || "home"}`;
+          const menuId = `menu-${item.section.slice(1)}`;
           const onPointerEnter = (e: PointerEvent) => e.pointerType === "mouse" && show(item.label);
           const onPointerLeave = (e: PointerEvent) => e.pointerType === "mouse" && hide();
           const onTriggerKeyDown = (e: KeyboardEvent) => {
@@ -116,7 +116,14 @@ export function Navbar({ items }: { items: NavItem[] }) {
               </button>
               <ul
                 id={menuId}
-                className="dropdown"
+                // Long menus (e.g. Committee) use two columns, filled top-to-bottom so arrow keys
+                // and Tab follow the visual reading order.
+                className={`dropdown${item.children.length > 8 ? " dropdown--columns" : ""}`}
+                style={
+                  item.children.length > 8
+                    ? { gridTemplateRows: `repeat(${Math.ceil(item.children.length / 2)}, auto)` }
+                    : undefined
+                }
                 data-menu={item.label}
                 hidden={!isOpen}
                 onKeyDown={onMenuKeyDown}

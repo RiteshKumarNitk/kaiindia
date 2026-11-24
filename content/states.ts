@@ -80,5 +80,5 @@ export function regionsForMapId(mapId: string): Region[] {
   return direct;
 }
 
-/** Verified state associations. A table appears on /organisation/associate-states once any is published. */
+/** Verified state associations. A table appears on /about/associate-states once any is published. */
 export const stateAssociations: StateAssociation[] = [];

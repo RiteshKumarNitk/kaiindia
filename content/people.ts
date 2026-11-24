@@ -10,7 +10,7 @@ import type { CommitteeKey, CommitteeMember } from "@/lib/types";
 /**
  * Office bearers — names, designations, affiliations and photographs supplied by the client
  * (November 2026). Listed in the client's order of precedence. Shown on the homepage and on
- * the Executive Committee page.
+ * the Executive Members page (/about/executive-members).
  */
 const officeBearerList: CommitteeMember[] = [
   {
@@ -81,6 +81,31 @@ const executiveMembers: CommitteeMember[] = [
 /** Office bearers only, in order of precedence (used on the homepage). */
 export const officeBearers = officeBearerList;
 
+/**
+ * Executive positions, in order of office, for the Executive Members page.
+ * - Members are matched to a position by their `designation`.
+ * - `alwaysShow`: the position is listed even when no member has been supplied for it
+ *   (shown as "Member details will be updated soon" — no name or photo is invented).
+ * - `showOnHomepage: false`: holders of this position are not featured on the homepage.
+ */
+export type ExecutiveRole = { title: string; alwaysShow?: boolean; showOnHomepage?: boolean };
+
+export const executiveRoles: ExecutiveRole[] = [
+  { title: "Director" },
+  { title: "President" },
+  { title: "Acting President" },
+  { title: "Vice President" },
+  { title: "General Secretary" },
+  { title: "Co-Acting Secretary" },
+  { title: "Joint Secretary", alwaysShow: true, showOnHomepage: false },
+  { title: "Executive Member" },
+];
+
+/** Office bearers featured on the homepage (excludes positions marked showOnHomepage: false). */
+export const homepageOfficeBearers = officeBearerList.filter(
+  (m) => executiveRoles.find((r) => r.title === m.designation)?.showOnHomepage !== false,
+);
+
 export const committees: Record<CommitteeKey, CommitteeMember[]> = {
   executive: [...officeBearerList, ...executiveMembers],
   "anti-doping": [],
@@ -113,6 +138,12 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       photo: "/assets/Ashish.jpeg",
     },
   ],
+  discipline: [],
+  organise: [],
+  technical: [],
+  sports: [],
+  athletes: [],
+  "sexual-harassment": [],
   medical: [],
   objection: [],
   management: [],

@@ -1,0 +1,379 @@
+/* ---------------------------------------------- Committees / directory */
+
+.role .section-title {
+  margin-bottom: var(--space-2);
+}
+
+.member-grid {
+  display: grid;
+  gap: var(--space-5);
+  /* Fixed-width columns so a single member is not stretched across the page. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 15rem));
+}
+@media (max-width: 40rem) {
+  .member-grid {
+    gap: var(--space-4) var(--space-3);
+  }
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.member-card__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 4.6;
+  object-fit: cover;
+}
+.member-card__photo--empty {
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  font: 700 2.5rem/1 var(--display);
+  color: var(--text-2);
+}
+/* Designated position without a supplied member (e.g. Joint Secretary). */
+.member-card--vacant {
+  border-style: dashed;
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+.member-card__photo--vacant {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 4.6;
+  background: var(--surface);
+  color: var(--border-strong);
+}
+.member-card__pending {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-2);
+}
+/* Ordered list variant used by the Executive Members directory. */
+.member-grid--list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.member-grid--list > li {
+  display: flex;
+}
+.member-grid--list > li > .member-card {
+  flex: 1;
+}
+.member-card__body {
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--space-4);
+}
+.member-card__role {
+  font-size: 0.9375rem;
+  color: var(--green);
+  font-weight: 500;
+}
+.member-card__meta,
+.member-card__bio {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+/* Tables (states, documents) */
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.data-table th,
+.data-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+.data-table thead th {
+  background: var(--surface-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.data-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+.data-table__empty td {
+  padding: var(--space-5);
+}
+.data-table__empty .empty-state--compact {
+  padding-block: var(--space-1);
+  background: transparent;
+}
+@media (max-width: 40rem) {
+  .data-table__empty td {
+    padding: var(--space-4);
+  }
+}
+.doc-name {
+  display: flex;
+  gap: var(--space-3);
+}
+.doc-name > span {
+  display: grid;
+  gap: 0.15rem;
+  font-weight: 400;
+}
+.doc-name svg {
+  flex: none;
+  color: var(--link);
+}
+@media (max-width: 40rem) {
+  .data-table thead {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------ Director's message */
+
+.leader-message {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (min-width: 52rem) {
+  .leader-message:has(.leader-message__portrait) {
+    grid-template-columns: minmax(13rem, 18rem) 1fr;
+  }
+  .leader-message:has(.leader-message__slider-col) {
+    grid-template-columns: minmax(18rem, 24rem) 1fr;
+    gap: var(--space-8);
+  }
+}
+.leader-message__slider-col {
+  width: 100%;
+  max-width: 26rem;
+}
+.leader-message__portrait {
+  width: 100%;
+  border-radius: var(--radius-lg);
+}
+.leader-message__body {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  max-width: 46rem;
+  padding-left: clamp(1.25rem, 4vw, 2.5rem);
+  border-left: 3px solid var(--accent);
+  font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
+  line-height: 1.75;
+}
+.leader-message__mark {
+  display: block;
+  height: 2.75rem;
+  margin-bottom: calc(-1 * var(--space-3));
+  font: 700 5.5rem/1 Georgia, "Times New Roman", serif;
+  color: var(--accent);
+}
+.leader-message__lead {
+  font-size: clamp(1.1875rem, 1.8vw, 1.375rem);
+  line-height: 1.55;
+  color: var(--heading);
+  font-weight: 500;
+}
+.leader-message__sign {
+  display: grid;
+  gap: 0.15rem;
+  margin-top: var(--space-3);
+}
+.leader-message__rule {
+  width: 3rem;
+  height: 3px;
+  margin-bottom: var(--space-3);
+  background: var(--green);
+}
+.leader-message__sign strong {
+  font: 700 1.5rem/1.1 var(--display);
+  color: var(--heading);
+}
+.leader-message__sign span:last-child {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+/* Member cards on the Executive Members and committee pages: same portrait framing. */
+.member-card__photo {
+  object-position: 50% 18%;
+}
+
+/* ------------------------------------------- Associate states: India map */
+
+.regions__head {
+  max-width: 46rem;
+  margin-bottom: var(--space-5);
+}
+.regions__head .section-title {
+  margin-bottom: var(--space-2);
+}
+.regions__grid {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .regions__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-7);
+  }
+}
+.india-map {
+  margin: 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+@media (min-width: 60rem) {
+  .india-map {
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+.india-map__svg {
+  display: block;
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  margin-inline: auto;
+}
+.india-map__region path {
+  stroke: #ffffff;
+  stroke-width: 0.8;
+  stroke-linejoin: round;
+  transition: fill 0.15s var(--ease);
+}
+.india-map__region.is-state path {
+  fill: #ffd9b0;
+}
+.india-map__region.is-ut path {
+  fill: #bfe3bb;
+}
+.india-map__region:hover path {
+  fill: var(--navy);
+}
+.india-map__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.india-map__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.india-map__key i {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+}
+.india-map__key i.is-state {
+  background: #ffd9b0;
+}
+.india-map__key i.is-ut {
+  background: #bfe3bb;
+}
+.india-map__credit {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+}
+
+.regions__lists {
+  display: grid;
+  gap: var(--space-6);
+}
+.region-group__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font: 700 1.4rem/1.1 var(--display);
+  color: var(--heading);
+}
+.region-group__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.9rem;
+  height: 1.6rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  font: 600 0.8125rem/1 var(--sans);
+  color: var(--text-2);
+}
+.region-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+@media (max-width: 21rem) {
+  .region-list {
+    grid-template-columns: 1fr;
+  }
+}
+.region {
+  position: relative;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9375rem;
+  scroll-margin-top: 6rem;
+}
+.region::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.region.is-ut::before {
+  background: var(--green);
+}
+.region__note {
+  font-size: 0.75rem;
+  color: var(--text-2);
+}
+.region:target {
+  background: var(--accent-tint);
+  box-shadow: inset 3px 0 0 var(--accent);
+  font-weight: 600;
+}
+
+/* Notice under the members panel on sensitive pages (e.g. Sexual Harassment Committee). */
+.committee-notice {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface-2);
+  color: var(--text);
+}

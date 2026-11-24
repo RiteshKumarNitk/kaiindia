@@ -20,7 +20,7 @@ export function Hero() {
             <Link href="/about" className="button button--primary">
               About KAI
             </Link>
-            <Link href="/organisation/director-message" className="button button--ghost">
+            <Link href="/about/director-message" className="button button--ghost">
               Director's Message
             </Link>
           </div>

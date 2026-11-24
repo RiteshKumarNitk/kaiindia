@@ -35,7 +35,7 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
   const toggle = () => {
     if (isOpen) return close();
     // Expand the section containing the current page by default.
-    setExpanded(items.find((i) => i.children && isActivePath(pathname, i.href))?.label ?? null);
+    setExpanded(items.find((i) => i.children && isActivePath(pathname, i.section))?.label ?? null);
     setOpenOn(pathname);
   };
 
@@ -60,7 +60,7 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
       <nav id="mobile-menu" className="mobile-nav__panel" aria-label="Main" hidden={!isOpen}>
         <ul className="mobile-nav__list">
           {items.map((item) => {
-            const active = isActivePath(pathname, item.href);
+            const active = isActivePath(pathname, item.section ?? item.href);
             if (!item.children) {
               return (
                 <li key={item.label}>
@@ -76,7 +76,7 @@ export function MobileMenu({ items }: { items: NavItem[] }) {
               );
             }
             const sectionOpen = expanded === item.label;
-            const id = `mobile-${item.href.slice(1)}`;
+            const id = `mobile-${item.section.slice(1)}`;
             return (
               <li key={item.label}>
                 <button

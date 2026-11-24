@@ -43,6 +43,12 @@
   letter-spacing: -0.01em;
   max-width: 22ch;
 }
+.page-hero__subtitle {
+  margin-top: var(--space-2);
+  font-size: clamp(1.0625rem, 1.6vw, 1.3rem);
+  font-weight: 500;
+  color: var(--green);
+}
 .page-hero__intro {
   margin-top: var(--space-4);
   max-width: 60ch;

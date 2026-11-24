@@ -1,11 +1,12 @@
-import { MemberDirectory } from "@/components/sections/organisation/MemberDirectory";
-import { StateDirectory } from "@/components/sections/organisation/StateDirectory";
+import { MemberDirectory } from "@/components/sections/committee/MemberDirectory";
+import { ExecutiveDirectory } from "@/components/sections/about/ExecutiveDirectory";
+import { StateDirectory } from "@/components/sections/about/StateDirectory";
 import { DocumentLibrary } from "@/components/sections/documents/DocumentLibrary";
 import { ContactPanel } from "@/components/sections/contact/ContactPanel";
 import { DonationsPanel } from "@/components/sections/donations/DonationsPanel";
 import { GovernancePanel } from "@/components/sections/governance/GovernancePanel";
 import { InfoSections } from "@/components/sections/about/ArticleSections";
-import { MessagePanel } from "@/components/sections/organisation/LeadershipMessage";
+import { MessagePanel } from "@/components/sections/about/LeadershipMessage";
 import { PolicyPanel } from "@/components/sections/policies/PolicyPanel";
 import { ProcessSteps } from "@/components/sections/membership/ProcessSteps";
 import { HubView } from "@/components/sections/hub/HubView";
@@ -24,8 +25,20 @@ function Body({ page }: { page: PageEntry }) {
       return <HubView hub={body} comingSoon={comingSoon} />;
     case "portal":
       return <PortalPreview role={body.role} features={body.features} comingSoon={comingSoon} />;
+    case "executive":
+      return <ExecutiveDirectory />;
     case "directory":
-      return <MemberDirectory committee={body.committee} focus={body.focus} comingSoon={comingSoon} />;
+      return (
+        <MemberDirectory
+          committee={body.committee}
+          focus={body.focus}
+          comingSoon={comingSoon}
+          icon={body.icon}
+          showProfileNote={body.showProfileNote}
+        >
+          {body.notice && <p className="fine-print committee-notice">{body.notice}</p>}
+        </MemberDirectory>
+      );
     case "states":
       return <StateDirectory />;
     case "message":
@@ -65,7 +78,7 @@ export function PageView({ path }: { path: RoutePath }) {
   const page = getPage(path);
   return (
     <>
-      <PageHero path={path} eyebrow={page.eyebrow} title={page.title} intro={page.intro} />
+      <PageHero path={path} eyebrow={page.eyebrow} title={page.title} subtitle={page.subtitle} intro={page.intro} />
       <PageContainer>
         <Body page={page} />
       </PageContainer>

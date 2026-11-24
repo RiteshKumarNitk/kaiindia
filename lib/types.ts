@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/ui/Icon";
+
 /**
  * Shared types for the KAI website.
  *
@@ -14,23 +16,28 @@ export type ContentStatus = "coming-soon" | "draft" | "published";
 export const routePaths = [
   "/",
   "/about",
+  "/about/director-message",
+  "/about/executive-members",
+  "/about/associate-states",
   "/about/athlete-login",
   "/about/coach-login",
   "/about/judges-profile",
   "/about/karate",
-  "/organisation",
-  "/organisation/director-message",
-  "/organisation/executive-committee",
-  "/organisation/anti-doping-committee",
-  "/organisation/referee-committee",
-  "/organisation/womens-committee",
-  "/organisation/kata-committee",
-  "/organisation/kumite-committee",
-  "/organisation/media-committee",
-  "/organisation/associate-states",
-  "/organisation/medical-physio-committee",
-  "/organisation/objection-committee",
-  "/organisation/management-committee",
+  "/committee/anti-doping",
+  "/committee/referee",
+  "/committee/womens",
+  "/committee/kata",
+  "/committee/kumite",
+  "/committee/media",
+  "/committee/discipline",
+  "/committee/organise",
+  "/committee/technical",
+  "/committee/sports",
+  "/committee/athletes",
+  "/committee/sexual-harassment",
+  "/committee/medical-physio",
+  "/committee/objection",
+  "/committee/management",
   "/media",
   "/media/news",
   "/media/photo-gallery",
@@ -51,7 +58,14 @@ export const routePaths = [
 export type RoutePath = (typeof routePaths)[number];
 
 export type NavLink = { label: string; href: RoutePath; description?: string };
-export type NavItem = NavLink & { children?: NavLink[] };
+/**
+ * A top-level menu item. Items with `children` open a dropdown (desktop) or accordion (mobile).
+ * `section` is the URL prefix used to highlight the item as active; it does not need to be a
+ * page of its own (e.g. "/committee" has no landing page).
+ */
+export type NavItem =
+  | (NavLink & { children?: undefined; section?: undefined })
+  | { label: string; section: string; children: NavLink[]; href?: undefined };
 
 export type ComingSoonCopy = { title: string; description: string };
 
@@ -74,6 +88,12 @@ export type CommitteeKey =
   | "kata"
   | "kumite"
   | "media"
+  | "discipline"
+  | "organise"
+  | "technical"
+  | "sports"
+  | "athletes"
+  | "sexual-harassment"
   | "medical"
   | "objection"
   | "management"
@@ -92,7 +112,19 @@ export type PageBody =
       pending?: ComingSoonCopy;
     }
   | { kind: "portal"; role: "Athlete" | "Coach"; features: string[] }
-  | { kind: "directory"; committee: CommitteeKey; focus: string[] }
+  | {
+      kind: "directory";
+      committee: CommitteeKey;
+      /** Typical areas of responsibility. Leave empty when the committee's role is not yet confirmed. */
+      focus: string[];
+      /** Icon for the "members to be announced" panel. */
+      icon?: IconName;
+      /** Show "each profile will include a photograph…" (default true). */
+      showProfileNote?: boolean;
+      /** Short note shown under the members panel (e.g. on sensitive pages). */
+      notice?: string;
+    }
+  | { kind: "executive" }
   | { kind: "states" }
   | { kind: "message" }
   | { kind: "info"; sections: InfoSection[]; pending?: ComingSoonCopy; related?: { title: string; links: RoutePath[] } }
@@ -109,6 +141,8 @@ export type PageBody =
 export type PageEntry = {
   /** Visible H1. */
   title: string;
+  /** Optional line shown directly under the H1. */
+  subtitle?: string;
   /** Short label for breadcrumbs and cards (defaults to title). */
   shortTitle?: string;
   /** Small label above the H1. */

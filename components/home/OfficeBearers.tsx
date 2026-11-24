@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
-import { officeBearers } from "@/content/people";
+import { homepageOfficeBearers } from "@/content/people";
 import { published } from "@/lib/content-status";
 
-/** Homepage list of office bearers, in the client's order of precedence, with photographs. */
+/**
+ * Homepage list of office bearers, in the client's order of precedence, with photographs.
+ * Joint Secretaries are intentionally not featured here; they appear on /about/executive-members.
+ */
 export function OfficeBearers() {
-  const members = published(officeBearers);
+  const members = published(homepageOfficeBearers);
   if (members.length === 0) return null;
 
   return (
@@ -19,8 +22,8 @@ export function OfficeBearers() {
               Office Bearers
             </h2>
           </div>
-          <Link href="/organisation/executive-committee" className="text-link">
-            Executive Committee <Icon name="arrow" size={16} />
+          <Link href="/about/executive-members" className="text-link">
+            All Executive Members <Icon name="arrow" size={16} />
           </Link>
         </div>
 

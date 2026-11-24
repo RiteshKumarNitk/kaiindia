@@ -24,7 +24,7 @@
 }
 @media (min-width: 64rem) {
   .site-footer__grid {
-    grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
+    grid-template-columns: 1.3fr repeat(5, minmax(0, 1fr));
   }
   .site-footer__brand {
     grid-column: auto;
@@ -86,4 +86,16 @@
 .site-footer__bottom-inner {
   padding-block: var(--space-4);
   font-size: 0.8125rem;
+}
+
+.site-footer .site-footer__cta {
+  margin-top: var(--space-4);
+  min-height: 2.5rem;
+  padding: 0.5rem 1.1rem;
+  color: var(--navy);
+  text-decoration: none;
+}
+.site-footer .site-footer__cta:hover {
+  color: var(--navy);
+  text-decoration: none;
 }

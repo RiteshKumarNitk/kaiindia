@@ -17,14 +17,14 @@ No official facts are invented. Officeholders, committee members, state associat
 | Section | Routes |
 | --- | --- |
 | Home | `/` |
-| About KAI | `/about`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
-| Organisation | `/organisation`, `/organisation/director-message`, `/organisation/executive-committee`, `/organisation/anti-doping-committee`, `/organisation/referee-committee`, `/organisation/womens-committee`, `/organisation/kata-committee`, `/organisation/kumite-committee`, `/organisation/media-committee`, `/organisation/associate-states`, `/organisation/medical-physio-committee`, `/organisation/objection-committee`, `/organisation/management-committee` |
+| About KAI | `/about`, `/about/director-message`, `/about/executive-members`, `/about/associate-states`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
+| Committee | `/committee/anti-doping`, `/committee/referee`, `/committee/womens`, `/committee/kata`, `/committee/kumite`, `/committee/media`, `/committee/discipline`, `/committee/organise`, `/committee/technical`, `/committee/sports`, `/committee/athletes`, `/committee/sexual-harassment`, `/committee/medical-physio`, `/committee/objection`, `/committee/management`. There is no Committee landing page: the menu opens the list directly, shown in two columns on desktop. To add a committee: add its route to `routePaths` (`lib/types.ts`), add a page entry with `kind: "directory"` in `content/pages.ts`, add an empty member list in `content/people.ts`, add a menu item in `config/navigation.ts`, and copy any `app/committee/*/page.tsx`. Leave `focus: []` until the committee's role is confirmed. |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
 | Other pages | `/donations`, `/rti-governance`, `/contact`, `/privacy-policy`, `/refund-policy` (the two policy pages are linked from the footer) |
 | SEO | `/sitemap.xml`, `/robots.txt` |
-| Redirects | `/organisation/president-message` and `/organisation/chairman-message` → `/organisation/director-message` (permanent, in `next.config.ts`) |
+| Redirects | All old `/organisation/...` URLs, `/about/chairman-message`, `/organisation` (→ `/about`) and `/committee` (→ `/committee/anti-doping`). They are permanent (308) and listed in `movedPages` in `next.config.ts`. |
 
 ## Project structure
 
@@ -58,7 +58,8 @@ components/
   home/                    Hero, DirectorSection, OfficeBearers, Introduction, Mission
   templates/PageView.tsx   Picks the page body for each route from content/pages.ts
   sections/<area>/         Page bodies grouped by site section:
-                           about, organisation, media, documents, membership, hub,
+                           about (leadership, executive members, states map), committee,
+                           media, documents, membership, hub,
                            policies, donations, governance, contact
   ui/                      Reusable building blocks: ComingSoon, Icon, ImageSlider,
                            PageHero, PageContainer, SectionHeading
@@ -92,7 +93,7 @@ Measured on a throttled mobile connection (slow 4G, 4× CPU slowdown, empty cach
 | --- | --- | --- |
 | Home | 876 KB → 459 KB | 3.5 s → 1.4 s |
 | Director's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
-| Executive Committee | 544 KB → 341 KB | ~0.6–0.8 s (unchanged) |
+| Executive Members | 544 KB → 341 KB | ~0.6–0.8 s (unchanged) |
 | Associate States | 514 KB → 329 KB | ~0.7–0.8 s (unchanged) |
 
 **When adding photos,** keep originals at around 1,600 px or less on the long side; `next/image` resizes them. To replace a photo, use a new file name (see "Office bearers").
@@ -121,7 +122,7 @@ See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github)
 
 ## Client-supplied content
 
-The homepage introduction, office bearers, mission section, About KAI page, Executive Committee and Director's Message use content supplied by the client.
+The homepage introduction, office bearers, mission section, About KAI page, Executive Members and Director's Message use content supplied by the client.
 
 - `content/source/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
 - The published versions are edited for grammar and punctuation only, with no new facts:
@@ -179,7 +180,7 @@ All page copy is in `content/pages.ts`:
 - `intro`: the paragraph under the H1.
 - `metaDescription`: the search-engine description.
 - `summaries` (bottom of the file): the one-line descriptions shown in directory rows and landing-page cards.
-- `body.layout` on section landing pages: `editorial` (About), `directory` (Organisation), `features` (Media), `documents` (Rules) or `pathways` (Membership).
+- `body.layout` on section landing pages: `editorial`, `directory` (grouped link rows), `features` (Media), `documents` (Rules) or `pathways` (Membership).
 - `comingSoon.title` and `comingSoon.description`: the page's Coming Soon panel.
 
 Keep the copy factual. Do not name officeholders, affiliations, recognitions or legal obligations until the association confirms them in writing.
@@ -236,18 +237,24 @@ The Director's message is published from `directorMessage` in `content/leadershi
 
 ### Office bearers
 
-The office bearers are listed in `officeBearerList` in `content/people.ts`, in order of precedence. They appear on the homepage ("Office Bearers") and on the Executive Committee page.
+The office bearers are listed in `officeBearerList` in `content/people.ts`, in order of precedence. They appear on the homepage ("Office Bearers") and on the Executive Members page (`/about/executive-members`).
+
+The positions and their order on Executive Members come from `executiveRoles` in `content/people.ts`:
+
+- A member appears under the position that matches their `designation`.
+- **Joint Secretary** is marked `alwaysShow: true`, so it is always listed. If nobody holds it, the page shows "Member details will be updated soon." with no invented name or photo.
+- It is also marked `showOnHomepage: false`, so Joint Secretaries never appear on the homepage.
 
 - Photographs live in `public/assets/`.
 - Each entry takes `name`, `designation`, an optional `affiliation` (for example "MLA, Vejalpur, Gujarat") and `photo`.
 - To add, remove or reorder someone, edit that list.
-- Executive members who are not office bearers (for example Anjali) go in `executiveMembers`. They appear on the Executive Committee page but not on the homepage.
+- Executive members who are not office bearers (for example Anjali) go in `executiveMembers`. They appear on the Executive Members page but not on the homepage.
 - Other committees' members go in `committees.<key>`, for example `media`, `referee`, `womens`, `medical`, `objection` or `management`.
 - **Replacing a photo:** save the new photo under a **new file name** (for example `Name-2.jpeg`) and update `photo`. Next.js caches optimised images by URL, so a file replaced under the same name keeps showing the old picture until the cache in `.next/cache/images` is cleared. If a face is cropped badly, set `photoFocus` (for example `"46% 22%"`).
 
 ### Associate States map
 
-`/organisation/associate-states` shows a map of India with all 28 states and 8 union territories, each linked to its place in the list.
+`/about/associate-states` shows a map of India with all 28 states and 8 union territories, each linked to its place in the list.
 
 - The list is defined in `content/states.ts`.
 - The map is drawn from the `@svg-maps/india` package (CC BY 4.0, credited under the map).
@@ -311,7 +318,29 @@ The privacy and refund policies remain "Document pending" until the official tex
 
 ### Contact details
 
-Fill in `siteConfig.contact` (`email`, `phone`, `address`) in `config/site.ts` with verified details only. The Contact page and footer then show them automatically.
+Fill in `siteConfig.contact` in `config/site.ts` with verified details only:
+
+- `address`, `email`, `phone` and `officeHours`. Until a field is set, the Contact page shows it as "Awaiting confirmation".
+- `mapUrl`. The "View on map" link appears only when both `address` and `mapUrl` are set.
+
+### Contact form
+
+`/contact` has a full enquiry form: name, email, phone, enquiry type, subject, message and consent. It validates input in the browser.
+
+There is no backend yet, so **sending is switched off**. The button is disabled, a notice says "Enquiry submission will be available soon", and nothing is sent anywhere.
+
+To switch it on later:
+
+1. Create a server-side Route Handler, for example `app/api/contact/route.ts`. It should send the email through a provider such as Resend, SES or SMTP.
+2. Store the provider's credentials in **server-side environment variables** only, never in client code.
+3. In that handler:
+   - validate the input again on the server;
+   - ignore requests where the hidden `website` field is filled (this is the spam honeypot);
+   - add rate limiting.
+4. Set `contactForm.endpoint` in `config/site.ts` to `"/api/contact"`.
+5. The form will then POST its fields as JSON. It shows the success message only when the endpoint returns a 2xx response.
+
+Before enabling, publish the approved Privacy Policy, because the consent checkbox links to it.
 
 ### Enabling logins, membership applications or donations later
 

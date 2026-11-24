@@ -91,7 +91,15 @@ export const pages: Record<RoutePath, PageEntry> = {
       ],
       related: {
         title: "In this section",
-        links: ["/about/athlete-login", "/about/coach-login", "/about/judges-profile", "/about/karate"],
+        links: [
+          "/about/director-message",
+          "/about/executive-members",
+          "/about/associate-states",
+          "/about/athlete-login",
+          "/about/coach-login",
+          "/about/judges-profile",
+          "/about/karate",
+        ],
       },
     },
   },
@@ -222,50 +230,10 @@ export const pages: Record<RoutePath, PageEntry> = {
     },
   },
 
-  /* ------------------------------------------------------------ Organisation */
-  "/organisation": {
-    title: "Organisation",
-    eyebrow: "Structure and leadership",
-    intro:
-      "This section will set out how the Karate Association of India is organised — its leadership, committees and the state associations it works with.",
-    metaDescription:
-      "Organisational structure of the Karate Association of India, including leadership, committees and associate states.",
-    comingSoon: {
-      title: "Committee details in preparation",
-      description:
-        "Committee memberships and the state association directory will be published here once verified. The Director's message is available now.",
-    },
-    body: {
-      kind: "hub",
-      layout: "directory",
-      groups: [
-        { title: "Leadership", links: ["/organisation/director-message", "/organisation/executive-committee"] },
-        {
-          title: "Committees",
-          links: [
-            "/organisation/anti-doping-committee",
-            "/organisation/referee-committee",
-            "/organisation/womens-committee",
-            "/organisation/kata-committee",
-            "/organisation/kumite-committee",
-            "/organisation/media-committee",
-          ],
-        },
-        {
-          title: "Other committees",
-          links: [
-            "/organisation/medical-physio-committee",
-            "/organisation/objection-committee",
-            "/organisation/management-committee",
-          ],
-        },
-        { title: "States", links: ["/organisation/associate-states"] },
-      ],
-    },
-  },
-  "/organisation/director-message": {
+  /* --------------------------------------------------- About KAI: leadership */
+  "/about/director-message": {
     title: "Director's Message",
-    eyebrow: "Organisation · Leadership",
+    eyebrow: "About KAI · Leadership",
     intro: "Message from the Director",
     metaDescription:
       "A message from Mr. Likha Tara Ji, Director of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
@@ -276,25 +244,23 @@ export const pages: Record<RoutePath, PageEntry> = {
     },
     body: { kind: "message" },
   },
-  "/organisation/executive-committee": {
-    title: "Executive Committee",
-    eyebrow: "Organisation · Committees",
-    intro:
-      "The office bearers and executive members of the Karate Association of India, listed in order of office.",
-    metaDescription: "Office bearers of the Karate Association of India: Director, President, Vice President, General Secretary and other officeholders.",
+  "/about/executive-members": {
+    title: "Executive Members",
+    subtitle: "Leadership and Executive Members of the Karate Association of India",
+    eyebrow: "About KAI · Leadership",
+    intro: "Office bearers and executive members of the association, listed in order of office.",
+    metaDescription:
+      "Executive Members of the Karate Association of India: Director, President, Vice President, General Secretary, Joint Secretary and other office bearers.",
     comingSoon: {
-      title: "Members to be announced",
-      description: "Officeholders and members will be listed here after the association confirms the official records.",
+      title: "Member details will be updated soon",
+      description: "Details for this position will be published once confirmed by the association.",
     },
-    body: {
-      kind: "directory",
-      committee: "executive",
-      focus: ["Strategic direction", "Administration and finance", "Coordination with state units", "Governance oversight"],
-    },
+    body: { kind: "executive" },
   },
-  "/organisation/anti-doping-committee": {
+  /* ------------------------------------------------------------- Committee */
+  "/committee/anti-doping": {
     title: "Anti-Doping Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Clean sport protects every athlete. This page will introduce the committee responsible for anti-doping awareness and education within the association.",
     metaDescription: "Anti-doping committee and clean-sport information from the Karate Association of India.",
@@ -309,9 +275,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Athlete education", "Clean-sport awareness", "Guidance for support personnel", "Official resources"],
     },
   },
-  "/organisation/referee-committee": {
+  "/committee/referee": {
     title: "Referee Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Consistent, impartial officiating underpins every competition. The Referee Commission oversees refereeing standards, official training and seminars.",
     metaDescription: "Referee committee of the Karate Association of India — officiating standards and referee development.",
@@ -325,9 +291,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Officiating standards", "Referee seminars", "Panel appointments", "Rules interpretation"],
     },
   },
-  "/organisation/womens-committee": {
+  "/committee/womens": {
     title: "Women's Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "This page will feature the committee working to support the participation, development and leadership of women and girls in karate.",
     metaDescription: "Women's committee of the Karate Association of India — participation and leadership in karate.",
@@ -341,9 +307,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Participation", "Coaching and officiating pathways", "Safe-sport awareness", "Leadership development"],
     },
   },
-  "/organisation/kata-committee": {
+  "/committee/kata": {
     title: "Kata Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Kata is one of karate's two competition disciplines. This page will introduce the committee concerned with kata technical standards, training and athlete development.",
     metaDescription: "Kata committee of the Karate Association of India — technical standards and kata development.",
@@ -357,9 +323,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Technical standards", "Coaching clinics", "Athlete development", "Judging liaison"],
     },
   },
-  "/organisation/kumite-committee": {
+  "/committee/kumite": {
     title: "Kumite Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Kumite — sparring — is karate's second competition discipline. This page will present the committee responsible for kumite technical development and athlete preparation.",
     metaDescription: "Kumite committee of the Karate Association of India — sparring standards and athlete preparation.",
@@ -373,9 +339,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Technical development", "Athlete preparation", "Safety and control", "Coaching clinics"],
     },
   },
-  "/organisation/media-committee": {
+  "/committee/media": {
     title: "Media Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "The committee responsible for the association's communications, publicity and official media coverage of events.",
     metaDescription: "Media committee of the Karate Association of India — communications and event coverage.",
@@ -389,9 +355,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Official communications", "Event coverage", "Media accreditation", "Digital channels"],
     },
   },
-  "/organisation/associate-states": {
+  "/about/associate-states": {
     title: "Associate States",
-    eyebrow: "Organisation · States",
+    eyebrow: "About KAI · States",
     intro:
       "The states and union territories of India, across which the Karate Association of India promotes and develops karate.",
     metaDescription: "Map and list of India's 28 states and 8 union territories for the Karate Association of India's state network.",
@@ -402,9 +368,109 @@ export const pages: Record<RoutePath, PageEntry> = {
     },
     body: { kind: "states" },
   },
-  "/organisation/medical-physio-committee": {
+  "/committee/discipline": {
+    title: "Discipline Committee",
+    eyebrow: "Committee",
+    intro: "Information about the Discipline Committee and its approved functions, members, and related announcements will be published here.",
+    metaDescription: "Discipline Committee of the Karate Association of India — approved functions, members and announcements.",
+    comingSoon: {
+      title: "Members to be announced",
+      description:
+        "Committee members will be listed here after the association confirms them.",
+    },
+    body: {
+      kind: "directory",
+      committee: "discipline",
+      focus: [],
+    },
+  },
+  "/committee/organise": {
+    title: "Organise Committee",
+    eyebrow: "Committee",
+    intro: "Information about the Organise Committee, its members, and its role in coordinating association activities will be available here.",
+    metaDescription: "Organise Committee of the Karate Association of India — members and coordination of association activities.",
+    comingSoon: {
+      title: "Members to be announced",
+      description:
+        "Committee members will be listed here after the association confirms them.",
+    },
+    body: {
+      kind: "directory",
+      committee: "organise",
+      focus: [],
+    },
+  },
+  "/committee/technical": {
+    title: "Technical Committee",
+    eyebrow: "Committee",
+    intro: "Official information regarding the Technical Committee, technical guidance, and committee members will be published here.",
+    metaDescription: "Technical Committee of the Karate Association of India — technical guidance and committee members.",
+    comingSoon: {
+      title: "Members to be announced",
+      description:
+        "Committee members will be listed here after the association confirms them.",
+    },
+    body: {
+      kind: "directory",
+      committee: "technical",
+      focus: [],
+    },
+  },
+  "/committee/sports": {
+    title: "Sports Committee",
+    eyebrow: "Committee",
+    intro: "Information about the Sports Committee and its association-related sports activities will be shared here.",
+    metaDescription: "Sports Committee of the Karate Association of India — association-related sports activities.",
+    comingSoon: {
+      title: "Members to be announced",
+      description:
+        "Committee members will be listed here after the association confirms them.",
+    },
+    body: {
+      kind: "directory",
+      committee: "sports",
+      focus: [],
+    },
+  },
+  "/committee/athletes": {
+    title: "Athletes Committee",
+    eyebrow: "Committee",
+    intro: "Information about the Athletes Committee, athlete representation, and relevant initiatives will be available here.",
+    metaDescription: "Athletes Committee of the Karate Association of India — athlete representation and initiatives.",
+    comingSoon: {
+      title: "Members to be announced",
+      description:
+        "Committee members will be listed here after the association confirms them.",
+    },
+    body: {
+      kind: "directory",
+      committee: "athletes",
+      focus: [],
+    },
+  },
+  "/committee/sexual-harassment": {
+    title: "Sexual Harassment Committee",
+    eyebrow: "Committee",
+    intro: "Official information about the committee, its approved policies, members, and reporting procedures will be published here.",
+    metaDescription: "Sexual Harassment Committee of the Karate Association of India — approved policies, members and reporting procedures, to be published once verified.",
+    comingSoon: {
+      title: "Information to be published",
+      description:
+        "The committee's approved policy, members and verified reporting procedures will be published here once confirmed by the association.",
+    },
+    body: {
+      kind: "directory",
+      committee: "sexual-harassment",
+      focus: [],
+      icon: "shield",
+      showProfileNote: false,
+      notice:
+        "This page does not accept complaints or personal information. If you or someone else is in immediate danger, call the national emergency number 112.",
+    },
+  },
+  "/committee/medical-physio": {
     title: "Medical & Physio. Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Athlete health and safety come first. This committee looks after medical and physiotherapy support for athletes at the association's events.",
     metaDescription: "Medical and physiotherapy committee of the Karate Association of India — athlete health and safety.",
@@ -418,9 +484,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Medical cover at events", "Physiotherapy support", "Injury prevention and care", "Athlete welfare"],
     },
   },
-  "/organisation/objection-committee": {
+  "/committee/objection": {
     title: "Objection Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "Fair competition depends on a clear process for concerns. This committee considers objections raised in connection with the association's competitions.",
     metaDescription: "Objection committee of the Karate Association of India — handling of competition objections.",
@@ -434,9 +500,9 @@ export const pages: Record<RoutePath, PageEntry> = {
       focus: ["Receiving objections", "Review of competition decisions", "Fair and impartial hearing", "Recording outcomes"],
     },
   },
-  "/organisation/management-committee": {
+  "/committee/management": {
     title: "Management Committee",
-    eyebrow: "Organisation · Committees",
+    eyebrow: "Committee",
     intro:
       "This committee supports the planning and day-to-day management of the association's events and activities.",
     metaDescription: "Management committee of the Karate Association of India — event and activity management.",
@@ -663,12 +729,15 @@ export const pages: Record<RoutePath, PageEntry> = {
   /* ----------------------------------------------------------------- Contact */
   "/contact": {
     title: "Contact Us",
-    eyebrow: "Get in touch",
-    intro: "Contact details for the Karate Association of India will be published on this page.",
-    metaDescription: "Contact information for the Karate Association of India.",
+    subtitle: "Get in Touch with Karate Association of India",
+    eyebrow: "Contact",
+    intro:
+      "For general enquiries, association-related information, membership questions, and official communication, please contact us using the details below.",
+    metaDescription:
+      "Contact the Karate Association of India for general enquiries, membership questions, athlete and coach support, and official communication.",
     comingSoon: {
-      title: "Contact details to be announced",
-      description: "Official contact information will be available soon.",
+      title: "Awaiting confirmation",
+      description: "Official contact details will be published once confirmed by the association.",
     },
     body: { kind: "contact" },
   },
@@ -692,19 +761,24 @@ const summaries: Partial<Record<RoutePath, string>> = {
   "/about/coach-login": "Planned online portal for coaches.",
   "/about/judges-profile": "Directory of verified judges and technical officials.",
   "/about/karate": "Karate as a martial art and sport: kata, kumite and training.",
-  "/organisation": "Leadership, committees and state associations.",
-  "/organisation/director-message": "A message from Mr. Likha Tara Ji, Director of KAI.",
-  "/organisation/executive-committee": "Office bearers of the association.",
-  "/organisation/anti-doping-committee": "Clean-sport education and awareness.",
-  "/organisation/referee-committee": "Officiating standards and referee development.",
-  "/organisation/womens-committee": "Participation and leadership of women in karate.",
-  "/organisation/kata-committee": "Technical standards and development in kata.",
-  "/organisation/kumite-committee": "Technical development and preparation in kumite.",
-  "/organisation/media-committee": "Communications and official event coverage.",
-  "/organisation/associate-states": "Map and list of India's states and union territories.",
-  "/organisation/medical-physio-committee": "Medical and physiotherapy support for athletes.",
-  "/organisation/objection-committee": "Handling of objections at competitions.",
-  "/organisation/management-committee": "Planning and management of events and activities.",
+  "/about/director-message": "A message from Mr. Likha Tara Ji, Director of KAI.",
+  "/about/executive-members": "Office bearers and executive members of the association.",
+  "/committee/anti-doping": "Clean-sport education and awareness.",
+  "/committee/referee": "Officiating standards and referee development.",
+  "/committee/womens": "Participation and leadership of women in karate.",
+  "/committee/kata": "Technical standards and development in kata.",
+  "/committee/kumite": "Technical development and preparation in kumite.",
+  "/committee/media": "Communications and official event coverage.",
+  "/about/associate-states": "Map and list of India's states and union territories.",
+  "/committee/discipline": "Discipline Committee: functions, members and announcements.",
+  "/committee/organise": "Organise Committee: coordination of association activities.",
+  "/committee/technical": "Technical Committee: technical guidance and members.",
+  "/committee/sports": "Sports Committee: association sports activities.",
+  "/committee/athletes": "Athletes Committee: athlete representation and initiatives.",
+  "/committee/sexual-harassment": "Policies, members and reporting procedures, once verified.",
+  "/committee/medical-physio": "Medical and physiotherapy support for athletes.",
+  "/committee/objection": "Handling of objections at competitions.",
+  "/committee/management": "Planning and management of events and activities.",
   "/media": "News, photographs and video highlights.",
   "/media/news": "Official announcements and event updates.",
   "/media/photo-gallery": "Photographs from championships and association activities.",
