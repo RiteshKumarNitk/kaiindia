@@ -13,8 +13,8 @@ const map: MapData = {
 
 /**
  * Static, server-rendered map of India's states and union territories.
- * Each region links to its entry in the list beside it. The list is the accessible
- * equivalent, so map links are removed from the tab order.
+ * Regions are clickable shapes (data-region="<code>"); AssociateStatesExplorer handles selection
+ * and highlighting. The state list and dropdown are the keyboard-accessible equivalents.
  *
  * Map data: @svg-maps/india by Victor Cazanave, licensed CC BY 4.0
  * (https://github.com/VictorCazanave/svg-maps). Modified: recoloured, linked, relabelled.
@@ -25,7 +25,7 @@ export function IndiaMap() {
       <svg
         viewBox={map.viewBox}
         role="img"
-        aria-label="Map of India showing its states and union territories"
+        aria-label="Map of India showing its states and union territories. Use the list or dropdown to choose a region."
         className="india-map__svg"
       >
         {map.locations.map((loc) => {
@@ -34,10 +34,13 @@ export function IndiaMap() {
           const label = regions.map((r) => r.name).join(" / ") || loc.name;
           const target = regions[0]?.code ?? loc.id;
           return (
-            <a key={loc.id} href={`#region-${target}`} tabIndex={-1} className={`india-map__region is-${kind}`}>
+            // A plain group (not a link): clicking it never moves focus, so the browser never draws a
+            // rectangular focus ring around the region's bounding box. Selection is handled by
+            // AssociateStatesExplorer via data-region; keyboard users use the list or dropdown.
+            <g key={loc.id} data-region={target} className={`india-map__region is-${kind}`}>
               <title>{label}</title>
               <path d={loc.path} />
-            </a>
+            </g>
           );
         })}
       </svg>

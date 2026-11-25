@@ -80,5 +80,118 @@ export function regionsForMapId(mapId: string): Region[] {
   return direct;
 }
 
-/** Verified state associations. A table appears on /about/associate-states once any is published. */
-export const stateAssociations: StateAssociation[] = [];
+/**
+ * State association details — transcribed from the official banners supplied by the client
+ * (25 Nov 2026), subject to the client's final approval. Banners live in /public/associate-states.
+ *
+ * To publish another state: add its banner file (JPG/JPEG/PNG/WebP) to /public/associate-states,
+ * then add an entry below with `status: "published"` and only the details the association has
+ * supplied. The page picks it up automatically — no UI changes needed.
+ */
+const supplied: Omit<StateAssociation, "status">[] = [
+  {
+    code: "hr",
+    associationName: "Haryana Sports Karate Association",
+    abbreviation: "HSKA",
+    banner: { src: "/associate-states/haryana.jpeg", width: 1813, height: 463 },
+    officials: [
+      { role: "President", name: "Pawan Kharkhoda", note: "MLA, Kharkhoda, Haryana" },
+      { role: "General Secretary", name: "Anoop Singh" },
+    ],
+    phones: ["8950338965"],
+    email: "sportskarateassociationharyana@gmail.com",
+  },
+  {
+    code: "ar",
+    associationName: "Arunachal Karate-Do-Association",
+    banner: { src: "/associate-states/arunachal-pradesh.jpeg", width: 1600, height: 408 },
+    officials: [
+      { role: "President", name: "Shri Likha Soni" },
+      { role: "General Secretary", name: "Ajay Kumar" },
+    ],
+    phones: ["9436040371", "9436050311"],
+    email: "arunachalkarateassociation@gmail.com",
+    website: "https://www.arunachalkaratedoassociation.com",
+  },
+  {
+    code: "br",
+    associationName: "Traditional Karate Association of Bihar",
+    abbreviation: "TKAB",
+    banner: { src: "/associate-states/bihar.jpeg", width: 1600, height: 409 },
+    officials: [
+      { role: "President", name: "Amit Kumar" },
+      { role: "Secretary", name: "Kaushal Kr. Singh" },
+    ],
+    phones: ["9308020043"],
+    email: "shihanamitkumar@gmail.com",
+  },
+  {
+    code: "ct",
+    associationName: "Karate Association of Chhattisgarh",
+    abbreviation: "KAC",
+    banner: { src: "/associate-states/chhattisgarh.jpeg", width: 1600, height: 408 },
+    officials: [
+      { role: "President", name: "Sushil Kumar Chandra" },
+      { role: "Secretary", name: "Avinash Prasad" },
+    ],
+    phones: ["9981433744", "9827494610"],
+    email: "karateassociation.cg@gmail.com",
+  },
+  {
+    code: "jk",
+    associationName: "Jammu & Kashmir Sports Karate Federation",
+    abbreviation: "JKSKF",
+    banner: { src: "/associate-states/jammu-kashmir.jpeg", width: 1600, height: 409 },
+    officials: [
+      { role: "President", name: "Rambir Singh" },
+      { role: "Secretary", name: "Abhimanyu Singh Charak" },
+    ],
+    // Printed on the banner with 11 digits — to be confirmed by the client before relying on it.
+    phones: ["97973933989"],
+    email: "acharak19@gmail.com",
+  },
+  {
+    code: "mp",
+    associationName: "Amateur Karate Association Madhya Pradesh",
+    abbreviation: "AKA",
+    banner: { src: "/associate-states/madhya-pradesh.jpeg", width: 1600, height: 409 },
+    officials: [
+      { role: "President", name: "Shihan Jaidev Sharma" },
+      { role: "General Secretary", name: "Sensei Paritosh Sharma" },
+    ],
+    phones: ["9827392060", "9826037366"],
+    email: "akamp2019@gmail.com",
+  },
+  {
+    code: "mh",
+    associationName: "Karate Organisation of Maharashtra",
+    banner: { src: "/associate-states/maharashtra.jpeg", width: 1600, height: 408 },
+    officials: [
+      { role: "President", name: "Dr. Nilkanth Kunjilal Kawde" },
+      { role: "Secretary", name: "Amitkumar Thakur" },
+    ],
+    phones: ["98907 09237", "92847 85726"],
+    email: "karateorganization.maha@gmail.com",
+  },
+  {
+    code: "pb",
+    associationName: "Amateur Karate-do Foundation Punjab",
+    abbreviation: "AKFP",
+    banner: { src: "/associate-states/punjab.jpeg", width: 1600, height: 408 },
+    officials: [
+      { role: "President", name: "Raja K.S. Sidhu" },
+      { role: "General Secretary", name: "Ajay Kumar" },
+    ],
+    phones: ["7888305968", "9336990004"],
+    email: "akfpunjab@gmail.com",
+    website: "https://www.akfpunjab.com",
+  },
+];
+
+/** One record for every state and union territory: published where supplied, otherwise pending. */
+export const stateAssociations: Record<string, StateAssociation> = Object.fromEntries(
+  allRegions.map((r) => {
+    const s = supplied.find((x) => x.code === r.code);
+    return [r.code, s ? { ...s, status: "published" as const } : { code: r.code, status: "pending" as const }];
+  }),
+);

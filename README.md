@@ -254,16 +254,25 @@ The positions and their order on Executive Members come from `executiveRoles` in
 - Other committees' members go in `committees.<key>`, for example `media`, `referee`, `womens`, `medical`, `objection` or `management`.
 - **Replacing a photo:** save the new photo under a **new file name** (for example `Name-2.jpeg`) and update `photo`. Next.js caches optimised images by URL, so a file replaced under the same name keeps showing the old picture until the cache in `.next/cache/images` is cleared. If a face is cropped badly, set `photoFocus` (for example `"46% 22%"`).
 
-### Associate States map
+### Associate States map and state associations
 
-`/about/associate-states` shows a map of India with all 28 states and 8 union territories, each linked to its place in the list.
+`/about/associate-states` shows an interactive map of India, a list of all 28 states and 8 union territories, and a **State Association Details** panel.
 
-- The list is defined in `content/states.ts`.
-- The map is drawn from the `@svg-maps/india` package (CC BY 4.0, credited under the map).
-- That map data predates 2019, so Ladakh appears within the Jammu and Kashmir outline. The list notes this.
-- Verified state associations go in `stateAssociations` in `content/states.ts`. A table of them appears below the map only once at least one is published; until then the page shows just the map and list.
-
-For associate states, add entries to `stateAssociations`. Set `recognitionStatus` **only** if the recognition has been verified.
+- **One selected state.** The map, the list, the mobile dropdown and the details panel all share a single selected state, kept in the URL (`?state=hr`).
+  - Back and forward work, and old `#region-hr` links still open the right state.
+  - The selected state is highlighted along its own outline: navy fill with a saffron edge.
+- **Data.** Association details live in `stateAssociations` in `content/states.ts`. There is one record per region, keyed by its stable code (for example `hr` for Haryana), and kept separate from the map shapes.
+  - Supplied details are `status: "published"`; everything else is `"pending"` and shows "Official association details for … will be published soon." with a "State Association Banner Awaited" placeholder.
+- **Adding a state's banner and details:**
+  1. Put the official banner in `public/associate-states/<state-name>.<jpg|jpeg|png|webp>`, for example `rajasthan.webp`.
+  2. Add an entry to the `supplied` list in `content/states.ts` with:
+     - the region `code`, `associationName` and optional `abbreviation`;
+     - `banner: { src, width, height }` with the image's pixel size;
+     - `officials`, using the titles exactly as the association writes them;
+     - `phones`, `email` and `website`.
+  3. Only add details the association has supplied. The page picks the entry up automatically, with no component changes.
+- **Banners currently supplied:** Haryana, Arunachal Pradesh, Bihar, Chhattisgarh, Jammu & Kashmir, Madhya Pradesh, Maharashtra and Punjab.
+- **Map data:** `@svg-maps/india` (CC BY 4.0). It predates 2019, so Ladakh appears within the Jammu and Kashmir outline, and selecting Ladakh highlights that shape.
 
 ### Publish news, photographs and videos
 

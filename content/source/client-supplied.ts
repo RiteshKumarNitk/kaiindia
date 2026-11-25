@@ -103,6 +103,16 @@ export const changeRequest20261125 = {
 } as const;
 
 /**
+ * State association banners supplied by the client on 25 November 2026 (originally in public/map/,
+ * moved to public/associate-states/ with consistent names). Details in content/states.ts are
+ * transcribed from these banners. The Jammu & Kashmir phone number is printed with 11 digits.
+ */
+export const stateBannersSupplied = [
+  "haryana.jpeg", "arunachal.jpeg", "bihar.jpeg", "chhattisgarh.jpeg",
+  "jammukashmir.jpeg", "madhyapardesh.jpeg", "maharashtra.jpeg", "panjab.jpeg",
+] as const;
+
+/**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
  * statements and are never labelled as verified or officially endorsed on the site.
@@ -120,6 +130,7 @@ export const claimsRequiringVerification = [
   "Sushil Sharma as Secretary of the Referee Commission (title and photograph).",
   "Photographs for Dr. Kyoshi Kola Partap Kumar and Vishal Mehta; Treasurer's name and photograph.",
   "Whether the General Secretary position is now vacant (its holder became Director & Acting President).",
+  "State association details transcribed from the eight banners (names, titles, phones, emails, websites); J&K phone '97973933989' has 11 digits.",
   "IDFC Bank account holder, account number, IFSC, branch and account type (verified in writing).",
   "Anjali as Executive Member (full name, title and photograph).",
   "Vijeta Mundlia of the Women's Commission (exact title and photograph).",

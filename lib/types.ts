@@ -181,16 +181,24 @@ export type CommitteeMember = {
   photoFocus?: string;
 };
 
+/**
+ * A state/UT karate association. Keyed by the stable region `code` from content/states.ts
+ * (never by display name), and kept separate from the map geometry.
+ */
 export type StateAssociation = {
-  status: ContentStatus;
-  state: string;
-  associationName: string;
-  representative?: string;
+  /** Region code, e.g. "hr" for Haryana. */
+  code: string;
+  /** "published" only for details supplied/approved by the client; everything else "pending". */
+  status: "pending" | "published";
+  associationName?: string;
+  abbreviation?: string;
+  /** Official banner in /public/associate-states (JPG, JPEG, PNG or WebP) with its pixel size. */
+  banner?: { src: string; width: number; height: number };
+  /** Officials exactly as titled by the association (e.g. "General Secretary" or "Secretary"). */
+  officials?: { role: string; name: string; note?: string }[];
+  phones?: string[];
   email?: string;
-  phone?: string;
   website?: string;
-  /** Only set when the recognition has been verified in writing. */
-  recognitionStatus?: string;
 };
 
 export type NewsArticle = {
