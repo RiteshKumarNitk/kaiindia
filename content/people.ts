@@ -30,7 +30,8 @@ const officeBearerList: CommitteeMember[] = [
   {
     status: "published",
     name: "Baikunth Singh",
-    designation: "Acting President",
+    // Client, 25 Nov 2026 (later): Director & Acting President.
+    designation: "Director & Acting President",
     photo: "/assets/Baikunth.jpeg",
   },
   {
@@ -40,12 +41,20 @@ const officeBearerList: CommitteeMember[] = [
     affiliation: "MLA, Kharkhoda, Haryana",
     photo: "/assets/Pawan.jpeg",
   },
+  // Added by the client, 25 Nov 2026. Landscape office photo: focus kept on his face.
   {
     status: "published",
-    // Name and designation corrected by the client, 25 Nov 2026 (previously "Dr. Neelkanth
-    // Kunjilal Kawade", General Secretary). Position in the list and photograph unchanged.
+    name: "Dr. Pankaj Shukla",
+    designation: "Vice President",
+    photo: "/members/Pankaj_shukla.jpeg",
+    photoFocus: "78% 20%",
+  },
+  {
+    status: "published",
+    // Name spelling corrected by the client, 25 Nov 2026 (previously "Dr. Neelkanth Kunjilal
+    // Kawade"). The client later confirmed he remains General Secretary.
     name: "Dr. Nilkanth Kunjilal Kawde",
-    designation: "Director & Acting President",
+    designation: "General Secretary",
     // Replaced photo uses a new file name so cached copies of the old one are not served.
     photo: "/assets/Neelkanth-2.jpeg",
     photoFocus: "46% 22%",
@@ -57,11 +66,13 @@ const officeBearerList: CommitteeMember[] = [
     photo: "/assets/Yogesh.jpeg",
   },
   // Added by the client, 25 Nov 2026: listed immediately after the Co-Acting Secretary.
-  // No photograph supplied yet — the card shows initials and "Photo awaited".
+  // Name spelling, affiliation and photograph confirmed by the client later the same day.
   {
     status: "published",
-    name: "Dr. Kyoshi Kola Partap Kumar",
+    name: "Dr. Kyoshi Kola Pratap Kumar",
     designation: "Joint Secretary",
+    affiliation: "President, South India Karate Association",
+    photo: "/members/Kyoshi_Kola.jpeg",
   },
   {
     status: "published",
@@ -76,11 +87,18 @@ const officeBearerList: CommitteeMember[] = [
     // Replaced photo uses a new file name so cached copies of the old one are not served.
     photo: "/assets/Jwala-2.jpeg",
   },
-  // Added by the client, 25 Nov 2026, as an additional Joint Secretary. No photograph supplied yet.
+  // Added by the client, 25 Nov 2026, as an additional Joint Secretary.
   {
     status: "published",
     name: "Vishal Mehta",
     designation: "Joint Secretary",
+    photo: "/members/Vishal_Mehta.jpeg",
+  },
+  // Treasurer named by the client, 25 Nov 2026. No photograph supplied yet.
+  {
+    status: "published",
+    name: "Avinash Sethi",
+    designation: "Treasurer",
   },
 ];
 
@@ -115,13 +133,13 @@ export type ExecutiveRole = {
 export const executiveRoles: ExecutiveRole[] = [
   { title: "Chairman" },
   { title: "President" },
+  { title: "Director & Acting President" },
   { title: "Acting President" },
   { title: "Vice President" },
-  { title: "Director & Acting President" },
   { title: "General Secretary" },
   { title: "Co-Acting Secretary" },
   { title: "Joint Secretary", alwaysShow: true, showOnHomepage: false },
-  // Client asked for the Treasurer to be shown; name and photograph not yet supplied.
+  // Always listed; shows "Name Awaited" if the Treasurer record is ever removed.
   { title: "Treasurer", alwaysShow: true, vacantText: "Name Awaited" },
   { title: "Executive Member" },
 ];
@@ -152,8 +170,24 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       photo: "/assets/Vijeta.jpeg",
     },
   ],
-  kata: [],
-  kumite: [],
+  // Supplied by the client, 25 Nov 2026.
+  kata: [
+    {
+      status: "published",
+      name: "Sensei Paritosh Sharma",
+      designation: "Chairman",
+      photo: "/members/Sensei_Paritosh_Sharma.jpeg",
+    },
+  ],
+  // Supplied by the client, 25 Nov 2026. Same person as the Referee Committee entry above.
+  kumite: [
+    {
+      status: "published",
+      name: "Sushil Sharma",
+      designation: "Chairman",
+      photo: "/members/Sushil_Sharma.jpeg",
+    },
+  ],
   // Supplied by the client, 23 November 2026.
   media: [
     {
@@ -163,12 +197,64 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       photo: "/assets/Ashish.jpeg",
     },
   ],
-  discipline: [],
-  organise: [],
-  technical: [],
-  sports: [],
-  athletes: [],
-  "sexual-harassment": [],
+  // Committee directors supplied by the client, 25 Nov 2026.
+  discipline: [
+    {
+      status: "published",
+      name: "Anil Bhardwaj",
+      designation: "Director",
+      photo: "/members/Anil_Bhardwaj.jpeg",
+    },
+  ],
+  organise: [
+    {
+      status: "published",
+      name: "Ankit Jaglan",
+      designation: "Director",
+      photo: "/members/Ankit_Jaglan.jpeg",
+    },
+  ],
+  // Client wrote "Technical commission".
+  technical: [
+    {
+      status: "published",
+      name: "Rinku Kashyap",
+      designation: "Director",
+      photo: "/members/Rinku_Kashyap.jpeg",
+    },
+  ],
+  // Client wrote "Sports commission".
+  sports: [
+    {
+      status: "published",
+      name: "Ajay Saini",
+      designation: "Director",
+      photo: "/members/Ajay_Saini.jpeg",
+    },
+  ],
+  // Client wrote "Athlete commission".
+  athletes: [
+    {
+      status: "published",
+      name: "Haib Singh",
+      designation: "Director",
+      photo: "/members/Haib_Singh.jpeg",
+    },
+  ],
+  "sexual-harassment": [
+    {
+      status: "published",
+      name: "Neelam Sangwan",
+      designation: "Director",
+      photo: "/members/Neelam_sangwan.jpeg",
+    },
+    {
+      status: "published",
+      name: "Vishal Mehta",
+      designation: "Joint Secretary",
+      photo: "/members/Vishal_Mehta.jpeg",
+    },
+  ],
   medical: [],
   objection: [],
   management: [],

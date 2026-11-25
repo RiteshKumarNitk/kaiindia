@@ -465,7 +465,7 @@ export const pages: Record<RoutePath, PageEntry> = {
       icon: "shield",
       showProfileNote: false,
       notice:
-        "This page does not accept complaints or personal information. If you or someone else is in immediate danger, call the national emergency number 112.",
+        "The committee's approved policy and verified reporting procedure will be published here once confirmed by the association. This page does not accept complaints or personal information. If you or someone else is in immediate danger, call the national emergency number 112.",
     },
   },
   "/committee/medical-physio": {

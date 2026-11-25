@@ -40,7 +40,19 @@ export function OfficeBearers() {
                     sizes="(max-width: 40rem) 45vw, (max-width: 64rem) 30vw, 17rem"
                     style={m.photoFocus ? { objectPosition: m.photoFocus } : undefined}
                   />
-                ) : null}
+                ) : (
+                  <div className="bearer__photo-empty">
+                    <span aria-hidden="true">
+                      {m.name
+                        .replace(/^(Dr|Mr|Mrs|Ms|Shri|Sensei)\.?\s+/i, "")
+                        .split(/s+/)
+                        .map((p) => p[0])
+                        .slice(0, 2)
+                        .join("")}
+                    </span>
+                    <span className="bearer__photo-note">Photo awaited</span>
+                  </div>
+                )}
               </div>
               <div className="bearer__body">
                 <p className="bearer__role">{m.designation}</p>

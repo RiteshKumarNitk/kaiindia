@@ -112,6 +112,26 @@ export const stateBannersSupplied = [
   "jammukashmir.jpeg", "madhyapardesh.jpeg", "maharashtra.jpeg", "panjab.jpeg",
 ] as const;
 
+/** Further members supplied by the client on 25 November 2026 (verbatim; photos in public/members). */
+export const membersSupplied20261125 = [
+  "Vishal Mehta / Joint secretary / Karate association of India",
+  "Dr Kyoshi Kola Pratap Kumar / Joint Secretary, KAI / President / South India karate Association.",
+  "Sexual harrasment committee / Director / Neelam sangwan",
+  "Joint secretary / Vishal Mehta (listed under the Sexual Harassment Committee)",
+  "Organise Committee / Director / Ankit Jaglan",
+  "Anil Bhardwaj / Director / Discipline Committee",
+  "Rinku Kashyap / Director / Technical commission",
+  "Ajay Saini / Director / Sports commission",
+  "Haib Singh / Director / Athlete commission",
+  "Dr. Pankaj shukla / Vice President (photo: public/members/Pankaj_shukla.jpeg)",
+  // Later the same day:
+  "dr. nikanth is hai General secretary",
+  "Baikunth ji hai Director & Acting President",
+  "Sensei Paritosh Sharma / Chairman / Kata committee (photo: public/members/Sensei_Paritosh_Sharma.jpeg)",
+  "Treasurer ka name dalo: Avinash sethi",
+  "Sushil Sharma / Chairman / Kumita committee mai dalo (photo: public/members/Sushil_Sharma.jpeg)",
+] as const;
+
 /**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
@@ -123,13 +143,13 @@ export const claimsRequiringVerification = [
   "KAI is the only national federation of karate in India (recognition documents).",
   "Association of national champions, internationally renowned players and WKF/AKF-qualified judges, referees, coaches and masters with KAI.",
   "Millions of people in India learning and practising karate (source of figure).",
-  "Mr. Likha Tara Ji as Chairman, and Dr. Nilkanth Kunjilal Kawde as Director & Acting President (Baikunth Singh is also listed as Acting President).",
+  "Mr. Likha Tara Ji as Chairman; Baikunth Singh as Director & Acting President; Dr. Nilkanth Kunjilal Kawde as General Secretary.",
   "Office bearer names, designations and photographs, and the MLA affiliations of Amit Thaker Ji and Pawan Kharkhoda.",
   "Written consent of each office bearer and committee member to publish their name and photograph.",
   "Aashish Poonia as Media Director (name spelling, title and photograph).",
   "Sushil Sharma as Secretary of the Referee Commission (title and photograph).",
-  "Photographs for Dr. Kyoshi Kola Partap Kumar and Vishal Mehta; Treasurer's name and photograph.",
-  "Whether the General Secretary position is now vacant (its holder became Director & Acting President).",
+  "Treasurer Avinash Sethi's photograph.",
+  "Spelling of 'Haib Singh' (Athletes Committee) and 'Dr. Kyoshi Kola Pratap Kumar' (earlier written 'Partap').",
   "State association details transcribed from the eight banners (names, titles, phones, emails, websites); J&K phone '97973933989' has 11 digits.",
   "IDFC Bank account holder, account number, IFSC, branch and account type (verified in writing).",
   "Anjali as Executive Member (full name, title and photograph).",

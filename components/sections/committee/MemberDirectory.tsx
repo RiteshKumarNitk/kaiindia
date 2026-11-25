@@ -95,6 +95,7 @@ export function MemberDirectory({
               <MemberCard key={`${m.name}-${m.designation}`} member={m} />
             ))}
           </div>
+          {children}
         </section>
       </>
     );
