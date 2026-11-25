@@ -2,11 +2,11 @@ import type { NextConfig } from "next";
 
 /** Old URL → new URL. All are permanent (308) so bookmarks and search results keep working. */
 const movedPages: Record<string, string> = {
-  // Leadership message: President's → Chairman's → Director's Message, now under About KAI.
-  "/organisation/president-message": "/about/director-message",
-  "/organisation/chairman-message": "/about/director-message",
-  "/organisation/director-message": "/about/director-message",
-  "/about/chairman-message": "/about/director-message",
+  // Leadership message: President's → Chairman's → Director's → Chairman's Message (client, 25 Nov 2026).
+  "/organisation/president-message": "/about/chairman-message",
+  "/organisation/chairman-message": "/about/chairman-message",
+  "/organisation/director-message": "/about/chairman-message",
+  "/about/director-message": "/about/chairman-message",
   // About KAI
   "/organisation/executive-committee": "/about/executive-members",
   "/organisation/associate-states": "/about/associate-states",
@@ -31,6 +31,8 @@ const nextConfig: NextConfig = {
   images: {
     // Serve AVIF (smallest) where supported, then WebP; originals stay in /public.
     formats: ["image/avif", "image/webp"],
+    // YouTube video thumbnails for the Video Gallery.
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   async redirects() {
     return Object.entries(movedPages).map(([source, destination]) => ({ source, destination, permanent: true }));

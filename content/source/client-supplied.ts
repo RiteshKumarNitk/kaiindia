@@ -84,6 +84,24 @@ export const additionalMembersOriginal = {
 /** Official email supplied by the client on 24 November 2026 ("use this mail where ever required"). */
 export const officialEmailOriginal = "kaikarateassociation@gmail.com";
 
+/** Change request supplied by the client on 25 November 2026 (verbatim values). */
+export const changeRequest20261125 = {
+  leadership: {
+    "Dr. Nilkanth Kunjilal Kawde": "Director & Acting President (corrects 'Dr. Neelkanth Kunjilal Kawade', previously General Secretary)",
+    "Mr. Likha Tara Ji": "Chairman — the request refers to the 'Chairman's Message' attributed to him",
+  },
+  executiveMembers: {
+    added: ["Dr. Kyoshi Kola Partap Kumar — Joint Secretary (after Acting Secretary)", "Vishal Mehta — Joint Secretary"],
+    corrected: ["Yogesh Kalara → Yogesh Kalra"],
+    treasurer: "Name and photograph requested but not supplied",
+  },
+  referee: "Sushil Sharma (corrects 'Susil Sharma')",
+  membershipFees: { newMembership: "₹5,100 for one year", renewal: "₹3,100 for one year", appliesTo: "Club and Academy" },
+  officeHours: ["Monday to Saturday: 10:00 AM – 5:00 PM", "Sunday: Closed"],
+  donations: { bank: "IDFC Bank" },
+  youtubeChannel: "https://youtube.com/@karateassociationofindiakai?si=IPAgCD0R3hicK-5e",
+} as const;
+
 /**
  * Statements published as supplied by the client that should be confirmed with documentary
  * evidence before a public production launch. They are shown as the association's own
@@ -95,11 +113,14 @@ export const claimsRequiringVerification = [
   "KAI is the only national federation of karate in India (recognition documents).",
   "Association of national champions, internationally renowned players and WKF/AKF-qualified judges, referees, coaches and masters with KAI.",
   "Millions of people in India learning and practising karate (source of figure).",
-  "Mr. Likha Tara Ji as Director of the Karate Association of India.",
+  "Mr. Likha Tara Ji as Chairman, and Dr. Nilkanth Kunjilal Kawde as Director & Acting President (Baikunth Singh is also listed as Acting President).",
   "Office bearer names, designations and photographs, and the MLA affiliations of Amit Thaker Ji and Pawan Kharkhoda.",
   "Written consent of each office bearer and committee member to publish their name and photograph.",
   "Aashish Poonia as Media Director (name spelling, title and photograph).",
-  "Susil Sharma as Secretary of the Referee Commission (name spelling, title and photograph).",
+  "Sushil Sharma as Secretary of the Referee Commission (title and photograph).",
+  "Photographs for Dr. Kyoshi Kola Partap Kumar and Vishal Mehta; Treasurer's name and photograph.",
+  "Whether the General Secretary position is now vacant (its holder became Director & Acting President).",
+  "IDFC Bank account holder, account number, IFSC, branch and account type (verified in writing).",
   "Anjali as Executive Member (full name, title and photograph).",
   "Vijeta Mundlia of the Women's Commission (exact title and photograph).",
 ] as const;

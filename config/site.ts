@@ -8,8 +8,8 @@ export type ContactDetails = {
   email: string | null;
   phone: string | null;
   address: string | null;
-  /** e.g. "Monday to Saturday, 10:00 am – 5:00 pm IST" — only once confirmed. */
-  officeHours: string | null;
+  /** Office hours as day/time rows — only once confirmed. */
+  officeHours: { days: string; hours: string }[] | null;
   /** Link to the verified office location (e.g. a Google Maps URL). Only set with a verified address. */
   mapUrl: string | null;
 };
@@ -48,15 +48,30 @@ export const siteConfig = {
   urlConfirmed: site.confirmed,
   crest: { src: "/kai-crest.jpg", width: 447, height: 447 },
   illustration: { src: "/karate.webp", width: 1254, height: 1254 },
+  /** Official social channels supplied by the client (tracking parameters removed). */
+  social: {
+    youtube: "https://www.youtube.com/@karateassociationofindiakai", // supplied 25 Nov 2026
+  },
   // Fill in ONLY with details the association has confirmed in writing.
   contact: {
     email: "kaikarateassociation@gmail.com", // supplied by the client, 24 November 2026
     phone: null,
     address: null,
-    officeHours: null,
+    // Supplied by the client, 25 Nov 2026. No holiday schedule has been supplied.
+    officeHours: [
+      { days: "Monday to Saturday", hours: "10:00 AM – 5:00 PM" },
+      { days: "Sunday", hours: "Closed" },
+    ],
     mapUrl: null,
   } satisfies ContactDetails as ContactDetails,
   contactForm: {
+    endpoint: null,
+  } satisfies ContactFormConfig as ContactFormConfig,
+  /**
+   * Membership applications. Same rules as contactForm: leave null until a secure server-side
+   * endpoint exists. That endpoint must re-validate every field and calculate the fee itself.
+   */
+  membershipForm: {
     endpoint: null,
   } satisfies ContactFormConfig as ContactFormConfig,
 };

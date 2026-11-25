@@ -16,7 +16,7 @@ export type ContentStatus = "coming-soon" | "draft" | "published";
 export const routePaths = [
   "/",
   "/about",
-  "/about/director-message",
+  "/about/chairman-message",
   "/about/executive-members",
   "/about/associate-states",
   "/about/athlete-login",
@@ -80,6 +80,9 @@ export type InfoSection = {
   pending?: string;
 };
 
+export type MembershipCategory = "club" | "academy";
+export type ApplicationType = "new" | "renewal";
+
 export type CommitteeKey =
   | "executive"
   | "anti-doping"
@@ -132,7 +135,13 @@ export type PageBody =
   | { kind: "photos" }
   | { kind: "videos" }
   | { kind: "documents"; collection: DocumentCollection; intro?: InfoSection[] }
-  | { kind: "membership"; sections: InfoSection[] }
+  | {
+      kind: "membership";
+      /** Pre-selects the category on the application form. */
+      category: MembershipCategory;
+      /** Information still to be published (shown beside the form). */
+      sections: InfoSection[];
+    }
   | { kind: "policy" }
   | { kind: "donations" }
   | { kind: "governance"; topics: InfoSection[] }
@@ -205,14 +214,15 @@ export type GalleryPhoto = {
   height: number;
 };
 
+/** A YouTube video in the Video Gallery. Add only links supplied or approved by the association. */
 export type VideoItem = {
   status: ContentStatus;
   title: string;
-  date?: string;
+  /** Any standard YouTube link: watch?v=…, youtu.be/…, /shorts/…, /embed/… or /live/…. */
+  youtubeUrl: string;
   description?: string;
-  thumbnail?: { src: string; alt: string };
-  /** YouTube video id for an approved embed. */
-  youtubeId?: string;
+  /** ISO date, e.g. "2026-11-20". */
+  publishedAt?: string;
 };
 
 export type OfficialDocument = {

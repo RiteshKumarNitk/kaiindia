@@ -104,3 +104,7 @@
 .site-footer__col a {
   overflow-wrap: anywhere;
 }
+
+.site-footer__social {
+  margin-top: var(--space-2);
+}

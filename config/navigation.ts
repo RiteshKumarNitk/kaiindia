@@ -11,7 +11,7 @@ export const mainNav: NavItem[] = [
     section: "/about",
     children: [
       { label: "About KAI", href: "/about" },
-      { label: "Director's Message", href: "/about/director-message" },
+      { label: "Chairman's Message", href: "/about/chairman-message" },
       { label: "Executive Members", href: "/about/executive-members" },
       { label: "Associate States", href: "/about/associate-states" },
       { label: "Athlete Login", href: "/about/athlete-login" },
@@ -93,7 +93,7 @@ export const footerNav: FooterColumn[] = [
     heading: "About KAI",
     links: [
       { label: "About KAI", href: "/about" },
-      { label: "Director's Message", href: "/about/director-message" },
+      { label: "Chairman's Message", href: "/about/chairman-message" },
       { label: "Executive Members", href: "/about/executive-members" },
       { label: "Associate States", href: "/about/associate-states" },
       { label: "Judges Profile", href: "/about/judges-profile" },

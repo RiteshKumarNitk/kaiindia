@@ -1,10 +1,11 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { siteConfig } from "@/config/site";
 import type { ComingSoonCopy } from "@/lib/types";
 import { ContactForm } from "./ContactForm";
 
-type Row = { label: string; icon: IconName; value: string | null; href?: string };
+type Row = { label: string; icon: IconName; value: ReactNode | null; href?: string };
 
 /**
  * Contact page body: association details + enquiry form.
@@ -17,7 +18,20 @@ export function ContactPanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
     { label: "Official address", icon: "map", value: address },
     { label: "Official email", icon: "mail", value: email, href: email ? `mailto:${email}` : undefined },
     { label: "Phone number", icon: "phone", value: phone, href: phone ? `tel:${phone.replace(/\s/g, "")}` : undefined },
-    { label: "Office hours", icon: "clock", value: officeHours },
+    {
+      label: "Office hours",
+      icon: "clock",
+      value: officeHours ? (
+        <ul className="office-hours">
+          {officeHours.map((h) => (
+            <li key={h.days} className={h.hours === "Closed" ? "is-closed" : undefined}>
+              <span>{h.days}</span>
+              <strong>{h.hours}</strong>
+            </li>
+          ))}
+        </ul>
+      ) : null,
+    },
   ];
   const anyMissing = rows.some((r) => !r.value);
 
@@ -46,7 +60,7 @@ export function ContactPanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
                 {r.label}
               </dt>
               <dd>
-                {r.value ? r.href ? <a href={r.href}>{r.value}</a> : r.value : <span>Awaiting confirmation</span>}
+                {r.value ? r.href ? <a href={r.href}>{r.value}</a> : r.value : <span className="is-pending-text">Awaiting confirmation</span>}
               </dd>
             </div>
           ))}

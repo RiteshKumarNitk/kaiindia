@@ -26,8 +26,9 @@ export function MemberCard({ member, priority = false }: { member: CommitteeMemb
           style={member.photoFocus ? { objectPosition: member.photoFocus } : undefined}
         />
       ) : (
-        <div className="member-card__photo member-card__photo--empty" aria-hidden="true">
-          {initials}
+        <div className="member-card__photo member-card__photo--empty">
+          <span aria-hidden="true">{initials}</span>
+          <span className="member-card__photo-note">Photo awaited</span>
         </div>
       )}
       <div className="member-card__body">

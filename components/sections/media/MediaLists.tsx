@@ -4,7 +4,12 @@ import { ComingSoon } from "@/components/ui/ComingSoon";
 import { galleryPhotos, newsArticles, videos } from "@/content/media";
 import { published } from "@/lib/content-status";
 import { formatDate } from "@/lib/format";
-import type { ComingSoonCopy, NewsArticle, VideoItem } from "@/lib/types";
+import type { ReactNode } from "react";
+import { Icon } from "@/components/ui/Icon";
+import { siteConfig } from "@/config/site";
+import { getYouTubeId } from "@/lib/youtube";
+import type { ComingSoonCopy, NewsArticle } from "@/lib/types";
+import { YouTubeCard } from "./YouTubeCard";
 
 
 /* ------------------------------------------------------------------ News */
@@ -84,46 +89,37 @@ export function PhotoGallery({ comingSoon }: { comingSoon: ComingSoonCopy }) {
 
 /* --------------------------------------------------------------- Videos */
 
-export function VideoCard({ video }: { video: VideoItem }) {
-  return (
-    <article className="video-card">
-      <div className="video-card__media">
-        {video.youtubeId ? (
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}`}
-            title={video.title}
-            loading="lazy"
-            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : video.thumbnail ? (
-          <Image src={video.thumbnail.src} alt={video.thumbnail.alt} width={640} height={360} />
-        ) : (
-          <div className="video-card__placeholder" aria-hidden="true" />
-        )}
-      </div>
-      <div className="video-card__body">
-        {video.date && (
-          <time dateTime={video.date} className="news-card__date">
-            {formatDate(video.date)}
-          </time>
-        )}
-        <h3>{video.title}</h3>
-        {video.description && <p>{video.description}</p>}
-      </div>
-    </article>
-  );
-}
-
+/** Video Gallery: approved YouTube links from content/media.ts, shown as click-to-load cards. */
 export function VideoGallery({ comingSoon }: { comingSoon: ComingSoonCopy }) {
-  const items = published(videos);
-  if (items.length === 0) return <EmptyMedia comingSoon={comingSoon} kind="videos" />;
+  const items = published(videos)
+    .map((v) => ({ ...v, videoId: getYouTubeId(v.youtubeUrl) }))
+    .filter((v): v is typeof v & { videoId: string } => v.videoId !== null)
+    .sort((x, y) => (y.publishedAt ?? "").localeCompare(x.publishedAt ?? ""));
+  const channel = siteConfig.social.youtube;
+  const channelLink = channel ? (
+    <a className="button button--primary video-channel" href={channel} target="_blank" rel="noopener noreferrer">
+      <Icon name="video" size={18} /> Watch on our YouTube channel <span className="sr-only">(opens in a new tab)</span>
+    </a>
+  ) : null;
+
+  if (items.length === 0) return <EmptyMedia comingSoon={comingSoon} kind="videos">{channelLink}</EmptyMedia>;
   return (
     <section aria-labelledby="videos-heading">
-      <h2 id="videos-heading" className="section-title">Videos</h2>
+      <div className="section-bar">
+        <h2 id="videos-heading" className="section-title">
+          Videos
+        </h2>
+        {channelLink}
+      </div>
       <div className="card-grid card-grid--wide">
         {items.map((v) => (
-          <VideoCard key={v.youtubeId ?? v.title} video={v} />
+          <YouTubeCard
+            key={v.videoId}
+            videoId={v.videoId}
+            title={v.title}
+            description={v.description}
+            date={v.publishedAt ? { iso: v.publishedAt, label: formatDate(v.publishedAt) } : undefined}
+          />
         ))}
       </div>
     </section>
@@ -138,7 +134,15 @@ const emptyMeta = {
   videos: { heading: "Videos", icon: "video" },
 } as const;
 
-function EmptyMedia({ comingSoon, kind }: { comingSoon: ComingSoonCopy; kind: "news" | "photos" | "videos" }) {
+function EmptyMedia({
+  comingSoon,
+  kind,
+  children,
+}: {
+  comingSoon: ComingSoonCopy;
+  kind: "news" | "photos" | "videos";
+  children?: ReactNode;
+}) {
   const meta = emptyMeta[kind];
   return (
     <section aria-labelledby={`${kind}-heading`}>
@@ -148,7 +152,9 @@ function EmptyMedia({ comingSoon, kind }: { comingSoon: ComingSoonCopy; kind: "n
         </h2>
         <span className="section-bar__count">0 published</span>
       </div>
-      <ComingSoon {...comingSoon} variant="hero" icon={meta.icon} headingLevel={3} />
+      <ComingSoon {...comingSoon} variant="hero" icon={meta.icon} headingLevel={3}>
+        {children}
+      </ComingSoon>
     </section>
   );
 }

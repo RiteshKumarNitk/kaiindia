@@ -5,7 +5,7 @@ import { published } from "@/lib/content-status";
 import type { CommitteeMember } from "@/lib/types";
 
 /** Card for a designated position whose holder has not been supplied yet. No name or photo is invented. */
-function VacantRoleCard({ role }: { role: string }) {
+function VacantRoleCard({ role, text = "Member details will be updated soon." }: { role: string; text?: string }) {
   return (
     <article className="member-card member-card--vacant">
       <div className="member-card__photo member-card__photo--vacant" aria-hidden="true">
@@ -13,7 +13,7 @@ function VacantRoleCard({ role }: { role: string }) {
       </div>
       <div className="member-card__body">
         <p className="member-card__role">{role}</p>
-        <p className="member-card__pending">Member details will be updated soon.</p>
+        <p className="member-card__pending">{text}</p>
       </div>
     </article>
   );
@@ -27,11 +27,11 @@ export function ExecutiveDirectory() {
   const members = published(committees.executive);
   const known = new Set(executiveRoles.map((r) => r.title));
 
-  const entries: ({ kind: "member"; member: CommitteeMember } | { kind: "vacant"; role: string })[] = [];
+  const entries: ({ kind: "member"; member: CommitteeMember } | { kind: "vacant"; role: string; text?: string })[] = [];
   for (const role of executiveRoles) {
     const holders = members.filter((m) => m.designation === role.title);
     if (holders.length > 0) holders.forEach((member) => entries.push({ kind: "member", member }));
-    else if (role.alwaysShow) entries.push({ kind: "vacant", role: role.title });
+    else if (role.alwaysShow) entries.push({ kind: "vacant", role: role.title, text: role.vacantText });
   }
   // Any member whose designation is not in the role list is still shown, after the listed roles.
   members.filter((m) => !known.has(m.designation)).forEach((member) => entries.push({ kind: "member", member }));
@@ -47,7 +47,7 @@ export function ExecutiveDirectory() {
             {e.kind === "member" ? (
               <MemberCard member={e.member} priority={i < 4} />
             ) : (
-              <VacantRoleCard role={e.role} />
+              <VacantRoleCard role={e.role} text={e.text} />
             )}
           </li>
         ))}

@@ -255,3 +255,265 @@
   background: var(--green-tint);
   font-weight: 500;
 }
+
+/* Office hours list inside the contact details */
+.office-hours {
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.office-hours li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.15rem var(--space-4);
+}
+.office-hours strong {
+  font-weight: 600;
+  color: var(--heading);
+}
+.office-hours .is-closed strong {
+  color: var(--accent-ink);
+}
+
+/* ------------------------------------------------------------ Membership */
+
+.membership {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (min-width: 60rem) {
+  .membership {
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.8fr);
+    gap: var(--space-7);
+  }
+  .membership__aside {
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+.membership__aside {
+  display: grid;
+  gap: var(--space-4);
+}
+.choice {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.choice legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.choice__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: var(--space-3);
+}
+.choice__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    border-color 0.15s var(--ease),
+    background-color 0.15s var(--ease);
+}
+.choice__option:hover {
+  border-color: var(--text-2);
+}
+.choice__option:has(input:checked) {
+  border-color: var(--navy);
+  background: #f0f1ff;
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.choice__option:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.choice__option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--navy);
+  flex: none;
+}
+.choice__option span {
+  display: grid;
+  font-weight: 500;
+}
+.choice__option small {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.fee-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid #c9e7c4;
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius);
+  background: var(--green-tint);
+}
+.fee-summary > div {
+  display: grid;
+  gap: 0.1rem;
+}
+.fee-summary__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+}
+.fee-summary strong {
+  font: 700 1.5rem/1.1 var(--display);
+  color: var(--heading);
+}
+.fee-summary__note {
+  grid-column: 1 / -1;
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.field__hint--left {
+  text-align: left;
+}
+
+.fee-card {
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.fee-card--muted {
+  border-top-color: var(--border-strong);
+  background: var(--surface-2);
+}
+.fee-card__title {
+  font: 700 1.35rem/1.1 var(--display);
+  margin-bottom: var(--space-3);
+}
+.fee-card__list {
+  margin: 0;
+  display: grid;
+}
+.fee-card__list > div {
+  display: grid;
+  gap: 0.1rem;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.fee-card__list dt {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.fee-card__list dd {
+  margin: 0;
+}
+.fee-card__list strong {
+  font: 700 1.6rem/1.1 var(--display);
+  color: var(--heading);
+}
+.fee-card__list span {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+.fee-card__note {
+  margin-top: var(--space-3);
+  font-size: 0.8125rem;
+  color: var(--text-2);
+}
+.fee-card .plain-list {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* -------------------------------------------------------------- Donations */
+
+.bank-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+}
+.bank-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--navy);
+  border-bottom: 3px solid var(--accent);
+}
+.bank-card__head h2 {
+  font: 700 1.5rem/1.1 var(--display);
+  color: #fff;
+}
+.bank-card__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+}
+.bank-card__list {
+  margin: 0;
+  padding: var(--space-2) var(--space-5);
+}
+.bank-card__list > div {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) 1fr;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.bank-card__list > div:last-child {
+  border-bottom: 0;
+}
+.bank-card__list dt {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.bank-card__list dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--heading);
+  overflow-wrap: anywhere;
+}
+.bank-card__list .is-pending dd span {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-2);
+}
+@media (max-width: 30rem) {
+  .bank-card__list > div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+.bank-card__notice {
+  margin: 0 var(--space-5) var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--accent-tint);
+  font-size: 0.9375rem;
+}

@@ -16,7 +16,8 @@ const officeBearerList: CommitteeMember[] = [
   {
     status: "published",
     name: "Mr. Likha Tara Ji",
-    designation: "Director",
+    // Client, 25 Nov 2026: Chairman (the "Director" title now belongs to Dr. Nilkanth Kunjilal Kawde).
+    designation: "Chairman",
     photo: "/assets/Likha.jpeg",
   },
   {
@@ -41,17 +42,26 @@ const officeBearerList: CommitteeMember[] = [
   },
   {
     status: "published",
-    name: "Dr. Neelkanth Kunjilal Kawade",
-    designation: "General Secretary",
+    // Name and designation corrected by the client, 25 Nov 2026 (previously "Dr. Neelkanth
+    // Kunjilal Kawade", General Secretary). Position in the list and photograph unchanged.
+    name: "Dr. Nilkanth Kunjilal Kawde",
+    designation: "Director & Acting President",
     // Replaced photo uses a new file name so cached copies of the old one are not served.
     photo: "/assets/Neelkanth-2.jpeg",
     photoFocus: "46% 22%",
   },
   {
     status: "published",
-    name: "Yogesh Kalara",
+    name: "Yogesh Kalra", // spelling corrected by the client, 25 Nov 2026
     designation: "Co-Acting Secretary",
     photo: "/assets/Yogesh.jpeg",
+  },
+  // Added by the client, 25 Nov 2026: listed immediately after the Co-Acting Secretary.
+  // No photograph supplied yet — the card shows initials and "Photo awaited".
+  {
+    status: "published",
+    name: "Dr. Kyoshi Kola Partap Kumar",
+    designation: "Joint Secretary",
   },
   {
     status: "published",
@@ -65,6 +75,12 @@ const officeBearerList: CommitteeMember[] = [
     designation: "Joint Secretary",
     // Replaced photo uses a new file name so cached copies of the old one are not served.
     photo: "/assets/Jwala-2.jpeg",
+  },
+  // Added by the client, 25 Nov 2026, as an additional Joint Secretary. No photograph supplied yet.
+  {
+    status: "published",
+    name: "Vishal Mehta",
+    designation: "Joint Secretary",
   },
 ];
 
@@ -84,20 +100,29 @@ export const officeBearers = officeBearerList;
 /**
  * Executive positions, in order of office, for the Executive Members page.
  * - Members are matched to a position by their `designation`.
- * - `alwaysShow`: the position is listed even when no member has been supplied for it
- *   (shown as "Member details will be updated soon" — no name or photo is invented).
+ * - `alwaysShow`: the position is listed even when no member has been supplied for it, with
+ *   `vacantText` (default "Member details will be updated soon.") — no name or photo is invented.
  * - `showOnHomepage: false`: holders of this position are not featured on the homepage.
+ * Positions without members and without `alwaysShow` are simply not listed.
  */
-export type ExecutiveRole = { title: string; alwaysShow?: boolean; showOnHomepage?: boolean };
+export type ExecutiveRole = {
+  title: string;
+  alwaysShow?: boolean;
+  showOnHomepage?: boolean;
+  vacantText?: string;
+};
 
 export const executiveRoles: ExecutiveRole[] = [
-  { title: "Director" },
+  { title: "Chairman" },
   { title: "President" },
   { title: "Acting President" },
   { title: "Vice President" },
+  { title: "Director & Acting President" },
   { title: "General Secretary" },
   { title: "Co-Acting Secretary" },
   { title: "Joint Secretary", alwaysShow: true, showOnHomepage: false },
+  // Client asked for the Treasurer to be shown; name and photograph not yet supplied.
+  { title: "Treasurer", alwaysShow: true, vacantText: "Name Awaited" },
   { title: "Executive Member" },
 ];
 
@@ -113,7 +138,7 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
   referee: [
     {
       status: "published",
-      name: "Susil Sharma",
+      name: "Sushil Sharma", // spelling corrected by the client, 25 Nov 2026
       designation: "Secretary, Referee Commission",
       photo: "/assets/Susil.jpeg",
     },

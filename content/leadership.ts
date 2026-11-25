@@ -1,38 +1,38 @@
 import type { LeadershipMessage, SliderImage } from "@/lib/types";
 
 /**
- * Director photographs and message — supplied by the client.
+ * Chairman photographs and message — supplied by the client.
  */
-export const directorImages: SliderImage[] = [
+export const chairmanImages: SliderImage[] = [
   {
-    src: "/director/director1.jpeg",
-    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
-    caption: "Mr. Likha Tara Ji — Director, Karate Association of India",
+    src: "/chairman/chairman1.jpeg",
+    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
+    caption: "Mr. Likha Tara Ji — Chairman, Karate Association of India",
     width: 960,
     height: 639,
   },
   {
-    src: "/director/director2.jpeg",
+    src: "/chairman/chairman2.jpeg",
     alt: "Mr. Likha Tara Ji presiding at an official KAI event",
     caption: "Mr. Likha Tara Ji presiding at an official KAI event",
     width: 656,
     height: 768,
   },
   {
-    src: "/director/director3.jpeg",
-    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
+    src: "/chairman/chairman3.jpeg",
+    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
     caption: "Mr. Likha Tara Ji — Championing karate across India",
     width: 1080,
     height: 1079,
   },
 ];
 
-export const directorMessage: LeadershipMessage = {
+export const chairmanMessage: LeadershipMessage = {
   status: "published",
   name: "Mr. Likha Tara Ji",
-  designation: "Director, Karate Association of India",
-  portrait: "/director/director1.jpeg",
-  images: directorImages,
+  designation: "Chairman, Karate Association of India",
+  portrait: "/chairman/chairman1.jpeg",
+  images: chairmanImages,
   paragraphs: [
     "It gives me immense pleasure to welcome all athletes, coaches, referees, officials and martial arts enthusiasts to the Karate Association of India.",
     "Karate is much more than a combat sport; it is a way of life built on the core pillars of discipline, respect, perseverance and self-control. Through rigorous training and healthy competition, our young karatekas not only sharpen their physical agility and mental focus but also learn the values of humility and sportsmanship that stay with them far beyond the dojo.",

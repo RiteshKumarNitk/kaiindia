@@ -140,7 +140,7 @@
   }
 }
 
-/* ------------------------------------------------------ Director's message */
+/* ------------------------------------------------------ Chairman's message */
 
 .leader-message {
   display: grid;
@@ -376,4 +376,17 @@
   border-radius: 0 var(--radius) var(--radius) 0;
   background: var(--surface-2);
   color: var(--text);
+}
+
+/* Initials avatar for members whose photograph has not been supplied yet. */
+.member-card__photo--empty {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+}
+.member-card__photo-note {
+  font: 500 0.75rem/1 var(--sans);
+  letter-spacing: 0.04em;
+  color: var(--text-2);
 }

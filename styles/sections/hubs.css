@@ -291,3 +291,12 @@
   font-weight: 600;
   color: var(--link);
 }
+
+/* Membership landing cards: fee chips (not numbered steps). */
+.pathway__steps--fees li::before {
+  content: none;
+}
+.pathway__steps--fees li {
+  color: var(--text);
+  background: var(--green-tint);
+}

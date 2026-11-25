@@ -8,7 +8,7 @@ import { GovernancePanel } from "@/components/sections/governance/GovernancePane
 import { InfoSections } from "@/components/sections/about/ArticleSections";
 import { MessagePanel } from "@/components/sections/about/LeadershipMessage";
 import { PolicyPanel } from "@/components/sections/policies/PolicyPanel";
-import { ProcessSteps } from "@/components/sections/membership/ProcessSteps";
+import { MembershipPanel } from "@/components/sections/membership/MembershipPanel";
 import { HubView } from "@/components/sections/hub/HubView";
 import { NewsList, PhotoGallery, VideoGallery } from "@/components/sections/media/MediaLists";
 import { PortalPreview } from "@/components/sections/about/PortalPreview";
@@ -54,12 +54,7 @@ function Body({ page }: { page: PageEntry }) {
     case "documents":
       return <DocumentLibrary collection={body.collection} comingSoon={comingSoon} />;
     case "membership":
-      return (
-        <>
-          <ComingSoon {...comingSoon} variant="compact" />
-          <ProcessSteps sections={body.sections} heading="How membership will work" />
-        </>
-      );
+      return <MembershipPanel category={body.category} sections={body.sections} />;
     case "policy":
       return <PolicyPanel comingSoon={comingSoon} />;
     case "donations":

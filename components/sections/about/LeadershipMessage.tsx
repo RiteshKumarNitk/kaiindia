@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { ComingSoon } from "@/components/ui/ComingSoon";
 import { ImageSlider } from "@/components/ui/ImageSlider";
-import { directorMessage } from "@/content/leadership";
+import { chairmanMessage } from "@/content/leadership";
 import { isPublished } from "@/lib/content-status";
 import type { ComingSoonCopy } from "@/lib/types";
 
-/** The Director's message page body. */
+/** The Chairman's message page body. */
 export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
-  const msg = directorMessage;
+  const msg = chairmanMessage;
   if (!isPublished(msg) || msg.paragraphs.length === 0) {
     return <ComingSoon {...comingSoon} variant="section" />;
   }
@@ -20,9 +20,9 @@ export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         <div className="leader-message__slider-col">
           <ImageSlider
             images={msg.images!}
-            title={`Photographs of ${msg.name || "the Director"}`}
+            title={`Photographs of ${msg.name || "the Chairman"}`}
             showThumbnails
-            className="slider--director-page"
+            className="slider--chairman-page"
           />
         </div>
       ) : msg.portrait && msg.name ? (

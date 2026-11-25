@@ -1,8 +1,8 @@
 import { PageView } from "@/components/templates/PageView";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata("/about/director-message");
+export const metadata = pageMetadata("/about/chairman-message");
 
 export default function Page() {
-  return <PageView path="/about/director-message" />;
+  return <PageView path="/about/chairman-message" />;
 }

@@ -76,6 +76,13 @@ export function Footer() {
               Questions about membership, events or the association? Send us an enquiry.
             </p>
           )}
+          {siteConfig.social.youtube && (
+            <p className="site-footer__social">
+              <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer">
+                YouTube channel <span className="sr-only">(opens in a new tab)</span>
+              </a>
+            </p>
+          )}
           <Link href="/contact" className="button button--primary site-footer__cta" prefetch={false}>
             Contact Us
           </Link>

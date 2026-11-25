@@ -92,7 +92,7 @@ export const pages: Record<RoutePath, PageEntry> = {
       related: {
         title: "In this section",
         links: [
-          "/about/director-message",
+          "/about/chairman-message",
           "/about/executive-members",
           "/about/associate-states",
           "/about/athlete-login",
@@ -231,16 +231,16 @@ export const pages: Record<RoutePath, PageEntry> = {
   },
 
   /* --------------------------------------------------- About KAI: leadership */
-  "/about/director-message": {
-    title: "Director's Message",
+  "/about/chairman-message": {
+    title: "Chairman's Message",
     eyebrow: "About KAI · Leadership",
-    intro: "Message from the Director",
+    intro: "Message from the Chairman",
     metaDescription:
-      "A message from Mr. Likha Tara Ji, Director of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
+      "A message from Mr. Likha Tara Ji, Chairman of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
     // Fallback only; the message is published in content/leadership.ts.
     comingSoon: {
       title: "Message to be published",
-      description: "The Director's message will appear here once approved for publication.",
+      description: "The Chairman's message will appear here once approved for publication.",
     },
     body: { kind: "message" },
   },
@@ -250,7 +250,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     eyebrow: "About KAI · Leadership",
     intro: "Office bearers and executive members of the association, listed in order of office.",
     metaDescription:
-      "Executive Members of the Karate Association of India: Director, President, Vice President, General Secretary, Joint Secretary and other office bearers.",
+      "Executive Members of the Karate Association of India: Chairman, President, Vice President, Director & Acting President, Joint Secretaries, Treasurer and other office bearers.",
     comingSoon: {
       title: "Member details will be updated soon",
       description: "Details for this position will be published once confirmed by the association.",
@@ -560,7 +560,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     metaDescription: "Official videos and highlights from the Karate Association of India.",
     comingSoon: {
       title: "Videos in preparation",
-      description: "Official videos will appear here once they are approved for publication.",
+      description: "Official Karate Association of India videos will be available here soon.",
     },
     body: { kind: "videos" },
   },
@@ -613,12 +613,12 @@ export const pages: Record<RoutePath, PageEntry> = {
     title: "Membership",
     eyebrow: "Join the network",
     intro:
-      "Information for karate clubs and academies seeking to become members of the association will be published in this section.",
-    metaDescription: "Club and academy membership information from the Karate Association of India.",
+      "Membership of the Karate Association of India for karate clubs and academies — new membership and annual renewal.",
+    metaDescription: "Club and academy membership of the Karate Association of India: fees, validity and application forms.",
     comingSoon: {
-      title: "Membership guidelines in preparation",
+      title: "Eligibility guidelines in preparation",
       description:
-        "Club and academy membership details will be published after the relevant guidelines and application process are finalised.",
+        "Fees are listed below. Eligibility criteria and required documents will be published once finalised, and online applications will open once processing is set up.",
     },
     body: { kind: "hub", layout: "pathways", groups: [{ links: ["/membership/club", "/membership/academy"] }] },
   },
@@ -627,45 +627,47 @@ export const pages: Record<RoutePath, PageEntry> = {
     shortTitle: "Club",
     eyebrow: "Membership · Clubs",
     intro:
-      "This will be the information portal for karate clubs interested in association membership, covering eligibility, documents, process and fees.",
-    metaDescription: "Club membership information for the Karate Association of India, to be published once finalised.",
+      "Apply for a new Club Membership or renew an existing one. Membership is valid for one year.",
+    metaDescription:
+      "Club membership of the Karate Association of India: new membership and renewal fees, validity and application form.",
     comingSoon: {
-      title: "Applications not yet open",
-      description: "Applications are not open. Guidelines for clubs will be published once finalised by the association.",
+      title: "Online applications not yet enabled",
+      description: "Online submission will open once the association sets up application processing.",
     },
     body: {
       kind: "membership",
+      category: "club",
       sections: [
         { id: "eligibility", title: "Eligibility", status: "coming-soon", pending: "Eligibility criteria for clubs are being finalised." },
         { id: "documents", title: "Required documents", status: "coming-soon", pending: "The list of required documents will be confirmed." },
-        { id: "process", title: "Membership process", status: "coming-soon", pending: "The step-by-step membership process will be published." },
-        { id: "fees", title: "Fees", status: "coming-soon", pending: "Fees have not been announced." },
-        { id: "application", title: "Application procedure", status: "coming-soon", pending: "How and where to apply will be announced." },
+        { id: "process", title: "Approval process", status: "coming-soon", pending: "How applications are reviewed and approved will be published." },
       ],
     },
   },
+
   "/membership/academy": {
     title: "Academy Membership",
     shortTitle: "Academy",
     eyebrow: "Membership · Academies",
     intro:
-      "This will be the information portal for karate academies and training centres interested in association membership.",
-    metaDescription: "Academy membership information for the Karate Association of India, to be published once finalised.",
+      "Apply for a new Academy Membership or renew an existing one. Membership is valid for one year.",
+    metaDescription:
+      "Academy membership of the Karate Association of India: new membership and renewal fees, validity and application form.",
     comingSoon: {
-      title: "Applications not yet open",
-      description: "Applications are not open. Guidelines for academies will be published once finalised by the association.",
+      title: "Online applications not yet enabled",
+      description: "Online submission will open once the association sets up application processing.",
     },
     body: {
       kind: "membership",
+      category: "academy",
       sections: [
         { id: "eligibility", title: "Eligibility", status: "coming-soon", pending: "Eligibility criteria for academies are being finalised." },
         { id: "documents", title: "Required documents", status: "coming-soon", pending: "The list of required documents will be confirmed." },
-        { id: "process", title: "Membership process", status: "coming-soon", pending: "The step-by-step membership process will be published." },
-        { id: "fees", title: "Fees", status: "coming-soon", pending: "Fees have not been announced." },
-        { id: "application", title: "Application procedure", status: "coming-soon", pending: "How and where to apply will be announced." },
+        { id: "process", title: "Approval process", status: "coming-soon", pending: "How applications are reviewed and approved will be published." },
       ],
     },
   },
+
 
   /* ---------------------------------------------------------------- Policies */
   "/privacy-policy": {
@@ -761,7 +763,7 @@ const summaries: Partial<Record<RoutePath, string>> = {
   "/about/coach-login": "Planned online portal for coaches.",
   "/about/judges-profile": "Directory of verified judges and technical officials.",
   "/about/karate": "Karate as a martial art and sport: kata, kumite and training.",
-  "/about/director-message": "A message from Mr. Likha Tara Ji, Director of KAI.",
+  "/about/chairman-message": "A message from Mr. Likha Tara Ji, Chairman of KAI.",
   "/about/executive-members": "Office bearers and executive members of the association.",
   "/committee/anti-doping": "Clean-sport education and awareness.",
   "/committee/referee": "Officiating standards and referee development.",

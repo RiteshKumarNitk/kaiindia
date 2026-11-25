@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { DirectorSection } from "@/components/home/DirectorSection";
+import { ChairmanSection } from "@/components/home/ChairmanSection";
 import { Hero } from "@/components/home/Hero";
 import { Introduction } from "@/components/home/Introduction";
 import { Mission } from "@/components/home/Mission";
@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className={fontDisplayHeavy.variable}>
       <Hero />
-      <DirectorSection />
+      <ChairmanSection />
       <OfficeBearers />
       <Introduction />
       <Mission />

@@ -17,7 +17,7 @@ No official facts are invented. Officeholders, committee members, state associat
 | Section | Routes |
 | --- | --- |
 | Home | `/` |
-| About KAI | `/about`, `/about/director-message`, `/about/executive-members`, `/about/associate-states`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
+| About KAI | `/about`, `/about/chairman-message`, `/about/executive-members`, `/about/associate-states`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
 | Committee | `/committee/anti-doping`, `/committee/referee`, `/committee/womens`, `/committee/kata`, `/committee/kumite`, `/committee/media`, `/committee/discipline`, `/committee/organise`, `/committee/technical`, `/committee/sports`, `/committee/athletes`, `/committee/sexual-harassment`, `/committee/medical-physio`, `/committee/objection`, `/committee/management`. There is no Committee landing page: the menu opens the list directly, shown in two columns on desktop. To add a committee: add its route to `routePaths` (`lib/types.ts`), add a page entry with `kind: "directory"` in `content/pages.ts`, add an empty member list in `content/people.ts`, add a menu item in `config/navigation.ts`, and copy any `app/committee/*/page.tsx`. Leave `focus: []` until the committee's role is confirmed. |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
@@ -38,11 +38,13 @@ app/                       Routes only. Each page.tsx is a few lines: metadata +
 content/                   Everything the client supplies or approves (edit here first)
   pages.ts                 Title, introduction, metadata, Coming Soon copy and layout for every route
   people.ts                Office bearers, executive members and committee members (+ photo paths)
-  leadership.ts            Director's message and photo slider
+  leadership.ts            Chairman's message and photo slider
   association.ts           Homepage introduction and mission
   states.ts                States/UTs list for the map, and verified state associations
   media.ts                 News, photo gallery and videos
   documents.ts             Rules and governance documents (PDFs)
+  membership.ts            Membership fees (new ₹5,100 / renewal ₹3,100, 1 year) and form labels
+  donations.ts             Donation bank details (IDFC Bank; account shown only when verified)
   source/client-supplied.ts  The client's original wording, verbatim, and claims to verify
 config/
   site.ts                  Name, crest, illustration, contact details, site URL
@@ -55,7 +57,7 @@ lib/                       Code helpers (no content)
   format.ts, svg-path.ts   Date formatting; map path simplification
 components/
   layout/                  Header, Navbar (desktop dropdowns), MobileMenu, Breadcrumbs, Footer
-  home/                    Hero, DirectorSection, OfficeBearers, Introduction, Mission
+  home/                    Hero, ChairmanSection, OfficeBearers, Introduction, Mission
   templates/PageView.tsx   Picks the page body for each route from content/pages.ts
   sections/<area>/         Page bodies grouped by site section:
                            about (leadership, executive members, states map), committee,
@@ -66,7 +68,7 @@ components/
 styles/                    tokens.css (colours, type, spacing), base, primitives,
                            layout/, components/, sections/, home.css, motion.css
 assets/fonts/              Inter and Barlow Condensed (Latin subset) + OFL licences
-public/                    Crest, illustration, people photos (assets/), director photos
+public/                    Crest, illustration, people photos (assets/), Chairman photos (chairman/)
 ```
 
 Only `Navbar`, `MobileMenu` and `ImageSlider` are client components. Everything else renders on the server and ships no JavaScript.
@@ -92,7 +94,7 @@ Measured on a throttled mobile connection (slow 4G, 4× CPU slowdown, empty cach
 | Page | Data before → after | Largest Contentful Paint |
 | --- | --- | --- |
 | Home | 876 KB → 459 KB | 3.5 s → 1.4 s |
-| Director's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
+| Chairman's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
 | Executive Members | 544 KB → 341 KB | ~0.6–0.8 s (unchanged) |
 | Associate States | 514 KB → 329 KB | ~0.7–0.8 s (unchanged) |
 
@@ -122,13 +124,13 @@ See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github)
 
 ## Client-supplied content
 
-The homepage introduction, office bearers, mission section, About KAI page, Executive Members and Director's Message use content supplied by the client.
+The homepage introduction, office bearers, mission section, About KAI page, Executive Members and Chairman's Message use content supplied by the client.
 
 - `content/source/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
 - The published versions are edited for grammar and punctuation only, with no new facts:
-  - `associationIntro` in `content/association.ts`, `directorMessage` in `content/leadership.ts`, and the office bearers in `content/people.ts`;
+  - `associationIntro` in `content/association.ts`, `chairmanMessage` in `content/leadership.ts`, and the office bearers in `content/people.ts`;
   - the `/about` sections in `content/pages.ts`.
-- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, the Director's name and title, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
+- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, the Chairman's name and title, Dr. Nilkanth Kunjilal Kawde as Director & Acting President, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
 - Numerical highlights (counters or statistics) must use only verified, approved figures.
 
 ## Colour system
@@ -233,7 +235,7 @@ export const committees = {
 };
 ```
 
-The Director's message is published from `directorMessage` in `content/leadership.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `directorImages`, with the photographs stored in `public/director/`. Never use a stock or generated portrait.
+The Chairman's message is published from `chairmanMessage` in `content/leadership.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `chairmanImages`, with the photographs stored in `public/chairman/`. Never use a stock or generated portrait.
 
 ### Office bearers
 
@@ -295,8 +297,8 @@ export const videos = [
   {
     status: "published",
     title: "Title",
-    date: "2027-01-15",
-    youtubeId: "VIDEO_ID", // embedded via youtube-nocookie.com
+    publishedAt: "2027-01-15",
+    youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID", // or a youtu.be / shorts link
   },
 ];
 ```
@@ -322,6 +324,31 @@ Fill in `siteConfig.contact` in `config/site.ts` with verified details only. The
 
 - `address`, `email`, `phone` and `officeHours`. Until a field is set, the Contact page shows it as "Awaiting confirmation".
 - `mapUrl`. The "View on map" link appears only when both `address` and `mapUrl` are set.
+
+### Membership applications
+
+`/membership/club` and `/membership/academy` share one application form, with **New Membership** and **Membership Renewal** options.
+
+- **Fees** are set in one place, `content/membership.ts`: ₹5,100 for a new membership and ₹3,100 for a renewal, each valid for one year and the same for clubs and academies. The form's fee summary and the Membership landing cards read from that file.
+- **Fees are never sent from the browser.** A server endpoint must calculate the fee itself from `category` and `applicationType`.
+- **Validation** covers required fields, email, Indian phone numbers (10 digits starting 6–9, with an optional `+91` or `0`) and maximum field lengths. For renewals there is an optional "Existing Membership ID" field.
+- **Submission is disabled** until `membershipForm.endpoint` is set in `config/site.ts`. Use the same secure server-side pattern as the contact form (below).
+- **No payment is collected.** Do not add payment links, Razorpay or QR codes until the payment setup has been approved.
+
+### Video Gallery (YouTube)
+
+Add approved videos to `videos` in `content/media.ts`, each with a `title` and `youtubeUrl`, plus an optional `description` and `publishedAt`. You don't need to change any component.
+
+- **Accepted links:** watch, youtu.be, Shorts, embed and live links. `lib/youtube.ts` extracts only the 11-character video ID; invalid or non-YouTube links are ignored.
+- **Click-to-load:** cards show the thumbnail first, and the privacy-enhanced player (`youtube-nocookie.com`) loads only when a visitor presses Play.
+- **Channel link:** the official channel (`siteConfig.social.youtube`) is linked on the gallery page and in the footer.
+- **Empty gallery:** while no videos are listed, the page reads "Official Karate Association of India videos will be available here soon."
+
+### Donations — bank details
+
+`content/donations.ts` holds the bank details. Only the bank name (IDFC Bank) has been supplied so far.
+
+- The account holder, account number, IFSC, branch and account type are displayed only when **all** are filled in and `verified: true` is set. Until then they show "Awaiting verification", with the notice "Bank account details will be published after verification."
 
 ### Contact form
 
