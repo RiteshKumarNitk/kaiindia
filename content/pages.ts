@@ -614,11 +614,11 @@ export const pages: Record<RoutePath, PageEntry> = {
     eyebrow: "Join the network",
     intro:
       "Membership of the Karate Association of India for karate clubs and academies — new membership and annual renewal.",
-    metaDescription: "Club and academy membership of the Karate Association of India: fees, validity and application forms.",
+    metaDescription: "Club and academy membership of the Karate Association of India: new membership, renewal and application forms.",
     comingSoon: {
       title: "Eligibility guidelines in preparation",
       description:
-        "Fees are listed below. Eligibility criteria and required documents will be published once finalised, and online applications will open once processing is set up.",
+        "The applicable fee is shown during the application. Eligibility criteria and required documents will be published once finalised, and online applications will open once processing is set up.",
     },
     body: { kind: "hub", layout: "pathways", groups: [{ links: ["/membership/club", "/membership/academy"] }] },
   },
@@ -629,7 +629,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     intro:
       "Apply for a new Club Membership or renew an existing one. Membership is valid for one year.",
     metaDescription:
-      "Club membership of the Karate Association of India: new membership and renewal fees, validity and application form.",
+      "Club membership of the Karate Association of India: new membership, renewal and application form.",
     comingSoon: {
       title: "Online applications not yet enabled",
       description: "Online submission will open once the association sets up application processing.",
@@ -652,7 +652,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     intro:
       "Apply for a new Academy Membership or renew an existing one. Membership is valid for one year.",
     metaDescription:
-      "Academy membership of the Karate Association of India: new membership and renewal fees, validity and application form.",
+      "Academy membership of the Karate Association of India: new membership, renewal and application form.",
     comingSoon: {
       title: "Online applications not yet enabled",
       description: "Online submission will open once the association sets up application processing.",

@@ -19,7 +19,7 @@ export type BankDetails = {
 
 export const bankDetails: BankDetails = {
   bankName: "IDFC Bank",
-  accountHolder: null,
+  accountHolder: "Karate Association of India", // supplied by the client, 25 Nov 2026
   accountNumber: null,
   ifsc: null,
   branch: null,
@@ -27,7 +27,11 @@ export const bankDetails: BankDetails = {
   verified: false,
 };
 
-/** True when the account can be published (all required fields present and verified). */
+/**
+ * True when the full account can be published (all required fields present and verified).
+ * The bank name and account holder name are shown as soon as they are supplied; the account
+ * number, IFSC, branch and type only when this returns true.
+ */
 export function bankDetailsPublishable(b: BankDetails): boolean {
   return b.verified && Boolean(b.accountHolder && b.accountNumber && b.ifsc && b.branch);
 }

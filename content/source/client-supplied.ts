@@ -130,6 +130,10 @@ export const membersSupplied20261125 = [
   "Sensei Paritosh Sharma / Chairman / Kata committee (photo: public/members/Sensei_Paritosh_Sharma.jpeg)",
   "Treasurer ka name dalo: Avinash sethi",
   "Sushil Sharma / Chairman / Kumita committee mai dalo (photo: public/members/Sushil_Sharma.jpeg)",
+  "Vishal will not list on the Sexual Harassment Committee page",
+  "Donations: account holder name 'Karate Association of India'",
+  "Membership: hide all amounts publicly; show only on the payment step",
+  "Gallery: public/gallery.jpeg (India Open Karate & Para Karate National Karate Championship 2026–27 poster)",
 ] as const;
 
 /**

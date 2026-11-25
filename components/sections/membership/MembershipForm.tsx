@@ -77,7 +77,8 @@ type Status = { kind: "idle" } | { kind: "sending" } | { kind: "sent" } | { kind
 
 /**
  * Club / Academy membership application.
- * - Fee summary comes from content/membership.ts; the fee is NEVER sent to the server.
+ * - Two steps: (1) applicant details — no amounts shown; (2) fee & payment — the fee from
+ *   content/membership.ts is revealed only after step 1 is valid. The fee is NEVER sent to the server.
  * - Submission is disabled while `endpoint` is null (config/site.ts → membershipForm.endpoint).
  * - No payment is collected; a success message appears only after a real 2xx response.
  */
@@ -108,6 +109,8 @@ export function MembershipForm({
   const [touched, setTouched] = useState<Partial<Record<Field, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  /** 1 = applicant details (no amounts shown) · 2 = fee & payment (amount revealed). */
+  const [step, setStep] = useState<1 | 2>(1);
 
   const { categories, applicationTypes, fees, validity } = membershipConfig;
   const orgLabel = categories[values.category].orgLabel;
@@ -142,7 +145,18 @@ export function MembershipForm({
     setSubmitted(true);
     const keys = Object.keys(errors) as Field[];
     if (keys.length > 0) {
-      document.getElementById(id(keys[0]))?.focus();
+      setStep(1);
+      requestAnimationFrame(() => document.getElementById(id(keys[0]))?.focus());
+      return;
+    }
+    if (step === 1) {
+      // Details are valid: reveal the fee & payment step.
+      setStep(2);
+      requestAnimationFrame(() => {
+        const h = document.getElementById(id("step2"));
+        h?.focus();
+        h?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      });
       return;
     }
     if (!endpoint || values.website) return; // not enabled, or a bot filled the honeypot
@@ -173,127 +187,184 @@ export function MembershipForm({
     }
   };
 
+  const stepper = (
+    <ol className="stepper" aria-label="Application steps">
+      <li className={step === 1 ? "is-current" : "is-done"} aria-current={step === 1 ? "step" : undefined}>
+        <span>1</span> Applicant details
+      </li>
+      <li className={step === 2 ? "is-current" : undefined} aria-current={step === 2 ? "step" : undefined}>
+        <span>2</span> Fee &amp; payment
+      </li>
+    </ol>
+  );
+
   return (
     <form className="contact-form membership-form" noValidate onSubmit={onSubmit} aria-labelledby={id("title")}>
       <h2 id={id("title")} className="contact-form__title">
         Membership application
       </h2>
-      <p className="contact-form__intro">All fields are required unless marked optional.</p>
+      {stepper}
 
-      <fieldset className="choice">
-        <legend>Membership Category</legend>
-        <div className="choice__options">
-          {(Object.keys(categories) as MembershipCategory[]).map((c) => (
-            <label key={c} className="choice__option">
-              <input type="radio" name="category" value={c} checked={values.category === c} onChange={onChange} />
-              <span>{categories[c].label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {step === 1 && (
+        <>
+          <p className="contact-form__intro">All fields are required unless marked optional.</p>
 
-      <fieldset className="choice">
-        <legend>Application Type</legend>
-        <div className="choice__options">
-          {(Object.keys(applicationTypes) as ApplicationType[]).map((t) => (
-            <label key={t} className="choice__option">
-              <input type="radio" name="applicationType" value={t} checked={values.applicationType === t} onChange={onChange} />
-              <span>
-                {applicationTypes[t].label}
-                <small>{formatINR(fees[t])} / year</small>
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+          <fieldset className="choice">
+            <legend>Membership Category</legend>
+            <div className="choice__options">
+              {(Object.keys(categories) as MembershipCategory[]).map((c) => (
+                <label key={c} className="choice__option">
+                  <input type="radio" name="category" value={c} checked={values.category === c} onChange={onChange} />
+                  <span>{categories[c].label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
-      <div className="fee-summary" aria-live="polite" id={id("fee")}>
-        <div>
-          <span className="fee-summary__label">{typeInfo.feeLabel}</span>
-          <strong className="fee-summary__amount">{formatINR(fee)}</strong>
-        </div>
-        <div>
-          <span className="fee-summary__label">Validity</span>
-          <strong>{validity}</strong>
-        </div>
-        <p className="fee-summary__note">
-          Shown for information only. No payment is collected on this website; payment instructions will be shared by
-          the association.
-        </p>
-      </div>
+          <fieldset className="choice">
+            <legend>Application Type</legend>
+            <div className="choice__options">
+              {(Object.keys(applicationTypes) as ApplicationType[]).map((t) => (
+                <label key={t} className="choice__option">
+                  <input type="radio" name="applicationType" value={t} checked={values.applicationType === t} onChange={onChange} />
+                  <span>
+                    {applicationTypes[t].label}
+                    <small>Valid for {validity}</small>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
 
-      <div className="contact-form__grid">
-        <div className="field">
-          <label htmlFor={id("firstName")}>First Name</label>
-          <input type="text" autoComplete="given-name" maxLength={LIMITS.name} required {...fieldProps("firstName")} />
-          {fieldError("firstName")}
-        </div>
-        <div className="field">
-          <label htmlFor={id("lastName")}>Last Name</label>
-          <input type="text" autoComplete="family-name" maxLength={LIMITS.name} required {...fieldProps("lastName")} />
-          {fieldError("lastName")}
-        </div>
-        <div className="field">
-          <label htmlFor={id("email")}>Email Address</label>
-          <input type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} required {...fieldProps("email")} />
-          {fieldError("email")}
-        </div>
-        <div className="field">
-          <label htmlFor={id("phone")}>Phone Number</label>
-          <input type="tel" inputMode="tel" autoComplete="tel" maxLength={LIMITS.phone} required placeholder="98765 43210" {...fieldProps("phone")} />
-          {fieldError("phone")}
-        </div>
-        <div className="field field--full">
-          <label htmlFor={id("address")}>Full Address</label>
-          <textarea rows={3} autoComplete="street-address" maxLength={LIMITS.address} required {...fieldProps("address")} />
-          {fieldError("address")}
-        </div>
-        <div className="field">
-          <label htmlFor={id("orgName")}>{orgLabel}</label>
-          <input type="text" autoComplete="organization" maxLength={LIMITS.orgName} required {...fieldProps("orgName")} />
-          {fieldError("orgName")}
-        </div>
-        <div className="field">
-          <label htmlFor={id("occupation")}>Occupation</label>
-          <input type="text" autoComplete="organization-title" maxLength={LIMITS.occupation} required {...fieldProps("occupation")} />
-          {fieldError("occupation")}
-        </div>
-        {values.applicationType === "renewal" && (
-          <div className="field field--full">
-            <label htmlFor={id("membershipId")}>
-              Existing Membership ID <span className="field__opt">(optional)</span>
-            </label>
-            <input type="text" maxLength={LIMITS.membershipId} {...fieldProps("membershipId")} />
-            <p className="field__hint field__hint--left">If you have one. Not required until the association confirms how members are identified.</p>
-            {fieldError("membershipId")}
+          <div className="contact-form__grid">
+            <div className="field">
+              <label htmlFor={id("firstName")}>First Name</label>
+              <input type="text" autoComplete="given-name" maxLength={LIMITS.name} required {...fieldProps("firstName")} />
+              {fieldError("firstName")}
+            </div>
+            <div className="field">
+              <label htmlFor={id("lastName")}>Last Name</label>
+              <input type="text" autoComplete="family-name" maxLength={LIMITS.name} required {...fieldProps("lastName")} />
+              {fieldError("lastName")}
+            </div>
+            <div className="field">
+              <label htmlFor={id("email")}>Email Address</label>
+              <input type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} required {...fieldProps("email")} />
+              {fieldError("email")}
+            </div>
+            <div className="field">
+              <label htmlFor={id("phone")}>Phone Number</label>
+              <input type="tel" inputMode="tel" autoComplete="tel" maxLength={LIMITS.phone} required placeholder="98765 43210" {...fieldProps("phone")} />
+              {fieldError("phone")}
+            </div>
+            <div className="field field--full">
+              <label htmlFor={id("address")}>Full Address</label>
+              <textarea rows={3} autoComplete="street-address" maxLength={LIMITS.address} required {...fieldProps("address")} />
+              {fieldError("address")}
+            </div>
+            <div className="field">
+              <label htmlFor={id("orgName")}>{orgLabel}</label>
+              <input type="text" autoComplete="organization" maxLength={LIMITS.orgName} required {...fieldProps("orgName")} />
+              {fieldError("orgName")}
+            </div>
+            <div className="field">
+              <label htmlFor={id("occupation")}>Occupation</label>
+              <input type="text" autoComplete="organization-title" maxLength={LIMITS.occupation} required {...fieldProps("occupation")} />
+              {fieldError("occupation")}
+            </div>
+            {values.applicationType === "renewal" && (
+              <div className="field field--full">
+                <label htmlFor={id("membershipId")}>
+                  Existing Membership ID <span className="field__opt">(optional)</span>
+                </label>
+                <input type="text" maxLength={LIMITS.membershipId} {...fieldProps("membershipId")} />
+                <p className="field__hint field__hint--left">If you have one. Not required until the association confirms how members are identified.</p>
+                {fieldError("membershipId")}
+              </div>
+            )}
+            <div className="field--hp" aria-hidden="true">
+              <label htmlFor={id("website")}>Website</label>
+              <input id={id("website")} name="website" type="text" tabIndex={-1} autoComplete="off" value={values.website} onChange={onChange} />
+            </div>
           </div>
-        )}
-        <div className="field--hp" aria-hidden="true">
-          <label htmlFor={id("website")}>Website</label>
-          <input id={id("website")} name="website" type="text" tabIndex={-1} autoComplete="off" value={values.website} onChange={onChange} />
-        </div>
-      </div>
 
-      <div className="contact-form__actions">
-        <button type="submit" className="button button--primary" disabled={!enabled || status.kind === "sending"} aria-describedby={id("status")}>
-          {status.kind === "sending" ? "Submitting…" : "Submit Application"}
-        </button>
-        <div id={id("status")} className="contact-form__status" role="status" aria-live="polite">
-          {!enabled && (
-            <p className="contact-form__notice">
-              <strong>Online membership applications are not yet enabled.</strong> Nothing you enter here is sent.
-              {fallbackEmail && (
-                <>
-                  {" "}
-                  For membership enquiries, email <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a>.
-                </>
-              )}
+          <div className="contact-form__actions">
+            <button type="submit" className="button button--primary">
+              Continue to payment
+            </button>
+            <p className="contact-form__intro">The membership fee is shown on the next step.</p>
+          </div>
+        </>
+      )}
+
+      {step === 2 && (
+        <>
+          <h3 id={id("step2")} className="membership-form__step-title" tabIndex={-1}>
+            Fee &amp; payment
+          </h3>
+          <dl className="review">
+            <div>
+              <dt>Category</dt>
+              <dd>{categories[values.category].label}</dd>
+            </div>
+            <div>
+              <dt>Application</dt>
+              <dd>{typeInfo.label}</dd>
+            </div>
+            <div>
+              <dt>Applicant</dt>
+              <dd>
+                {clean(values.firstName)} {clean(values.lastName)}
+              </dd>
+            </div>
+            <div>
+              <dt>{orgLabel}</dt>
+              <dd>{clean(values.orgName)}</dd>
+            </div>
+          </dl>
+
+          <div className="fee-summary" id={id("fee")}>
+            <div>
+              <span className="fee-summary__label">{typeInfo.feeLabel}</span>
+              <strong className="fee-summary__amount">{formatINR(fee)}</strong>
+            </div>
+            <div>
+              <span className="fee-summary__label">Validity</span>
+              <strong>{validity}</strong>
+            </div>
+            <p className="fee-summary__note">
+              Online payment is not yet enabled, and no payment is collected on this website. Payment instructions will
+              be shared by the association.
             </p>
-          )}
-          {status.kind === "sent" && <p className="contact-form__success">Thank you — your application has been received.</p>}
-          {status.kind === "error" && <p className="field__error">{status.message}</p>}
-        </div>
-      </div>
+          </div>
+
+          <div className="contact-form__actions">
+            <div className="membership-form__buttons">
+              <button type="button" className="button button--ghost" onClick={() => setStep(1)}>
+                Back to details
+              </button>
+              <button type="submit" className="button button--primary" disabled={!enabled || status.kind === "sending"} aria-describedby={id("status")}>
+                {status.kind === "sending" ? "Submitting…" : "Submit Application"}
+              </button>
+            </div>
+            <div id={id("status")} className="contact-form__status" role="status" aria-live="polite">
+              {!enabled && (
+                <p className="contact-form__notice">
+                  <strong>Online membership applications are not yet enabled.</strong> Nothing you enter here is sent.
+                  {fallbackEmail && (
+                    <>
+                      {" "}
+                      For membership enquiries, email <a href={`mailto:${fallbackEmail}`}>{fallbackEmail}</a>.
+                    </>
+                  )}
+                </p>
+              )}
+              {status.kind === "sent" && <p className="contact-form__success">Thank you — your application has been received.</p>}
+              {status.kind === "error" && <p className="field__error">{status.message}</p>}
+            </div>
+          </div>
+        </>
+      )}
     </form>
   );
 }

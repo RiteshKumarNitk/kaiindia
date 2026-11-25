@@ -248,12 +248,7 @@ export const committees: Record<CommitteeKey, CommitteeMember[]> = {
       designation: "Director",
       photo: "/members/Neelam_sangwan.jpeg",
     },
-    {
-      status: "published",
-      name: "Vishal Mehta",
-      designation: "Joint Secretary",
-      photo: "/members/Vishal_Mehta.jpeg",
-    },
+    // Vishal Mehta removed from this committee at the client's request (25 Nov 2026).
   ],
   medical: [],
   objection: [],

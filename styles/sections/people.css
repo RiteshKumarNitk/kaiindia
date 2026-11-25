@@ -4,15 +4,25 @@
   margin-bottom: var(--space-2);
 }
 
+/*
+ * Member cards share the full content width evenly: 2 columns on phones, 3 on tablets,
+ * 4 on laptops, 5 on wide screens. auto-fill keeps empty tracks, so a committee with only
+ * one or two members shows normal-sized cards instead of stretched ones.
+ */
 .member-grid {
   display: grid;
-  gap: var(--space-5);
-  /* Fixed-width columns so a single member is not stretched across the page. */
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 15rem));
+  gap: var(--space-4) var(--space-3);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-@media (max-width: 40rem) {
+@media (min-width: 40rem) {
   .member-grid {
-    gap: var(--space-4) var(--space-3);
+    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  }
+}
+@media (min-width: 64rem) {
+  .member-grid {
+    grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr));
   }
 }
 .member-card {
@@ -714,5 +724,39 @@
 @media (min-width: 60rem) {
   .explorer__picker {
     display: none;
+  }
+}
+
+/*
+ * Executive Members directory: same column counts as .member-grid, but laid out with flexbox
+ * so an incomplete last row is centred instead of sitting on the left.
+ */
+.member-grid--list {
+  --cols: 2;
+  --gap: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4) var(--gap);
+}
+.member-grid--list > li {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  min-width: 0;
+}
+@media (min-width: 40rem) {
+  .member-grid--list {
+    --cols: 3;
+    --gap: var(--space-5);
+    row-gap: var(--space-5);
+  }
+}
+@media (min-width: 64rem) {
+  .member-grid--list {
+    --cols: 4;
+  }
+}
+@media (min-width: 76rem) {
+  .member-grid--list {
+    --cols: 5;
   }
 }

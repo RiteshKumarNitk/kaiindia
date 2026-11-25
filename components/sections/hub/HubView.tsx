@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ComingSoon } from "@/components/ui/ComingSoon";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { getPage, pageLabel, pageSummary } from "@/content/pages";
-import { formatINR, membershipConfig } from "@/content/membership";
+import { membershipConfig } from "@/content/membership";
 import type { ApplicationType, ComingSoonCopy, PageBody, RoutePath } from "@/lib/types";
 
 type Hub = Extract<PageBody, { kind: "hub" }>;
@@ -131,8 +131,8 @@ function Pathways({ hub }: { hub: Hub }) {
         const steps =
           page.body.kind === "membership"
             ? (Object.keys(membershipConfig.fees) as ApplicationType[]).map(
-                (t) => `${membershipConfig.applicationTypes[t].label}: ${formatINR(membershipConfig.fees[t])} / ${membershipConfig.validity}`,
-              )
+                (t) => membershipConfig.applicationTypes[t].label,
+              ).concat(`Valid for ${membershipConfig.validity}`)
             : [];
         return (
           <li key={href} className="pathway">
@@ -142,7 +142,7 @@ function Pathways({ hub }: { hub: Hub }) {
             </h2>
             <p className="pathway__desc">{pageSummary(href)}</p>
             {steps.length > 0 && (
-              <ol className="pathway__steps pathway__steps--fees" aria-label="Membership fees">
+              <ol className="pathway__steps pathway__steps--fees" aria-label="Membership options">
                 {steps.map((s) => (
                   <li key={s}>{s}</li>
                 ))}

@@ -6,13 +6,14 @@ import type { ComingSoonCopy } from "@/lib/types";
 
 /**
  * Donations page body: bank details card. Account fields are shown only when fully verified
- * (content/donations.ts); otherwise only the bank name appears, with a verification notice.
+ * (content/donations.ts); otherwise only the bank name and account holder name appear, with a verification notice.
  */
 export function DonationsPanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
   const live = bankDetailsPublishable(bankDetails);
   const rows: { label: string; value: string | null }[] = [
     { label: "Bank Name", value: bankDetails.bankName },
-    { label: "Account Holder Name", value: live ? bankDetails.accountHolder : null },
+    // Bank and account holder names are not sensitive; shown once supplied.
+    { label: "Account Holder Name", value: bankDetails.accountHolder },
     { label: "Account Number", value: live ? bankDetails.accountNumber : null },
     { label: "IFSC Code", value: live ? bankDetails.ifsc : null },
     { label: "Branch", value: live ? bankDetails.branch : null },

@@ -71,13 +71,17 @@ export function PhotoGallery({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         {photos.map((p) => (
           <li key={p.src}>
             <figure>
-              <Image
-                src={p.src}
-                alt={p.alt}
-                width={p.width}
-                height={p.height}
-                sizes="(max-width: 40rem) 100vw, (max-width: 64rem) 50vw, 33vw"
-              />
+              {/* Opens the original image; shown uncropped so posters keep all their text. */}
+              <a href={p.src} target="_blank" rel="noopener noreferrer" className="gallery-grid__link">
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={p.width}
+                  height={p.height}
+                  sizes="(max-width: 40rem) 100vw, (max-width: 64rem) 50vw, 33vw"
+                />
+                <span className="sr-only">(opens full size in a new tab)</span>
+              </a>
               {p.caption && <figcaption>{p.caption}</figcaption>}
             </figure>
           </li>

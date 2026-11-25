@@ -338,7 +338,7 @@ Fill in `siteConfig.contact` in `config/site.ts` with verified details only. The
 
 `/membership/club` and `/membership/academy` share one application form, with **New Membership** and **Membership Renewal** options.
 
-- **Fees** are set in one place, `content/membership.ts`: ₹5,100 for a new membership and ₹3,100 for a renewal, each valid for one year and the same for clubs and academies. The form's fee summary and the Membership landing cards read from that file.
+- **Fees** are set in one place, `content/membership.ts`: ₹5,100 for a new membership and ₹3,100 for a renewal, each valid for one year and the same for clubs and academies. **Amounts are not shown publicly** (client request, 25 Nov 2026): the landing cards and the page aside show only the options and validity; the fee appears on the form's second step ("Fee & payment") after the applicant details are valid. Note that the amounts are still in the client JavaScript bundle; true secrecy would need the fee calculated on the server.
 - **Fees are never sent from the browser.** A server endpoint must calculate the fee itself from `category` and `applicationType`.
 - **Validation** covers required fields, email, Indian phone numbers (10 digits starting 6–9, with an optional `+91` or `0`) and maximum field lengths. For renewals there is an optional "Existing Membership ID" field.
 - **Submission is disabled** until `membershipForm.endpoint` is set in `config/site.ts`. Use the same secure server-side pattern as the contact form (below).
