@@ -2,11 +2,11 @@ import type { NextConfig } from "next";
 
 /** Old URL → new URL. All are permanent (308) so bookmarks and search results keep working. */
 const movedPages: Record<string, string> = {
-  // Leadership message: President's → Chairman's → Director's → Chairman's Message (client, 25 Nov 2026).
-  "/organisation/president-message": "/about/chairman-message",
-  "/organisation/chairman-message": "/about/chairman-message",
-  "/organisation/director-message": "/about/chairman-message",
-  "/about/director-message": "/about/chairman-message",
+  // Leadership message: President's → Chairman's → Director's → Chairman's → Director's Message (client, 26 Nov 2026: Mr. Likha Tara Ji is Director).
+  "/organisation/president-message": "/about/director-message",
+  "/organisation/chairman-message": "/about/director-message",
+  "/organisation/director-message": "/about/director-message",
+  "/about/chairman-message": "/about/director-message",
   // About KAI
   "/organisation/executive-committee": "/about/executive-members",
   "/organisation/associate-states": "/about/associate-states",

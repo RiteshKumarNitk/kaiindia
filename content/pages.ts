@@ -92,7 +92,7 @@ export const pages: Record<RoutePath, PageEntry> = {
       related: {
         title: "In this section",
         links: [
-          "/about/chairman-message",
+          "/about/director-message",
           "/about/executive-members",
           "/about/associate-states",
           "/about/athlete-login",
@@ -231,16 +231,16 @@ export const pages: Record<RoutePath, PageEntry> = {
   },
 
   /* --------------------------------------------------- About KAI: leadership */
-  "/about/chairman-message": {
-    title: "Chairman's Message",
+  "/about/director-message": {
+    title: "Director's Message",
     eyebrow: "About KAI · Leadership",
-    intro: "Message from the Chairman",
+    intro: "Message from the Director",
     metaDescription:
-      "A message from Mr. Likha Tara Ji, Chairman of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
+      "A message from Mr. Likha Tara Ji, Director of the Karate Association of India, to athletes, coaches, referees, officials and martial arts enthusiasts.",
     // Fallback only; the message is published in content/leadership.ts.
     comingSoon: {
       title: "Message to be published",
-      description: "The Chairman's message will appear here once approved for publication.",
+      description: "The Director's Message will appear here once approved for publication.",
     },
     body: { kind: "message" },
   },
@@ -250,7 +250,7 @@ export const pages: Record<RoutePath, PageEntry> = {
     eyebrow: "About KAI · Leadership",
     intro: "Office bearers and executive members of the association, listed in order of office.",
     metaDescription:
-      "Executive Members of the Karate Association of India: Chairman, President, Vice President, Director & Acting President, Joint Secretaries, Treasurer and other office bearers.",
+      "Executive Members of the Karate Association of India: Director, President, Vice President, Director & Acting President, Joint Secretaries, Treasurer and other office bearers.",
     comingSoon: {
       title: "Member details will be updated soon",
       description: "Details for this position will be published once confirmed by the association.",
@@ -763,7 +763,7 @@ const summaries: Partial<Record<RoutePath, string>> = {
   "/about/coach-login": "Planned online portal for coaches.",
   "/about/judges-profile": "Directory of verified judges and technical officials.",
   "/about/karate": "Karate as a martial art and sport: kata, kumite and training.",
-  "/about/chairman-message": "A message from Mr. Likha Tara Ji, Chairman of KAI.",
+  "/about/director-message": "A message from Mr. Likha Tara Ji, Director of KAI.",
   "/about/executive-members": "Office bearers and executive members of the association.",
   "/committee/anti-doping": "Clean-sport education and awareness.",
   "/committee/referee": "Officiating standards and referee development.",

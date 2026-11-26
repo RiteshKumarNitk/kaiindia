@@ -14,7 +14,7 @@ export function ChairmanSection() {
         <div className="home-chairman__head">
           <p className="eyebrow">Leadership &amp; Vision</p>
           <h2 id="home-chairman-title" className="home-chairman__title">
-            Message from the Chairman
+            Message from the Director
           </h2>
           <span className="tricolour-rule" aria-hidden="true" />
         </div>
@@ -23,7 +23,7 @@ export function ChairmanSection() {
           <div className="home-chairman__media">
             <ImageSlider
               images={chairmanImages}
-              title="Mr. Likha Tara Ji, Chairman of KAI"
+              title="Mr. Likha Tara Ji, Director of KAI"
               showThumbnails
               className="slider--chairman-home"
             />
@@ -43,7 +43,7 @@ export function ChairmanSection() {
             </footer>
 
             <div className="home-chairman__actions">
-              <Link href="/about/chairman-message" className="button button--primary">
+              <Link href="/about/director-message" className="button button--primary">
                 Read full message <Icon name="arrow" size={16} />
               </Link>
             </div>

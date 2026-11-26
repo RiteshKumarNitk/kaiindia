@@ -1,13 +1,13 @@
 import type { LeadershipMessage, SliderImage } from "@/lib/types";
 
 /**
- * Chairman photographs and message — supplied by the client.
+ * Director photographs and message — supplied by the client.
  */
 export const chairmanImages: SliderImage[] = [
   {
     src: "/chairman/chairman1.jpeg",
-    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
-    caption: "Mr. Likha Tara Ji — Chairman, Karate Association of India",
+    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
+    caption: "Mr. Likha Tara Ji — Director, Karate Association of India",
     width: 960,
     height: 639,
   },
@@ -20,7 +20,7 @@ export const chairmanImages: SliderImage[] = [
   },
   {
     src: "/chairman/chairman3.jpeg",
-    alt: "Mr. Likha Tara Ji, Chairman of the Karate Association of India",
+    alt: "Mr. Likha Tara Ji, Director of the Karate Association of India",
     caption: "Mr. Likha Tara Ji — Championing karate across India",
     width: 1080,
     height: 1079,
@@ -30,7 +30,7 @@ export const chairmanImages: SliderImage[] = [
 export const chairmanMessage: LeadershipMessage = {
   status: "published",
   name: "Mr. Likha Tara Ji",
-  designation: "Chairman, Karate Association of India",
+  designation: "Director, Karate Association of India",
   portrait: "/chairman/chairman1.jpeg",
   images: chairmanImages,
   paragraphs: [

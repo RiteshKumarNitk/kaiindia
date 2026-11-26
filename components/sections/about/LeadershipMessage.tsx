@@ -5,7 +5,7 @@ import { chairmanMessage } from "@/content/leadership";
 import { isPublished } from "@/lib/content-status";
 import type { ComingSoonCopy } from "@/lib/types";
 
-/** The Chairman's message page body. */
+/** The Director's Message page body. */
 export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
   const msg = chairmanMessage;
   if (!isPublished(msg) || msg.paragraphs.length === 0) {
@@ -20,7 +20,7 @@ export function MessagePanel({ comingSoon }: { comingSoon: ComingSoonCopy }) {
         <div className="leader-message__slider-col">
           <ImageSlider
             images={msg.images!}
-            title={`Photographs of ${msg.name || "the Chairman"}`}
+            title={`Photographs of ${msg.name || "the Director"}`}
             showThumbnails
             className="slider--chairman-page"
           />

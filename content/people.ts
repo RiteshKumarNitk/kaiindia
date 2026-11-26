@@ -16,8 +16,8 @@ const officeBearerList: CommitteeMember[] = [
   {
     status: "published",
     name: "Mr. Likha Tara Ji",
-    // Client, 25 Nov 2026: Chairman (the "Director" title now belongs to Dr. Nilkanth Kunjilal Kawde).
-    designation: "Chairman",
+    // Client, 26 Nov 2026: Director (not Chairman). Separate from Dr. Nilkanth Kunjilal Kawde, Director & Acting President.
+    designation: "Director",
     photo: "/assets/Likha.jpeg",
   },
   {
@@ -131,7 +131,7 @@ export type ExecutiveRole = {
 };
 
 export const executiveRoles: ExecutiveRole[] = [
-  { title: "Chairman" },
+  { title: "Director" },
   { title: "President" },
   { title: "Director & Acting President" },
   { title: "Acting President" },

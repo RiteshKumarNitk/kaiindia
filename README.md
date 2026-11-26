@@ -17,14 +17,14 @@ No official facts are invented. Officeholders, committee members, state associat
 | Section | Routes |
 | --- | --- |
 | Home | `/` |
-| About KAI | `/about`, `/about/chairman-message`, `/about/executive-members`, `/about/associate-states`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
+| About KAI | `/about`, `/about/director-message`, `/about/executive-members`, `/about/associate-states`, `/about/athlete-login`, `/about/coach-login`, `/about/judges-profile`, `/about/karate` |
 | Committee | `/committee/anti-doping`, `/committee/referee`, `/committee/womens`, `/committee/kata`, `/committee/kumite`, `/committee/media`, `/committee/discipline`, `/committee/organise`, `/committee/technical`, `/committee/sports`, `/committee/athletes`, `/committee/sexual-harassment`, `/committee/medical-physio`, `/committee/objection`, `/committee/management`. There is no Committee landing page: the menu opens the list directly, shown in two columns on desktop. To add a committee: add its route to `routePaths` (`lib/types.ts`), add a page entry with `kind: "directory"` in `content/pages.ts`, add an empty member list in `content/people.ts`, add a menu item in `config/navigation.ts`, and copy any `app/committee/*/page.tsx`. Leave `focus: []` until the committee's role is confirmed. |
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
 | Other pages | `/donations`, `/rti-governance`, `/contact`, `/privacy-policy`, `/refund-policy` (the two policy pages are linked from the footer) |
 | SEO | `/sitemap.xml`, `/robots.txt` |
-| Redirects | All old `/organisation/...` URLs, `/about/chairman-message`, `/organisation` (→ `/about`) and `/committee` (→ `/committee/anti-doping`). They are permanent (308) and listed in `movedPages` in `next.config.ts`. |
+| Redirects | All old `/organisation/...` URLs, `/about/director-message`, `/organisation` (→ `/about`) and `/committee` (→ `/committee/anti-doping`). They are permanent (308) and listed in `movedPages` in `next.config.ts`. |
 
 ## Project structure
 
@@ -38,7 +38,7 @@ app/                       Routes only. Each page.tsx is a few lines: metadata +
 content/                   Everything the client supplies or approves (edit here first)
   pages.ts                 Title, introduction, metadata, Coming Soon copy and layout for every route
   people.ts                Office bearers, executive members and committee members (+ photo paths)
-  leadership.ts            Chairman's message and photo slider
+  leadership.ts            Director's Message and photo slider
   association.ts           Homepage introduction and mission
   states.ts                States/UTs list for the map, and verified state associations
   media.ts                 News, photo gallery and videos
@@ -68,7 +68,7 @@ components/
 styles/                    tokens.css (colours, type, spacing), base, primitives,
                            layout/, components/, sections/, home.css, motion.css
 assets/fonts/              Inter and Barlow Condensed (Latin subset) + OFL licences
-public/                    Crest, illustration, people photos (assets/), Chairman photos (chairman/)
+public/                    Crest, illustration, people photos (assets/), Director photos (chairman/)
 ```
 
 Only `Navbar`, `MobileMenu` and `ImageSlider` are client components. Everything else renders on the server and ships no JavaScript.
@@ -94,7 +94,7 @@ Measured on a throttled mobile connection (slow 4G, 4× CPU slowdown, empty cach
 | Page | Data before → after | Largest Contentful Paint |
 | --- | --- | --- |
 | Home | 876 KB → 459 KB | 3.5 s → 1.4 s |
-| Chairman's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
+| Director's Message | 636 KB → 370 KB | 2.6 s → 1.0 s |
 | Executive Members | 544 KB → 341 KB | ~0.6–0.8 s (unchanged) |
 | Associate States | 514 KB → 329 KB | ~0.7–0.8 s (unchanged) |
 
@@ -124,13 +124,13 @@ See [Vercel's GitHub integration](https://vercel.com/docs/git/vercel-for-github)
 
 ## Client-supplied content
 
-The homepage introduction, office bearers, mission section, About KAI page, Executive Members and Chairman's Message use content supplied by the client.
+The homepage introduction, office bearers, mission section, About KAI page, Executive Members and Director's Message use content supplied by the client.
 
 - `content/source/client-supplied.ts` keeps the client's **original wording verbatim**, together with `claimsRequiringVerification`.
 - The published versions are edited for grammar and punctuation only, with no new facts:
   - `associationIntro` in `content/association.ts`, `chairmanMessage` in `content/leadership.ts`, and the office bearers in `content/people.ts`;
   - the `/about` sections in `content/pages.ts`.
-- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, the Chairman's name and title, Dr. Nilkanth Kunjilal Kawde as Director & Acting President, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
+- Before a public production launch, confirm these statements with documentary evidence: Section 8 incorporation in 2013, 33 affiliated state associations, sole national federation status, the association of champions and WKF/AKF-qualified officials with KAI, the "millions of people" figure, Mr. Likha Tara Ji's name and title (Director), Dr. Nilkanth Kunjilal Kawde as Director & Acting President, the office bearers' names, designations, MLA affiliations and photographs, and each office bearer's consent to publication. The site presents them as the association's own statements and never labels them as verified or endorsed.
 - Numerical highlights (counters or statistics) must use only verified, approved figures.
 
 ## Colour system
@@ -235,7 +235,7 @@ export const committees = {
 };
 ```
 
-The Chairman's message is published from `chairmanMessage` in `content/leadership.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `chairmanImages`, with the photographs stored in `public/chairman/`. Never use a stock or generated portrait.
+The Director's Message (signed by Mr. Likha Tara Ji, Director) is published from `chairmanMessage` in `content/leadership.ts` (`name`, `designation`, `paragraphs`). Its photo slider uses `chairmanImages`, with the photographs stored in `public/chairman/`. Never use a stock or generated portrait.
 
 ### Office bearers
 

@@ -16,7 +16,7 @@ export type ContentStatus = "coming-soon" | "draft" | "published";
 export const routePaths = [
   "/",
   "/about",
-  "/about/chairman-message",
+  "/about/director-message",
   "/about/executive-members",
   "/about/associate-states",
   "/about/athlete-login",
