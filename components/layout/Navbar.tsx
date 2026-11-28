@@ -53,7 +53,7 @@ export function Navbar({ items }: { items: NavItem[] }) {
               <li key={item.label}>
                 <Link
                   href={item.href}
-                  className={`desktop-nav__link${active ? " is-active" : ""}`}
+                  className={`desktop-nav__link${active ? " is-active" : ""}${item.label.length > 18 ? " desktop-nav__link--long" : ""}`}
                   aria-current={pathname === item.href ? "page" : undefined}
                 >
                   {item.label}

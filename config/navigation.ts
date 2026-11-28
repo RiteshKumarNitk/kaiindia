@@ -71,6 +71,7 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "Donations", href: "/donations" },
+  { label: "Certificate Verification", href: "/certificate-verification" },
   { label: "RTI & Governance", href: "/rti-governance" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -86,6 +87,7 @@ export const footerNav: FooterColumn[] = [
       { label: "Media", href: "/media" },
       { label: "Membership", href: "/membership" },
       { label: "Donations", href: "/donations" },
+      { label: "Certificate Verification", href: "/certificate-verification" },
       { label: "Contact Us", href: "/contact" },
     ],
   },

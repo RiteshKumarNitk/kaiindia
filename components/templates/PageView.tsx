@@ -4,6 +4,7 @@ import { StateDirectory } from "@/components/sections/about/StateDirectory";
 import { DocumentLibrary } from "@/components/sections/documents/DocumentLibrary";
 import { ContactPanel } from "@/components/sections/contact/ContactPanel";
 import { DonationsPanel } from "@/components/sections/donations/DonationsPanel";
+import { CertificateVerificationPanel } from "@/components/sections/certificates/CertificateVerificationPanel";
 import { GovernancePanel } from "@/components/sections/governance/GovernancePanel";
 import { InfoSections } from "@/components/sections/about/ArticleSections";
 import { MessagePanel } from "@/components/sections/about/LeadershipMessage";
@@ -59,6 +60,8 @@ function Body({ page }: { page: PageEntry }) {
       return <PolicyPanel comingSoon={comingSoon} />;
     case "donations":
       return <DonationsPanel comingSoon={comingSoon} />;
+    case "certificates":
+      return <CertificateVerificationPanel />;
     case "governance":
       return <GovernancePanel topics={body.topics} comingSoon={comingSoon} />;
     case "contact":

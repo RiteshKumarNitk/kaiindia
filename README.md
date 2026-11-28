@@ -22,6 +22,7 @@ No official facts are invented. Officeholders, committee members, state associat
 | Media | `/media`, `/media/news`, `/media/photo-gallery`, `/media/video-gallery` |
 | Rules & Regulations | `/rules-regulations`, `/rules-regulations/kai-association-rules`, `/rules-regulations/karate-rules` |
 | Membership | `/membership`, `/membership/club`, `/membership/academy` |
+| Certificate Verification | `/certificate-verification` (Player and Coach certificates), plus the endpoint `POST /api/certificate-verification`. Verification is disabled until an authorised certificate database is connected; see [docs/certificate-verification.md](docs/certificate-verification.md). |
 | Other pages | `/donations`, `/rti-governance`, `/contact`, `/privacy-policy`, `/refund-policy` (the two policy pages are linked from the footer) |
 | SEO | `/sitemap.xml`, `/robots.txt` |
 | Redirects | All old `/organisation/...` URLs, `/about/director-message`, `/organisation` (→ `/about`) and `/committee` (→ `/committee/anti-doping`). They are permanent (308) and listed in `movedPages` in `next.config.ts`. |
@@ -352,6 +353,27 @@ Add approved videos to `videos` in `content/media.ts`, each with a `title` and `
 - **Click-to-load:** cards show the thumbnail first, and the privacy-enhanced player (`youtube-nocookie.com`) loads only when a visitor presses Play.
 - **Channel link:** the official channel (`siteConfig.social.youtube`) is linked on the gallery page and in the footer.
 - **Empty gallery:** while no videos are listed, the page reads "Official Karate Association of India videos will be available here soon."
+
+### Certificate verification
+
+`/certificate-verification` lets visitors check a Player or Coach certificate using:
+
+- the certificate type;
+- the serial number;
+- the full name;
+- the last 4 digits of the holder's Aadhaar.
+
+**No certificate database exists yet**, so the page shows "Online certificate verification will be available soon." and the button stays disabled. Nothing typed into the form is sent.
+
+- **Connection point:** `lib/certificates/repository.ts`. `getCertificateRepository()` returns `null`.
+- **Server secret:** `CERTIFICATE_AADHAAR_HMAC_KEY` (32+ random characters). Never put it in a `NEXT_PUBLIC_` variable.
+- **Results come only from the server.**
+  - Any mismatch gives one generic message.
+  - Expired and revoked certificates are reported as such.
+  - Only the type, serial, holder name, dates and status are shown.
+- **No fixtures:** never add sample or placeholder certificate records to the app.
+
+The security design, data model, admin workflow and go-live steps are in [docs/certificate-verification.md](docs/certificate-verification.md).
 
 ### Donations — bank details
 

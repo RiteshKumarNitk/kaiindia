@@ -707,6 +707,21 @@ export const pages: Record<RoutePath, PageEntry> = {
     body: { kind: "donations" },
   },
 
+  /* ------------------------------------------------- Certificate Verification */
+  "/certificate-verification": {
+    title: "Certificate Verification",
+    eyebrow: "Player & Coach certificates",
+    intro:
+      "Check whether a Player or Coach certificate was issued by the Karate Association of India, using the details printed on the certificate.",
+    metaDescription:
+      "Verify a Player or Coach certificate issued by the Karate Association of India using its serial number, holder name and Aadhaar last four digits.",
+    comingSoon: {
+      title: "Online verification coming soon",
+      description: "Online certificate verification will be available soon.",
+    },
+    body: { kind: "certificates" },
+  },
+
   /* ---------------------------------------------------------- RTI & Governance */
   "/rti-governance": {
     title: "RTI & Governance",
@@ -792,6 +807,7 @@ const summaries: Partial<Record<RoutePath, string>> = {
   "/membership/club": "Membership information for karate clubs.",
   "/membership/academy": "Membership information for academies and training centres.",
   "/donations": "Supporting the development of karate.",
+  "/certificate-verification": "Verify a KAI Player or Coach certificate.",
   "/rti-governance": "Governance documents and official disclosures.",
   "/contact": "How to reach the association.",
 };

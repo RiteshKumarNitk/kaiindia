@@ -333,3 +333,24 @@
     display: none;
   }
 }
+
+/* Long top-level labels (e.g. "Certificate Verification") wrap onto two centred lines on
+   smaller desktops so ten items fit without horizontal scrolling. */
+@media (max-width: 80rem) {
+  .desktop-nav__link--long {
+    max-width: 6.5rem;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.15;
+  }
+}
+@media (max-width: 72rem) {
+  .desktop-nav__link {
+    padding-inline: 0.3rem;
+    font-size: 0.82rem;
+  }
+  .desktop-nav__link::after {
+    left: 0.3rem;
+    right: 0.3rem;
+  }
+}

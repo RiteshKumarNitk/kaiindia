@@ -51,6 +51,7 @@ export const routePaths = [
   "/privacy-policy",
   "/refund-policy",
   "/donations",
+  "/certificate-verification",
   "/rti-governance",
   "/contact",
 ] as const;
@@ -144,6 +145,7 @@ export type PageBody =
     }
   | { kind: "policy" }
   | { kind: "donations" }
+  | { kind: "certificates" }
   | { kind: "governance"; topics: InfoSection[] }
   | { kind: "contact" };
 
